@@ -1,5 +1,5 @@
 {
-    "name": "contao/contao-asms-bundle",
+    "name": "lumturo/contao-asms-bundle",
     "type": "symfony-bundle",
     "description": "ASMS bundles",
     "homepage": "https://contao.org",
