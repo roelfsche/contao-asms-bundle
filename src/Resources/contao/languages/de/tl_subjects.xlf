@@ -1,0 +1,39 @@
+<?xml version="1.0" ?><xliff version="1.1">
+    <file datatype="php" original="system/modules/vacancies/languages/de/tl_subjects.php" source-language="en">
+        <body>
+            <trans-unit id="tl_subjects.tstamp.0">
+                <target>Änderungsdatum</target>
+            </trans-unit>
+            <trans-unit id="tl_subjects.tstamp.1">
+                <target>Datum und Uhrzeit der letzten Änderung</target>
+            </trans-unit>
+
+            <trans-unit id="tl_subjects.lbl_general">
+                <target>Allgemein</target>
+            </trans-unit>
+
+            <trans-unit id="tl_subjects.title.0">
+                <target>Titel</target>
+            </trans-unit>
+            <trans-unit id="tl_subjects.title.1">
+                <target>Bitte geben Sie den Titel ein.</target>
+            </trans-unit>
+
+            <trans-unit id="tl_subjects.new.0">
+                <target>Fachgebiet hinzufügen</target>
+            </trans-unit>
+            <trans-unit id="tl_subjects.edit.0">
+                <target>Bearbeiten</target>
+            </trans-unit>
+            <trans-unit id="tl_subjects.copy.0">
+                <target>Kopieren</target>
+            </trans-unit>
+            <trans-unit id="tl_subjects.delete.0">
+                <target>Löschen</target>
+            </trans-unit>
+            <trans-unit id="tl_subjects.show.0">
+                <target>Details</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

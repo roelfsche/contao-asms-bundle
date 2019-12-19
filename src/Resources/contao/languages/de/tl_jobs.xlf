@@ -1,0 +1,315 @@
+<?xml version="1.0" ?><xliff version="1.1">
+    <file datatype="php" original="system/modules/vacancies/languages/de/tl_jobs.php" source-language="en">
+        <body>
+            <trans-unit id="tl_jobs.tstamp.0">
+                <target>Änderungsdatum</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.tstamp.1">
+                <target>Datum und Uhrzeit der letzten Änderung</target>
+            </trans-unit>
+
+            <trans-unit id="tl_jobs.lbl_general">
+                <target>Allgemein</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.lbl_statement">
+                <target>Teaser</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.lbl_teaser_image">
+                <target>Teaser - Bild</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.lbl_linkbutton">
+                <target>Teaser - Link-Button</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.lbl_link">
+                <target>Teaser - Link</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.lbl_aboutus">
+                <target>Über uns</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.lbl_contactperson">
+                <target>Ansprechpartner</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.lbl_availability">
+                <target>Verfügbarkeit</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.lbl_type">
+                <target>Stellenart</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.lbl_content">
+                <target>Inhalt</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.lbl_published">
+                <target>Veröffentlichung</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.alt.0">
+                <target>Alternativer Text</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.alt.1">
+                <target>Hier können Sie einen alternativen Text für das Bild eingeben (&lt;em&gt;alt&lt;/em&gt;-Attribut).</target>
+            </trans-unit>
+
+            <trans-unit id="tl_jobs.type.0">
+                <target>Typ</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.type.1">
+                <target>Wählen Sie den Typ der Stellenanzeige aus.</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.clinic.0">
+                <target>Klinik / Einrichtung</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.clinic.1">
+                <target>Wählen Sie die Klinik / Einrichtung aus.</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.title.0">
+                <target>Stellenbezeichnung</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.title.1">
+                <target>Geben Sie eine individuelle Stellenbezeichnung an, sie ersetzt die Auswahl oben.</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.jobID.0">
+                <target>Stellen-ID</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.jobID.1">
+                <target>Geben Sie die Stellen-ID an, die zur Suche genutzt werden kann.</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.alias.0">
+                <target>Alias</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.alias.1">
+                <target>Der Alias ist eine eindeutige Referenz, die anstelle der numerischen Seiten-ID aufgerufen werden kann.</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.meta_description.0">
+                <target>Meta-Description</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.meta_description.1">
+                <target>Eine kurze Beschreibung für Suchmaschinen</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.published.0">
+                <target>Stellenanzeige veröffentlichen</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.published.1">
+                <target>Die Stellenanzeige auf der Webseite anzeigen.</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.start.0">
+                <target>Anzeigen ab</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.start.1">
+                <target>Das Element erst ab diesem Tag auf der Webseite anzeigen.</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.stop.0">
+                <target>Anzeigen bis</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.stop.1">
+                <target>Das Element nur bis zu diesem Tag auf der Webseite anzeigen.</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.titleSelection.0">
+                <target>Berufstyp</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.titleSelection.1">
+                <target>Wählen Sie einen Berufstyp aus.</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.individualJobtitle.0">
+                <target>Individuelle Stellenbezeichnung</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.individualJobtitle.1">
+                <target>Klicken Sie hier um eine individuelle Stellenbezeichnung anzugeben.</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.subtitle1.0">
+                <target>Untertitel 1</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.subtitle2.0">
+                <target>Untertitel 2</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.has_contactperson.0">
+                <target>Individueller Ansprechpartner</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.has_contactperson.1">
+                <target>Klicken Sie hier, wenn Sie einen anderen Ansprechpartner für diese Stellenanzeige angeben möchten, als den, der in der Klinik angegeben ist.</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.contactperson_salutation.0">
+                <target>Anrede</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.contactperson_title.0">
+                <target>Titel</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.contactperson_position.0">
+                <target>Position</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.contactperson_firstname.0">
+                <target>Vorname</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.contactperson_lastname.0">
+                <target>Nachname</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.contactperson_email.0">
+                <target>E-Mail</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.contactperson_phone.0">
+                <target>Telefon</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.subjectSelection.0">
+                <target>Fachgebiet</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.subjectSelection.1">
+                <target>Wählen Sie ein Fachgebiet aus.</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.individualSubject.0">
+                <target>Individuelles Fachgebiet</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.individualSubject.1">
+                <target>Klicken Sie hier um ein individuelles Fachgebiet anzugeben.</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.subject.0">
+                <target>Fachgebiet</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.subject.1">
+                <target>Geben Sie ein individuelles Fachgebiet an, es ersetzt die Auswahl oben.</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.statementImage.0">
+                <target>Quelldatei (Teaser-Bild)</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.statementImage.1">
+                <target>Format 635 x 486 px, jpg, max. 100 kB</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.statementText.0">
+                <target>Zitat</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.aboutUs.0">
+                <target>Über uns</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.addAboutUsImage.0">
+                <target>Ein Bild hinzufügen</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.aboutUsImage.0">
+                <target>Quelldatei</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.aboutUsImage.1">
+                <target>Format 590 x 200 px, jpg, max. 100 kB</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.availabilityFrom.0">
+                <target>Verfügbarkeit festlegen</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.availabilityFrom.1">
+                <target>Wenn Sie die Verfügbarkeit nicht festlegen, ist die Stellenanzeige ab sofort verfügbar.</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.availabilityFromDate.0">
+                <target>Verfügbar ab</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.availabilityFromDate.1">
+                <target>Geben Sie ein Datum an ab dem die Stelle verfügbar ist.</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.typeFulltime.0">
+                <target>Vollzeit</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.typeFulltime.1">
+                <target>Klicken Sie hier wenn es sich um eine Vollzeitstelle handelt.</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.typeParttime.0">
+                <target>Teilzeit</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.typeParttime.1">
+                <target>Klicken Sie hier wenn es sich um eine Teilzeitstelle handelt.</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.typeLimited.0">
+                <target>Befristet</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.typeLimited.1">
+                <target>Klicken Sie hier wenn es sich um eine befristete Stelle handelt.</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.typeLimitedText.0">
+                <target>Befristungstext</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.weOffer.0">
+                <target>Wir bieten</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.addWeOfferImage.0">
+                <target>Ein Bild hinzufügen</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.weOfferImage.0">
+                <target>Quelldatei</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.weOfferImage.1">
+                <target>Format 590 x 200 px, jpg, max. 100 kB</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.youOffer.0">
+                <target>Sie bieten</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.applicationNotes.0">
+                <target>Ihr Aufgaben-Spektrum</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.individualTextHeadline.0">
+                <target>Optionaler Block - Überschrift</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.individualText.0">
+                <target>Optionaler Block - Inhalt</target>
+            </trans-unit>
+
+
+            <trans-unit id="tl_jobs.addLink.0">
+                <target>Einen Link einfügen</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.addLink.1">
+                <target>Klicken Sie hier um einen Linkbutton einzufügen.</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.linkText.0">
+                <target>Linktext</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.linkText.1">
+                <target>Wählen Sie den Text aus, der für diesen Link angezeigt werden soll.</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.linkTextMobile.0">
+                <target>Linktext (Mobil)</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.linkTextMobile.1">
+                <target>Wählen Sie den Text aus, der für diesen Link auf dem Smartphone angezeigt werden soll.</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.linkLink.0">
+                <target>Hyperlink</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.linkLink.1">
+                <target>Wählen Sie eine Seite aus, die nach einem Klick auf den Link angezeigt werden soll.</target>
+            </trans-unit>
+
+            <trans-unit id="tl_jobs.addLinkButton.0">
+                <target>Einen Link-Button einfügen</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.addLinkButton.1">
+                <target>Klicken Sie hier um einen Linkbutton einzufügen.</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.linkButtonText.0">
+                <target>Linktext</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.linkButtonText.1">
+                <target>Wählen Sie den Text aus, der für diesen Link angezeigt werden soll.</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.linkButtonTextMobile.0">
+                <target>Linktext (Mobil)</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.linkButtonTextMobile.1">
+                <target>Wählen Sie den Text aus, der für diesen Link auf dem Smartphone angezeigt werden soll.</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.linkButtonLink.0">
+                <target>Hyperlink</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.linkButtonLink.1">
+                <target>Wählen Sie eine Seite aus, die nach einem Klick auf den Link angezeigt werden soll.</target>
+            </trans-unit>
+
+            <trans-unit id="tl_jobs.new.0">
+                <target>Stellenangebot hinzufügen</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.edit.0">
+                <target>Bearbeiten</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.copy.0">
+                <target>Kopieren</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.delete.0">
+                <target>Löschen</target>
+            </trans-unit>
+            <trans-unit id="tl_jobs.show.0">
+                <target>Details</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

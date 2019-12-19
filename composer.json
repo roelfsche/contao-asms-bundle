@@ -29,16 +29,16 @@
         "symfony/phpunit-bridge": "^3.2"
     },
     "extra": {
-        "contao-manager-plugin": "Contao\\AsmsBundle\\ContaoManager\\Plugin"
+        "contao-manager-plugin": "Lumturo\\ContaoAsmsBundle\\ContaoManager\\Plugin"
     },
     "autoload": {
         "psr-4": {
-            "Contao\\AsmsBundle\\": "src/"
+            "Lumturo\\ContaoAsmsBundle\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Contao\\AsmsBundle\\Tests\\": "tests/"
+            "Lumturo\\ContaoAsmsBundle\\Tests\\": "tests/"
         }
     },
     "support": {

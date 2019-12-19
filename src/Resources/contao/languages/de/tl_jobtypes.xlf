@@ -1,0 +1,46 @@
+<?xml version="1.0" ?><xliff version="1.1">
+    <file datatype="php" original="system/modules/vacancies/languages/de/tl_jobtypes.php" source-language="en">
+        <body>
+            <trans-unit id="tl_jobtypes.tstamp.0">
+                <target>Änderungsdatum</target>
+            </trans-unit>
+            <trans-unit id="tl_jobtypes.tstamp.1">
+                <target>Datum und Uhrzeit der letzten Änderung</target>
+            </trans-unit>
+
+            <trans-unit id="tl_jobtypes.lbl_general">
+                <target>Allgemein</target>
+            </trans-unit>
+
+            <trans-unit id="tl_jobtypes.title.0">
+                <target>Titel</target>
+            </trans-unit>
+            <trans-unit id="tl_jobtypes.title.1">
+                <target>Bitte geben Sie den Titel ein.</target>
+            </trans-unit>
+
+            <trans-unit id="tl_jobtypes.showInLinkList.0">
+                <target>In Link-Liste anzeigen</target>
+            </trans-unit>
+            <trans-unit id="tl_jobtypes.showInLinkList.1">
+                <target>Zeigt diesen Eintrag in der Link-Liste im Kopfbereich der Seite an.</target>
+            </trans-unit>
+
+            <trans-unit id="tl_jobtypes.new.0">
+                <target>Berufstyp hinzufügen</target>
+            </trans-unit>
+            <trans-unit id="tl_jobtypes.edit.0">
+                <target>Bearbeiten</target>
+            </trans-unit>
+            <trans-unit id="tl_jobtypes.copy.0">
+                <target>Kopieren</target>
+            </trans-unit>
+            <trans-unit id="tl_jobtypes.delete.0">
+                <target>Löschen</target>
+            </trans-unit>
+            <trans-unit id="tl_jobtypes.show.0">
+                <target>Details</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

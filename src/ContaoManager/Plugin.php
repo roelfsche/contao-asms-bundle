@@ -8,13 +8,13 @@
  * @license LGPL-3.0-or-later
  */
 
-namespace Contao\AsmsBundle\ContaoManager;
+namespace Lumturo\ContaoAsmsBundle\ContaoManager;
 
 use Contao\CoreBundle\ContaoCoreBundle;
 use Contao\ManagerPlugin\Bundle\BundlePluginInterface;
 use Contao\ManagerPlugin\Bundle\Config\BundleConfig;
 use Contao\ManagerPlugin\Bundle\Parser\ParserInterface;
-use Contao\AsmsBundle\ContaoAsmsBundle;
+use Lumturo\ContaoAsmsBundle\ContaoAsmsBundle;
 
 class Plugin implements BundlePluginInterface
 {

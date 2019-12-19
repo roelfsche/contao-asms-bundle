@@ -1,0 +1,165 @@
+<?xml version="1.0" ?><xliff version="1.1">
+    <file datatype="php" original="system/modules/vacancies/languages/de/tl_clinics.php" source-language="en">
+        <body>
+            <trans-unit id="tl_clinics.tstamp.0">
+                <target>Änderungsdatum</target>
+            </trans-unit>
+            <trans-unit id="tl_clinics.tstamp.1">
+                <target>Datum und Uhrzeit der letzten Änderung</target>
+            </trans-unit>
+
+            <trans-unit id="tl_clinics.lbl_general">
+                <target>Allgemein</target>
+            </trans-unit>
+            <trans-unit id="tl_clinics.lbl_logo">
+                <target>Logo</target>
+            </trans-unit>
+            <trans-unit id="tl_clinics.lbl_location">
+                <target>Anschrift</target>
+            </trans-unit>
+            <trans-unit id="tl_clinics.lbl_contactperson">
+                <target>Ansprechpartner</target>
+            </trans-unit>
+            <trans-unit id="tl_clinics.lbl_additional">
+                <target>Weitere Informationen</target>
+            </trans-unit>
+            <trans-unit id="tl_clinics.lbl_social">
+                <target>Social Media Kanäle</target>
+            </trans-unit>
+            <trans-unit id="tl_clinics.lbl_award">
+                <target>Wir sind ausgezeichnet</target>
+            </trans-unit>
+            <trans-unit id="tl_clinics.lbl_equality">
+                <target>Infos zur Gleichstellung</target>
+            </trans-unit>
+
+            <trans-unit id="tl_clinics.title.0">
+                <target>Name der Klinik / Einrichtung</target>
+            </trans-unit>
+            <trans-unit id="tl_clinics.title.1">
+                <target>Bitte geben Sie den Namen der Klinik / Einrichtung ein.</target>
+            </trans-unit>
+
+
+            <trans-unit id="tl_clinics.alt.0">
+                <target>Alternativer Text</target>
+            </trans-unit>
+            <trans-unit id="tl_clinics.alt.1">
+                <target>Hier können Sie einen alternativen Text für das Bild eingeben (&lt;em&gt;alt&lt;/em&gt;-Attribut).</target>
+            </trans-unit>
+
+            <trans-unit id="tl_clinics.logo.0">
+                <target>Quelldatei (Logo)</target>
+            </trans-unit>
+            <trans-unit id="tl_clinics.logo.1">
+                <target>Format 250 x 150 px, jpg, max. 100 kB</target>
+            </trans-unit>
+            <trans-unit id="tl_clinics.addOptionalImage.0">
+                <target>Ein optionales Bild hinzufügen</target>
+            </trans-unit>
+            <trans-unit id="tl_clinics.optionalImage.0">
+                <target>Quelldatei (optionales Bild)</target>
+            </trans-unit>
+            <trans-unit id="tl_clinics.optionalImage.1">
+                <target>Format 280 x 200 px, jpg, max. 100 kB</target>
+            </trans-unit>
+            <trans-unit id="tl_clinics.department.0">
+                <target>Abteilung</target>
+            </trans-unit>
+            <trans-unit id="tl_clinics.street.0">
+                <target>Straße</target>
+            </trans-unit>
+            <trans-unit id="tl_clinics.houseNumber.0">
+                <target>Hausnummer</target>
+            </trans-unit>
+            <trans-unit id="tl_clinics.zipCode.0">
+                <target>Postleitzahl</target>
+            </trans-unit>
+            <trans-unit id="tl_clinics.city.0">
+                <target>Ort</target>
+            </trans-unit>
+            <trans-unit id="tl_clinics.state.0">
+                <target>Bundesland</target>
+            </trans-unit>
+            <trans-unit id="tl_clinics.contactperson_salutation.0">
+                <target>Anrede</target>
+            </trans-unit>contactperson_position
+            <trans-unit id="tl_clinics.contactperson_title.0">
+                <target>Titel</target>
+            </trans-unit>
+            <trans-unit id="tl_clinics.contactperson_position.0">
+                <target>Position</target>
+            </trans-unit>
+            <trans-unit id="tl_clinics.contactperson_firstname.0">
+                <target>Vorname</target>
+            </trans-unit>
+            <trans-unit id="tl_clinics.contactperson_lastname.0">
+                <target>Nachname</target>
+            </trans-unit>
+            <trans-unit id="tl_clinics.contactperson_email.0">
+                <target>E-Mail</target>
+            </trans-unit>
+            <trans-unit id="tl_clinics.contactperson_phone.0">
+                <target>Telefon</target>
+            </trans-unit>
+            <trans-unit id="tl_clinics.url1.0">
+                <target>URL 1</target>
+            </trans-unit>
+            <trans-unit id="tl_clinics.url2.0">
+                <target>URL 2</target>
+            </trans-unit>
+            <trans-unit id="tl_clinics.social_facebook.0">
+                <target>Facebook</target>
+            </trans-unit>
+            <trans-unit id="tl_clinics.social_gplus.0">
+                <target>Google+</target>
+            </trans-unit>
+            <trans-unit id="tl_clinics.social_twitter.0">
+                <target>Twitter</target>
+            </trans-unit>
+            <trans-unit id="tl_clinics.addAwardImage1.0">
+                <target>Ein Bild hinzufügen</target>
+            </trans-unit>
+            <trans-unit id="tl_clinics.awardImage1.0">
+                <target>Quelldatei</target>
+            </trans-unit>
+            <trans-unit id="tl_clinics.awardImage1.1">
+                <target>Format 280 x 130 px, jpg, max. 100 kB</target>
+            </trans-unit>
+            <trans-unit id="tl_clinics.addAwardImage2.0">
+                <target>Ein weiteres Bild hinzufügen</target>
+            </trans-unit>
+            <trans-unit id="tl_clinics.awardImage2.0">
+                <target>Quelldatei</target>
+            </trans-unit>
+            <trans-unit id="tl_clinics.awardImage2.1">
+                <target>Format 280 x 130 px, jpg, max. 100 kB</target>
+            </trans-unit>
+            <trans-unit id="tl_clinics.equality.0">
+                <target>Gleichstellung</target>
+            </trans-unit>
+            <trans-unit id="tl_clinics.clinicPDF.0">
+                <target>Unternehmensbroschüre</target>
+            </trans-unit>
+            <trans-unit id="tl_clinics.clinicVideo.0">
+                <target>Video über die Klinik / Einrichtung</target>
+            </trans-unit>
+
+            <trans-unit id="tl_clinics.new.0">
+                <target>Stammdaten hinzufügen</target>
+            </trans-unit>
+            <trans-unit id="tl_clinics.edit.0">
+                <target>Bearbeiten</target>
+            </trans-unit>
+            <trans-unit id="tl_clinics.copy.0">
+                <target>Kopieren</target>
+            </trans-unit>
+            <trans-unit id="tl_clinics.delete.0">
+                <target>Löschen</target>
+            </trans-unit>
+            <trans-unit id="tl_clinics.show.0">
+                <target>Details</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

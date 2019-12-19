@@ -1,0 +1,42 @@
+<?xml version="1.0" ?><xliff version="1.1">
+    <file datatype="php" original="system/modules/vacancies/languages/de/tl_module.php" source-language="en">
+        <body>
+
+            <trans-unit id="tl_module.isSearchResultInfo.0">
+                <target>Info-Bereich</target>
+            </trans-unit>
+            <trans-unit id="tl_module.isSearchResultInfo.1">
+                <target>Gibt an, ob es sich bei dem Bereich um den Infobereich handelt.</target>
+            </trans-unit>
+
+            <trans-unit id="tl_module.jumpToJobResult.0">
+                <target>Weiterleitungsseite (Ergebnisliste)</target>
+            </trans-unit>
+            <trans-unit id="tl_module.jumpToJobResult.1">
+                <target>Bitte wählen Sie die Seite aus, zu der Besucher beim Anklicken eines Links oder Abschicken eines Formulars weitergeleitet werden.</target>
+            </trans-unit>
+
+            <trans-unit id="tl_module.isHead.0">
+                <target>Kopf-Bereich</target>
+            </trans-unit>
+            <trans-unit id="tl_module.isHead.1">
+                <target>Gibt an, ob es sich bei dem Bereich um den Kopfbereich handelt.</target>
+            </trans-unit>
+
+            <trans-unit id="tl_module.isRehab.0">
+                <target>Ärzte in Rehabilitationskliniken</target>
+            </trans-unit>
+            <trans-unit id="tl_module.isRehab.1">
+                <target>Gibt an, ob es sich bei dem Bereich um den Rehabilitationsbereich handelt.</target>
+            </trans-unit>
+
+            <trans-unit id="tl_module.filterClinic.0">
+                <target>Nur aktuelle Klinik anzeigen</target>
+            </trans-unit>
+            <trans-unit id="tl_module.filterClinic.1">
+                <target>Gibt an, ob nur Stellen der aktuellen Klinik angezeigt werden sollen.</target>
+            </trans-unit>
+
+        </body>
+    </file>
+</xliff>
