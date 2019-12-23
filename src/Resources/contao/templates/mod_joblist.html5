@@ -1,1 +1,121 @@
-<h2>Jobliste</h2>
+<section class="section section--search">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <form class="search_form">
+                    <div class="row">
+                        <div class="col-12 col-lg-5 order-lg-1">
+                            <input class="search_form__input js-search-form-input" type="text" name="searchterm" placeholder="Funktion, Fachgebiet, Unternehmen, Stellen-ID">
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-2 order-lg-2">
+                            <input class="search_form__input js-search-city" type="text" name="place" placeholder="PLZ/Ort">
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-2 order-lg-3">
+                            <select class="search_form__select" name="range">
+                                <option value="---">Umkreis</option>
+                                <option value="10">10 km</option>
+                                <option value="20">20 km</option>
+                                <option value="50">50 km</option>
+                                <option value="more">mehr als 50 km</option>
+                            </select>
+                        </div>
+                        <div class="col-12 col-lg-3 order-5 order-lg-4">
+                            <input class="btn btn--secondary search_form__submit" type="submit" value="Jobs finden">
+                        </div>
+                        <div class="col-12 col-lg-8 order-lg-5 direct-search js-hide-options">
+                            <span class="color-white small italic">Direktsuche</span>
+                            <a href="#" class="small moresearch" title="Arzt">Arzt</a>
+                            <a href="#" class="small moresearch" title="Facharzt">Facharzt</a>
+                            <a href="#" class="small moresearch" title="Assistenzarzt">Assistenzarzt</a>
+                            <a href="#" class="small moresearch" title="Leitender Oberarzt">Leitender Oberarzt</a>
+                        </div>
+                        <div class="col-12 col-lg-4 order-lg-6 right js-hide-options"><span class="moresearch expandextras js-show-extended-search-options">Erweiterte Suche</span></div>
+                        <div class="col-12 order-lg-7 search-more js-search_more">
+                            <div class="row">
+                                <div class="col-12 col-lg-5">
+                                    <select class="search_form__select" name="section">
+                                        <option value="---">Fachgebiet</option>
+                                        <option value="Chierurgie">Chierurgie</option>
+                                        <option value="Geriatrie">Geriatrie</option>
+                                        <option value="Neurologie">Neurologie</option>
+                                    </select>
+                                </div>
+                                <div class="col-12 col-sm-6 col-lg-2">
+                                    <select class="search_form__select" name="function">
+                                        <option value="---">Funktion</option>
+                                        <option value="Arzt">Arzt</option>
+                                        <option value="Oberarzt">Oberarzt</option>
+                                        <option value="Praktikant">Praktikant</option>
+                                    </select>
+                                </div>
+                                <div class="col-12 col-sm-6 col-lg-2">
+                                    <input class="search_form__input" type="text" name="jobid" placeholder="Stellen-ID">
+                                </div>
+                                <div class="col-12 col-lg-3">
+                                    <div class="row">
+                                        <div class="col-12 col-sm-6 col-lg-12">
+                                            <div class="search_form__radio">
+                                                <label><input type="radio" name="optradio" value="fulltime" checked>Vollzeit</label>
+                                            </div>
+                                            <div class="search_form__radio">
+                                                <label><input type="radio" name="optradio" value="halftime">Teilzeit</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-6 col-lg-12 right"><span class="moresearch expandextras collapseextras js-hide-extended-search-options">Erweiterte Suche</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<section class="section section--searchresult">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <span class="jobcount">Aktuell sind <strong>Traum-Jobs</strong> verfügbar</span>
+                <div id="js-joblist">
+                    <ul class="resultlist list"> </ul>
+                    <ul class="pagination"></ul>
+                </div>
+                <!--pagination-->
+            </div>
+        </div>
+    </div>
+    <!-- Job-Template -->
+    <div style="display: none;">
+        <li id="js-list-entry-template" class="resultlist__item">
+            <div style="display: none;">
+                <span class="id"></span>
+                <span class="zipCode"></span>
+            </div>
+            <a href="#" title="Arztstelle" class="js-showoverlay">
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        <span class="color-black"><strong><span class="jobTitle"></span> - <span class="subjectTitle"></span></strong><br><span class="clinicTitle"></span>, <span class="city"></span></span>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <ul class="taglist">
+                            <li class="taglist__item taglist__item--person jobTitle2"></li>
+                            <li class="taglist__item taglist__item--star subjectTitle2"></li>
+                            <li class="taglist__item taglist__item--pin city2"></li>
+                            <li class="taglist__item taglist__item--time">Vollzeit</li>
+                        </ul>
+                    </div>
+                </div>
+            </a>
+        </li>
+    </div>
+</section>
+
+
+
+<script type="text/javascript">
+    var jobs = <?php echo json_encode($this->jobs) ?>;
+</script>
