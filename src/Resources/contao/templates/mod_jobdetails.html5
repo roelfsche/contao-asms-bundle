@@ -1,0 +1,74 @@
+<div id="js-jobwrapper" class="jobwrapper">
+    <div class="jobimage"><img src="files/bilder/jobs/bild_klinik.jpg" alt="Klinikbild"></div>
+    <div class="container-fluid">
+      <div id="js-jobname" class="jobname">Leitender Oberarzt - Pneumologie</div>
+      <div class="row">
+        <div class="col-12 col-md-8">
+          <ul class="taglist taglist--overlay">
+            <li id="js-jobtitle" class="taglist__item taglist__item--overlay taglist__item--person">Leitender Oberarzt</li>
+            <li id="js-subjecttitle" class="taglist__item taglist__item--overlay taglist__item--star">Pneumologie</li>
+            <li id="js-city" class="taglist__item taglist__item--overlay taglist__item--pin">Bad Ems</li>
+            <li id="js-typefulltime" class="taglist__item taglist__item--overlay taglist__item--time">Vollzeit</li>
+            <li id="js-typeparttime" class="taglist__item taglist__item--overlay taglist__item--time">Teilzeit</li>
+            <li id="js-typelimited" class="taglist__item taglist__item--overlay taglist__item--time">Befristed</li>
+          </ul>
+        </div>
+        <div class="col-12 col-md-4"><img src="files/bilder/stammdaten/logo_klinik.jpg" alt=""></div>
+      </div>
+      <div class="row">
+        <div class="col-8 col-lg-8"><a class="btn btn--secondary btn--fullwidth" href="#" title="Jetzt bewerben">Jetzt bewerben</a></div>
+        <div class="col-4"><div class="information">i<span class="information-overlay">Jetzt erfolgt die Weiterleitung ins Bewerbungsportal.</span></div></div>
+      </div>
+      <h4>Jobbeschreibung</h4>
+      <p id="js-jobdescription">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+      <h4>Ihre Voraussetzungen</h4>
+      <p>Das erwarten wir von Ihnen:</p>
+      <div id="js-youoffer"></div>
+      <h4>Unsere Leistungen</h4>
+      <p>Das bekommen Sie:</p>
+      <div id="js-weoffer"></div>
+      <div class="row">
+        <div class="col-8 col-lg-8"><a class="btn btn--secondary btn--fullwidth" href="#" title="Jetzt bewerben">Jetzt bewerben</a></div>
+        <div class="col-4"><div class="information">i<span class="information-overlay">Jetzt erfolgt die Weiterleitung ins Bewerbungsportal.</span></div></div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <span class="jobid">Stellen.ID: <span id="js-jobid"></span></span>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid clinicdetail">
+      <div class="row">
+        <div class="col-12">
+          <h3>Alles Wichtige zur Klinik</h3>
+        </div>
+        <div class="col-md-6">
+          <p><strong>Klinikanschrift</strong></p>
+          <p>Psychosomatische Klinik Buching<br>
+          Rauhenbichl<br>
+          87642 Halblech</p>
+          <a class="link link--external" href="#" title="">Klinik-Website</a>
+          <a class="link link--download" href="#" title="">Klinik-Broschüre</a>
+        </div>
+        <div class="col-md-6">
+          <p><strong>Ihr Ansprechpartner</strong></p>
+          <p>Susanne Brand<br>
+          Leiterin der Abteilung Kliniken,<br>
+          Bau und Verwaltung</p>
+          <a class="link link--phone" href="#" title="">0821500 2849</a>
+          <a class="link link--email" href="#" title="">susanne.brand@drv-schwaben.de</a>
+        </div>
+        <div class="col-md-6">
+          <p><br><strong>Auszeichnungen</strong></p>
+          <div class="row">
+            <div class="col-6"><img src="files/bilder/stammdaten/logo_auszeichnung.jpg" alt=""></div>
+            <div class="col-6"><img src="files/bilder/stammdaten/logo_auszeichnung.jpg" alt=""></div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <p><br><strong>infos zur Gleichstellung</strong></p>
+          <p>Wir möchten darauf hinweisen, dass Bewerbungen von Frauen ausdrücklich erwünscht sind. Die einschlägigen gesetzlichen Regelungen zur Förderung von Frauen finden bei der Auswahl Anwendung. Dies gilt gleichermaßen für die Bewerbung von schwerbehinderten Menschen.</p>
+        </div>
+      </div>
+    </div>
+  </div>

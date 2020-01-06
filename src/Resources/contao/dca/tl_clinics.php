@@ -142,7 +142,7 @@ $GLOBALS['TL_DCA'][$table] = array(
             'exclude'                 => true,
             'inputType'               => 'select',
             'options_callback'        => array($table, 'getStates'),
-            'eval'                    => array('tl_class' => 'w50'),
+            'eval'                    => array('tl_class' => 'w100'),
             'sql'                     => "varchar(32) NOT NULL default ''"
         ),
         'lat' => array(
@@ -150,6 +150,12 @@ $GLOBALS['TL_DCA'][$table] = array(
             'label' => &$GLOBALS['TL_LANG'][$table]['lat'],
             'exclude' => false,
             'inputType' => 'text',
+            'save_callback' => array(
+                array(
+                    'tl_clinics',
+                    'saveLat'
+                )
+            ),
             'eval' => array('mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w100'),
             'sql' => "varchar(255) NOT NULL default ''",
         ),
@@ -158,6 +164,12 @@ $GLOBALS['TL_DCA'][$table] = array(
             'label' => &$GLOBALS['TL_LANG'][$table]['lon'],
             'exclude' => false,
             'inputType' => 'text',
+            'save_callback' => array(
+                array(
+                    'tl_clinics',
+                    'saveLon'
+                )
+            ),
             'eval' => array('mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w100'),
             'sql' => "varchar(255) NOT NULL default ''",
         ),
@@ -412,5 +424,46 @@ class tl_clinics extends Backend
         $arrOptions[] = "Thüringen";
 
         return $arrOptions;
+    }
+    public function saveLon($value, $objDca)
+    {
+        return $this->savePos('lon', $value, $objDca);
+    }
+
+    public function saveLat($value, $objDca)
+    {
+        return $this->savePos('lat', $value, $objDca);
+    }
+
+    private function savePos($strField, $value, $objDca)
+    {
+        if (floatval($value)) {
+            return $value;
+        }
+        if ($this->objNominatimResponse) {
+            return $this->objNominatimResponse->{$strField};
+        }
+
+        $arrQueryValues = [
+            trim($this->Input->post('postal') . ' ' . $this->Input->post('city')),
+            str_replace(',', '', $this->Input->post('street'))
+        ];
+        $headers = [];
+        // $headers = array('Accept' => 'application/json');
+        $query = array(
+            'q' => urldecode(implode(',', $arrQueryValues)),
+            'format' => 'json'
+        );
+
+        $response = Unirest\Request::get('https://nominatim.openstreetmap.org/search', $headers, $query);
+        if ($response->code == 200) {
+            if (isset($response->body[0])) {
+                $this->objNominatimResponse = $response->body[0];
+            }
+        }
+        if ($this->objNominatimResponse && isset($this->objNominatimResponse->{$strField})) {
+            return $this->objNominatimResponse->{$strField};
+        }
+        return $value;
     }
 }

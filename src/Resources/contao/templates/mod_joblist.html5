@@ -11,7 +11,7 @@
                             <input class="search_form__input js-search-city" type="text" name="place" placeholder="PLZ/Ort">
                         </div>
                         <div class="col-12 col-sm-6 col-lg-2 order-lg-3">
-                            <select class="search_form__select" name="range">
+                            <select class="search_form__select js-search-surrounding" name="range"  disabled>
                                 <option value="---">Umkreis</option>
                                 <option value="10">10 km</option>
                                 <option value="20">20 km</option>
@@ -20,7 +20,7 @@
                             </select>
                         </div>
                         <div class="col-12 col-lg-3 order-5 order-lg-4">
-                            <input class="btn btn--secondary search_form__submit" type="submit" value="Jobs finden">
+                            <input class="btn btn--secondary search_form__submit js-search-button" type="submit" value="Jobs finden">
                         </div>
                         <div class="col-12 col-lg-8 order-lg-5 direct-search js-hide-options">
                             <span class="color-white small italic">Direktsuche</span>
@@ -90,7 +90,7 @@
     </div>
     <!-- Job-Template -->
     <div style="display: none;">
-        <li id="js-list-entry-template" class="resultlist__item">
+        <li id="js-list-entry-template" class="resultlist__item js-resultlist__item">
             <div style="display: none;">
                 <span class="id"></span>
                 <span class="zipCode"></span>
@@ -105,7 +105,9 @@
                             <li class="taglist__item taglist__item--person jobTitle2"></li>
                             <li class="taglist__item taglist__item--star subjectTitle2"></li>
                             <li class="taglist__item taglist__item--pin city2"></li>
-                            <li class="taglist__item taglist__item--time">Vollzeit</li>
+                            <li class="taglist__item taglist__item--time typeFulltime js-typefulltime"></li>
+                            <li class="taglist__item taglist__item--time typeParttime js-typeparttime"></li>
+                            <li class="taglist__item taglist__item--time typeLimited js-typelimited"></li>
                         </ul>
                     </div>
                 </div>
@@ -114,8 +116,17 @@
     </div>
 </section>
 
+<div id="overlay">
+    <div class="overlay-wrapper">
+      <button class="btn btn--close-overlay js-close-overlay">schließen</button>
+      <?php echo $this->detailTemplate ?>
+    </div>
+</div>
+
 
 
 <script type="text/javascript">
     var jobs = <?php echo json_encode($this->jobs) ?>;
+    var jobMapping = <?php echo json_encode($this->job_mapping) ?>;
+
 </script>

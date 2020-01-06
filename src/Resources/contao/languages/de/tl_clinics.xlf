@@ -81,6 +81,18 @@
             <trans-unit id="tl_clinics.state.0">
                 <target>Bundesland</target>
             </trans-unit>
+            <trans-unit id="tl_clinics.lat.0">
+                <target>Latitude</target>
+            </trans-unit>
+            <trans-unit id="tl_clinics.lat.1">
+                <target>Wird automatisch gefüllt, wenn leer.</target>
+            </trans-unit>
+            <trans-unit id="tl_clinics.lon.0">
+                <target>Longitude</target>
+            </trans-unit>
+            <trans-unit id="tl_clinics.lon.1">
+                <target>Wird automatisch gefüllt, wenn leer.</target>
+            </trans-unit>
             <trans-unit id="tl_clinics.contactperson_salutation.0">
                 <target>Anrede</target>
             </trans-unit>contactperson_position

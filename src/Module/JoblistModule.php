@@ -2,6 +2,7 @@
 
 namespace Lumturo\ContaoAsmsBundle\Module;
 
+use Contao\FrontendTemplate;
 use Patchwork\Utf8;
 
 class JoblistModule extends \Module
@@ -42,14 +43,23 @@ class JoblistModule extends \Module
      */
     protected function compile()
     {
-        $arrJobs = $this->Database->prepare('select a.id, a.typeFulltime, a.typeParttime, a.typeLimited, b.title as clinicTitle, b.city, b.city as city2, b.zipCode ,c.title as jobTitle, c.title as jobTitle2, d.title as subjectTitle, d.title as subjectTitle2 from tl_jobs a join tl_clinics b on (a.clinic = b.id) join tl_jobtypes c on (a.titleSelection = c.id) join tl_subjects d on (a.subjectSelection = d.id) where a.published = \'\' AND (a.start = \'\' or a.start < ?) AND (a.stop = \'\' or a.stop > ?)')->execute(time(), time())->fetchAllAssoc();
+        $arrJobs = $this->Database->prepare('select a.id, a.jobID, a.typeFulltime, a.typeParttime, a.typeLimited, a.weOffer, a.youOffer, a.applicationNotes, b.title as clinicTitle, b.city, b.city as city2, b.zipCode, b.lat, b.lon ,c.title as jobTitle, c.title as jobTitle2, d.title as subjectTitle, d.title as subjectTitle2 from tl_jobs a join tl_clinics b on (a.clinic = b.id) join tl_jobtypes c on (a.titleSelection = c.id) join tl_subjects d on (a.subjectSelection = d.id) where a.published = \'\' AND (a.start = \'\' or a.start < ?) AND (a.stop = \'\' or a.stop > ?)')->execute(time(), time())->fetchAllAssoc();
 
         // id -> index; Vollzeit / Teilzeit
         $arrFixedJobs = [];
-        foreach($arrJobs as $arrJob) {
-            $arrFixedJobs[$arrJob['id']] = $arrJob;
+        foreach($arrJobs as $intId => $arrJob) {
+            // $arrJobs[$intId]['applicationNotes'] = htmlspecialchars_decode($arrJob['applicationNotes']);
+            $arrJobs[$intId]['typeFulltime'] = ($arrJob['typeFulltime'] == 1) ? 'Vollzeit' : '';
+            $arrJobs[$intId]['typeParttime'] = ($arrJob['typeParttime'] == 1) ? 'Teilzeit' : '';
+            $arrJobs[$intId]['typeLimited'] = ($arrJob['typeLimited'] == 1) ? 'Befristed' : '';
+            $arrFixedJobs[$arrJob['id']] = $intId;
         }
 
+        $objDetailTemplate = new FrontendTemplate('mod_jobdetails');
+        $objDetailTemplate->job = $arrJobs[0];
+
         $this->Template->jobs = $arrJobs;
+        $this->Template->job_mapping = $arrFixedJobs;
+        $this->Template->detailTemplate = $objDetailTemplate->parse(); 
     }
 }
