@@ -81,7 +81,7 @@
             <div class="col-12">
                 <span class="jobcount">Aktuell sind <strong>Traum-Jobs</strong> verfügbar</span>
                 <div id="js-joblist">
-                    <ul class="resultlist list"> </ul>
+                    <ul class="resultlist list js-joblist"> </ul>
                     <ul class="pagination"></ul>
                 </div>
                 <!--pagination-->

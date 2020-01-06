@@ -117,7 +117,8 @@ $(function () {
     });
 
     // click auf Liste --> Anzeige details
-    $('.js-resultlist__item').on('click', (function () {
+    // $('.js-resultlist__item').on('click', (function () {
+    $('.js-joblist').on('click', '.js-resultlist__item', (function () {
         var $overlay = $('#overlay'),
             $closeButton = $('.js-close-overlay'),
             $jobTitle = $('#js-jobtitle'),
