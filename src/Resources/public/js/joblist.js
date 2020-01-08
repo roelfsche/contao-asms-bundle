@@ -128,7 +128,18 @@ $(function () {
             $jobDescription = $('#js-jobdescription'),
             $youOffer = $('#js-youoffer'),
             $weOffer = $('#js-weoffer'),
-            $jobId = $('#js-jobid');
+            $jobId = $('#js-jobid'),
+            $clinicName = $('#clinicName'),
+            // $clinicCity = $('#clinicCity'),
+            $clinicAddress = $('#clinicAddress'),
+            $clinicUrl = $('#clinicUrl'),
+            $clinicBrochure = $('#clinicBrochure'),
+            $clinicContactName = $('#clinicContactName'),
+            $clinicContactDepartment = $('#clinicContactDepartment'),
+            $clinicContactPhone = $('#clinicContactPhone'),
+            $clinicContactMail = $('#clinicContactMail'),
+            $jobMailto = $('.jobMailto'),
+            $jobEquality = $('#jobEquality');
 
         $closeButton.on('click', function (e) {
             e.preventDefault();
@@ -184,6 +195,25 @@ $(function () {
             $youOffer.html(job.youOffer);
             $weOffer.html(job.weOffer);
             $jobId.text(job.jobID);
+            $clinicName.text(job.clinicTitle);
+            // $clinicCity.text(job.city)
+            $clinicAddress.text(job.zipCode + " " + job.city);
+            if (job.url != undefined) {
+                $clinicUrl.attr('href', job.url);
+            } else {
+                $clinicUrl.hide();
+            }
+            if (job.brochure != undefined) {
+                $clinicBrochure.attr('href', job.brochure);
+            } else {
+                $clinicBrochure.hide();
+            }
+            $clinicContactName.text(job.contactperson_title + " " + job.contactperson_firstname + " " + job.contactperson_lastname);
+            $clinicContactDepartment.text(job.department);
+            $clinicContactPhone.text(job.contactperson_phone).attr('href', 'tel:' + job.contactperson_phone);
+            $clinicContactMail.text(job.contactperson_email).attr('href', 'mailto:' + job.contactperson_email);
+            $jobMailto.attr('href', 'mailto:' + job.mailto);
+            $jobEquality.html(job.equality);
 
         }
     })());
