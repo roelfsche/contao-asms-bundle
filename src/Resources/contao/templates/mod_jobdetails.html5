@@ -13,7 +13,7 @@
             <li id="js-typelimited" class="taglist__item taglist__item--overlay taglist__item--time">Befristet</li>
           </ul>
         </div>
-        <div class="col-12 col-md-4"><img src="files/bilder/stammdaten/logo_klinik.jpg" alt=""></div>
+        <div id="js-cliniclogo-wrapper" class="col-12 col-md-4"><img id="js-cliniclogo" src="files/bilder/stammdaten/logo_klinik.jpg" alt=""></div>
       </div>
       <div class="row">
         <div class="col-8 col-lg-8"><a class="btn btn--secondary btn--fullwidth jobMailto" href="#" title="Jetzt bewerben">Jetzt bewerben</a></div>
@@ -48,7 +48,7 @@
           <!-- <span id="clinicCity">Rauhenbichl</span><br> -->
           <span id="clinicAddress">87642 Halblech</span></p>
           <a id="clinicUrl" class="link link--external" href="#" title="">Klinik-Website</a>
-          <a id="clinicBrochure" class="link link--download" href="#" title="">Klinik-Broschüre</a>
+          <a id="clinicBrochure" class="link link--download" href="#" title="Klinik-Broschüre" target="_blank">Klinik-Broschüre</a>
         </div>
         <div class="col-md-6">
           <p><strong>Ihr Ansprechpartner</strong></p>
@@ -58,11 +58,11 @@
           <a id="clinicContactPhone" class="link link--phone" href="#" title="">0821500 2849</a>
           <a id="clinicContactMail" class="link link--email" href="#" title="">susanne.brand@drv-schwaben.de</a>
         </div>
-        <div class="col-md-6">
+        <div id="js-award-div-wrapper" class="col-md-6">
           <p><br><strong>Auszeichnungen</strong></p>
           <div class="row">
-            <div class="col-6"><img src="files/bilder/stammdaten/logo_auszeichnung.jpg" alt=""></div>
-            <div class="col-6"><img src="files/bilder/stammdaten/logo_auszeichnung.jpg" alt=""></div>
+            <div class="col-6 js-award-div"><img src="files/bilder/stammdaten/logo_auszeichnung.jpg" alt=""></div>
+            <div class="col-6 js-award-div"><img src="files/bilder/stammdaten/logo_auszeichnung.jpg" alt=""></div>
           </div>
         </div>
         <div class="col-md-6">

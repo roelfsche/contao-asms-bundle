@@ -124,6 +124,8 @@ $(function () {
             $jobTitle = $('#js-jobtitle'),
             $subjectTitle = $('#js-subjecttitle'),
             $city = $('#js-city'),
+            $logoWrapper = $('#js-cliniclogo-wrapper'),
+            $logo = $('js-cliniclogo'),
             $jobName = $('#js-jobname'),
             $jobDescription = $('#js-jobdescription'),
             $youOffer = $('#js-youoffer'),
@@ -134,6 +136,8 @@ $(function () {
             $clinicAddress = $('#clinicAddress'),
             $clinicUrl = $('#clinicUrl'),
             $clinicBrochure = $('#clinicBrochure'),
+            $awardDivWrapper = $('#js-award-div-wrapper'),
+            $awardDivs = $('.js-award-div'),
             $clinicContactName = $('#clinicContactName'),
             $clinicContactDepartment = $('#clinicContactDepartment'),
             $clinicContactPhone = $('#clinicContactPhone'),
@@ -192,6 +196,12 @@ $(function () {
             })
             $subjectTitle.text(job.subjectTitle);
             $jobDescription.html(job.applicationNotes);
+            if (job.clinicLogo != undefined) {
+                $logoWrapper.show();
+                $logo.attr('src', job.clinicLogo).attr('alt', 'clinicLogoAlt');
+            } else {
+                $logoWrapper.hide();
+            }
             $youOffer.html(job.youOffer);
             $weOffer.html(job.weOffer);
             $jobId.text(job.jobID);
@@ -199,7 +209,7 @@ $(function () {
             // $clinicCity.text(job.city)
             $clinicAddress.text(job.zipCode + " " + job.city);
             if (job.url != undefined) {
-                $clinicUrl.attr('href', job.url);
+                $clinicUrl.show().attr('href', job.url);
             } else {
                 $clinicUrl.hide();
             }
@@ -208,6 +218,21 @@ $(function () {
             } else {
                 $clinicBrochure.hide();
             }
+
+            if (job.awardImage1 != undefined) {
+                $awardDivWrapper.show();
+                $awardDivs.first().find('img').attr('src', job.awardImage1).attr('alt', job.awardImage1Alt);
+
+                if (job.awardImage2 != undefined) {
+                    $awardDivs.eq(1).show().find('img').attr('src', job.awardImage2).attr('alt', job.awardImage2Alt);
+                } else {
+                    $awardDivs.eq(1).hide();
+                }
+            } else {
+                $awardDivWrapper.hide();
+            }
+
+
             $clinicContactName.text(job.contactperson_title + " " + job.contactperson_firstname + " " + job.contactperson_lastname);
             $clinicContactDepartment.text(job.department);
             $clinicContactPhone.text(job.contactperson_phone).attr('href', 'tel:' + job.contactperson_phone);
