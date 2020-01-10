@@ -1,16 +1,28 @@
 $(function () {
+    var $filterGlobal = $('.js-search-form-input'),
+        $filterCity = $('.js-search-city'),
+        $filterTypeSelect = $('#js-filter-function'),
+        $filterSubject = $('#js-filter-subject'),
+        $filterJobId = $('.js-filter-jobid'),
+        $filterSurrounding = $('.js-search-surrounding'),
+        $filterSearchButton = $('.js-search-button'),
+        $filterResetButton = $('.js-reset-filter');
+    var latLon = { lat: 0, lon: 0 };
+
+
+
     var list = new List('js-joblist', {
         page: 5,
         pagination: {
             outerWindow: 1,
         },
-        valueNames: ['id', 'jobTitle', 'jobTitle2', 'subjectTitle', 'subjectTitle2', 'clinicTitle', 'city', 'city2', 'zipCode', 'typeFulltime', 'typeParttime', 'typeLimited'],
+        valueNames: ['id', 'jobTitle', 'jobTitle2', 'jobType', 'jobSubject', 'jobId', 'subjectTitle', 'subjectTitle2', 'clinicTitle', 'city', 'city2', 'zipCode', 'typeFulltime', 'typeParttime', 'typeLimited'],
         item: 'js-list-entry-template'
     }, jobs);
 
     // blende nach pagination / filter leere Elemente aus (Vollzeit / Teilzeit) ...
     list.on('updated', function (list) {
-        console.log('updated')
+        // console.log('updated')
         $(list.visibleItems).each(function (i, elem) {
             var $domnode = $(elem.elm);
             $domnode.find('.js-typefulltime, .js-typeparttime, .js-typelimited').each(function (i, elem) {
@@ -35,12 +47,8 @@ $(function () {
     });
 
     var filterList = (function () {
-        var $globalFilter = $('.js-search-form-input'),
-            $city = $('.js-search-city'),
-            lat = 0, lon = 0;
-
         function _filterGlobal(job) {
-            var globalVal = $globalFilter.val();
+            var globalVal = $filterGlobal.val();
             // if (globalVal = '') {
             //     return true;
             // }
@@ -52,9 +60,9 @@ $(function () {
             );
         }
 
-        function _filterCityZip(job) {
-            var val = $city.val();
-            if (val == '') {
+        function _filterByCityZip(job) {
+            var val = $filterCity.val();
+            if (val == '' || parseInt($filterSurrounding.val()) != 0) {
                 return true;
             }
 
@@ -62,21 +70,116 @@ $(function () {
             return (job.city.search(regExp) != -1 || job.zipCode.search(regExp) != -1);
         }
 
-        function _filterFunction(item) {
+        function _filterBySurrounding(job) {
+            var filterVal = parseInt($filterSurrounding.val());
+            if (filterVal == 0) {
+                return true;
+            }
+            if (latLon.lat == 0 || latLon.lon == 0) {
+                return true;
+            }
+            var lat = parseFloat(job.lat),
+                lon = parseFloat(job.lon);
+            if (!lat || !lon) {
+                return false;
+            }
+            var dist = distance(latLon.lat, latLon.lon, lat, lon, 'K');
+            return (dist <= filterVal);
+        }
 
+        function _filterByFunction(job) {
+            var filterVal = parseInt($filterTypeSelect.val());
+            if (!filterVal) {
+                return true;
+            }
+            return job.jobType == filterVal;
+        }
+
+        function _filterBySubject(job) {
+            var filterVal = parseInt($filterSubject.val());
+            if (!filterVal) {
+                return true;
+            }
+            return job.jobSubject == filterVal;
+        }
+
+        function _filterByJobId(job) {
+            var filterVal = $filterJobId.val();
+            if (!filterVal.length) {
+                return true;
+            }
+            return job.jobId == filterVal;
+        }
+
+        function _filterByJobKind(job) {
+            var $filterElem = $("input[name='job_kind[]']:checked");
+            if ($filterElem.length == 0) {
+                return true;
+            }
+            var filterVal = $filterElem.val();
+            return job[filterVal] != "";
         }
 
         var filter = function (item) {
             // var id = item.values().id;
             var job = item.values();
-            return _filterGlobal(job) && _filterCityZip(job);
+            return _filterGlobal(job)
+                && _filterByCityZip(job)
+                && _filterBySurrounding(job)
+                && _filterByFunction(job)
+                && _filterBySubject(job)
+                && _filterByJobId(job)
+                && _filterByJobKind(job)
+                ;
         };
+
+        function distance(lat1, lon1, lat2, lon2, unit) {
+            if ((lat1 == lat2) && (lon1 == lon2)) {
+                return 0;
+            }
+            else {
+                var radlat1 = Math.PI * lat1 / 180;
+                var radlat2 = Math.PI * lat2 / 180;
+                var theta = lon1 - lon2;
+                var radtheta = Math.PI * theta / 180;
+                var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+                if (dist > 1) {
+                    dist = 1;
+                }
+                dist = Math.acos(dist);
+                dist = dist * 180 / Math.PI;
+                dist = dist * 60 * 1.1515;
+                if (unit == "K") { dist = dist * 1.609344 }
+                if (unit == "N") { dist = dist * 0.8684 }
+                return dist;
+            }
+        }
 
         return function () {
             list.filter(); // filter leeren
             list.filter(filter);
         }
     })();
+
+
+    // ext. Filter rein / raus
+    $('.js-show-extended-search-options').click(function (e) {
+        e.preventDefault();
+        $('.js-hide-options').hide();
+        $('.js-search_more').show();
+    });
+    $('.js-hide-extended-search-options').click(function (e) {
+        e.preventDefault();
+        $('.js-hide-options').show();
+        $('.js-search_more').hide();
+    });
+
+    // Direktliste Jobtypen
+    $('.js-short-job-type').on('click', function (e) {
+        e.preventDefault();
+        $filterTypeSelect.val($(this).data('id'));
+        $filterSearchButton.trigger('click');
+    })
 
     $('.js-search-city').on('input', function () {
         var zip = $(this).val();
@@ -92,29 +195,33 @@ $(function () {
             if (!data.length) {
                 // disabled
                 $('.js-search-surrounding').prop('disabled', true);
+                latLon.lat = latLon.lon = 0;
                 return;
             }
+            latLon.lat = parseFloat(data[0].lat);
+            latLon.lon = parseFloat(data[0].lon);
             $('.js-search-surrounding').prop('disabled', false);
-            console.log(data);
-            return;
-            map.panTo(new L.LatLng(data[0].lat, data[0].lon));
-            var latlng = [data[0].lat, data[0].lon]
-
-            if (surroundingCircle) {
-                map.removeLayer(surroundingCircle);
-                surroundingCircle = null;
-                $(".js-surrounding").val($(".js-surrounding option:first").val());
-            }
-            // console.log(latlng);
+            // console.log(data);
         });
-
     });
 
-    $('.js-search-button').on('click', function (e) {
+
+    $filterSearchButton.on('click', function (e) {
         e.preventDefault();
-        // $('.js-search-form-input, .js-search-city').on('input', function () {
         filterList();
     });
+    $filterResetButton.on('click', function (e) {
+        e.preventDefault();
+        $filterGlobal.val('');
+        $filterCity.val('');
+        $filterSurrounding.val(0);
+        $filterSubject.val(0);
+        $filterTypeSelect.val(0);
+        $filterJobId.val('');
+        $("input[name='job_kind[]']").prop('checked', false);
+        $filterSearchButton.trigger('click')
+    });
+
 
     // click auf Liste --> Anzeige details
     // $('.js-resultlist__item').on('click', (function () {
@@ -168,7 +275,7 @@ $(function () {
             }
 
             var job = jobs[jobIndex];
-            console.log(job);
+            // console.log(job);
             setJobDetails(job);
 
 
@@ -204,7 +311,7 @@ $(function () {
             }
             $youOffer.html(job.youOffer);
             $weOffer.html(job.weOffer);
-            $jobId.text(job.jobID);
+            $jobId.text(job.jobId);
             $clinicName.text(job.clinicTitle);
             // $clinicCity.text(job.city)
             $clinicAddress.text(job.zipCode + " " + job.city);
