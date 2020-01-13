@@ -8,33 +8,40 @@
 /**
  * Add palettes to tl_user
  */
-$GLOBALS['TL_DCA']['tl_user']['palettes']['__selector__'][] = 'isClinic';
 
-$GLOBALS['TL_DCA']['tl_user']['palettes']['extend']    = str_replace(
-    'inherit;',
-    'inherit,isClinic;',
-    $GLOBALS['TL_DCA']['tl_user']['palettes']['extend']
-);
-$GLOBALS['TL_DCA']['tl_user']['palettes']['extend']    = str_replace(
-    '{forms_legend},forms,formp;',
-    '',
-    $GLOBALS['TL_DCA']['tl_user']['palettes']['extend']
-);
-$GLOBALS['TL_DCA']['tl_user']['subpalettes']['isClinic'] = 'clinic';
+$GLOBALS['TL_DCA']['tl_user']['fields']['job_offer_access'] = array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_user']['job_offer_access'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox',
+			'options_callback'        => array('tl_asms_user', 'getJobOfferUser'),
+			// 'reference'               => &$GLOBALS['TL_LANG']['MOD'],
+			'eval'                    => array('multiple'=>true, 'helpwizard'=>true),
+			'sql'                     => "blob NULL"
+        );
 
-$GLOBALS['TL_DCA']['tl_user']['fields']['isClinic'] = array
-(
-    'label'                   => &$GLOBALS['TL_LANG']['tl_user']['isClinic'],
-    'exclude'                 => true,
-    'inputType'               => 'checkbox',
-    'eval'                    => array('submitOnChange'=>true),
-    'sql'                     => "char(1) NOT NULL default ''"
-);
-$GLOBALS['TL_DCA']['tl_user']['fields']['clinic'] = array
-(
-    'label'                   => &$GLOBALS['TL_LANG']['tl_user']['clinic'],
-    'inputType'               => 'select',
-    'foreignKey'              => 'tl_clinics.title',
-    'sql'                     => "int(10) unsigned NOT NULL default '0'",
-    'relation'                => array('type'=>'hasOne', 'load'=>'eager')
-);
+/**
+ * Extend default palette
+ */
+// $GLOBALS['TL_DCA']['tl_user']['palettes']['extend'] = str_replace('email;', 'email;{job_offer_access_legend},job_offer_access;', $GLOBALS['TL_DCA']['tl_user']['palettes']['extend']);
+// $GLOBALS['TL_DCA']['tl_user']['palettes']['custom'] = str_replace('email;', 'email;{job_offer_access_legend},job_offer_access;', $GLOBALS['TL_DCA']['tl_user']['palettes']['custom']);
+
+
+class tl_asms_user extends Backend
+{
+    /**
+     * Import the back end user object
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->import('BackendUser', 'User');
+    }
+
+    public function getJobOfferUser() {
+        return [
+            1 => 'Johann',
+            2 => 'Achim'
+        ];
+    }
+}

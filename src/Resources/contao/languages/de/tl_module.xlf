@@ -36,6 +36,18 @@
             <trans-unit id="tl_module.filterClinic.1">
                 <target>Gibt an, ob nur Stellen der aktuellen Klinik angezeigt werden sollen.</target>
             </trans-unit>
+            <trans-unit id="tl_module.filter_legend">
+                <target>Filter / Limit</target>
+            </trans-unit>
+            <trans-unit id="tl_module.subjects.0">
+                <target>Fach</target>
+            </trans-unit>
+            <trans-unit id="tl_module.max_results.0">
+                <target>max. Anzahl Ergebnisse</target>
+            </trans-unit>
+            <trans-unit id="tl_module.max_results.1">
+                <target>Wenn 0, dann werden alle ausgegeben</target>
+            </trans-unit>
 
         </body>
     </file>

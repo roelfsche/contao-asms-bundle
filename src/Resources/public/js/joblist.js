@@ -6,23 +6,42 @@ $(function () {
         $filterJobId = $('.js-filter-jobid'),
         $filterSurrounding = $('.js-search-surrounding'),
         $filterSearchButton = $('.js-search-button'),
-        $filterResetButton = $('.js-reset-filter');
+        $filterResetButton = $('.js-reset-filter')
+        $noJobCountSpan = $('#js-no-jobcount-span'),
+        $jobCountSpan = $('#js-jobcount-span'),
+        $jobCount = $('#js-job-count');
     var latLon = { lat: 0, lon: 0 };
 
-
-
-    var list = new List('js-joblist', {
-        page: 5,
-        pagination: {
-            outerWindow: 1,
-        },
+    var listConfig = {
+        // page: 5,
+        // pagination: pagination, 
         valueNames: ['id', 'jobTitle', 'jobTitle2', 'jobType', 'jobSubject', 'jobId', 'subjectTitle', 'subjectTitle2', 'clinicTitle', 'city', 'city2', 'zipCode', 'typeFulltime', 'typeParttime', 'typeLimited'],
         item: 'js-list-entry-template'
-    }, jobs);
+    }
+
+    // Pagination-Config
+    if (pagination) {
+        listConfig.page = 5;
+        listConfig.pagination = {
+            outerWindow: 1,
+        }
+    }
+
+    var list = new List('js-joblist', listConfig, jobs);
 
     // blende nach pagination / filter leere Elemente aus (Vollzeit / Teilzeit) ...
     list.on('updated', function (list) {
-        // console.log('updated')
+        // Anzahl der Jobs ausgeben
+        var count = list.matchingItems.length;
+        if (count) {
+            $noJobCountSpan.hide();
+            $jobCount.text(count);
+            $jobCountSpan.show();
+        } else {
+            $noJobCountSpan.show();
+            $jobCountSpan.hide();
+        }
+        // tags ein-/ausblenden
         $(list.visibleItems).each(function (i, elem) {
             var $domnode = $(elem.elm);
             $domnode.find('.js-typefulltime, .js-typeparttime, .js-typelimited').each(function (i, elem) {

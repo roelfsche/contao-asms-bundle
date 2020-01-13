@@ -1,17 +1,14 @@
 <?xml version="1.0" ?><xliff version="1.1">
     <file datatype="php" original="system/modules/vacancies/languages/de/tl_user.php" source-language="en">
         <body>
-            <trans-unit id="tl_user.isClinic.0">
-                <target>Klinik verbinden</target>
+            <trans-unit id="tl_user.job_offer_access.0">
+                <target>Zugriff auf Stellenanzeigen</target>
             </trans-unit>
-            <trans-unit id="tl_user.isClinic.1">
-                <target>Wählen Sie eine Klinik aus, die durch diesen Benutzer repräsentiert wird.</target>
+            <trans-unit id="tl_user.job_offer_access.1">
+                <target>Zugriff auf Stellenanzeigen anderer User erlauben</target>
             </trans-unit>
-            <trans-unit id="tl_user.clinic.0">
-                <target>Klinik</target>
-            </trans-unit>
-            <trans-unit id="tl_user.clinic.1">
-                <target>Wichtig: Wählen Sie unter den Benutzergruppen den Eintrag "Klinik" aus!</target>
+            <trans-unit id="tl_user.job_offer_access_legend">
+                <source>Zugriffsrechte Stellenangebote</source>
             </trans-unit>
         </body>
     </file>

@@ -1,3 +1,4 @@
+<?php if ($this->show_filter) : ?>
 <section class="section section--search">
     <div class="container">
         <div class="row">
@@ -74,14 +75,15 @@
         </div>
     </div>
 </section>
-
+<?php endif; ?>
 
 
 <section class="section section--searchresult">
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <span class="jobcount">Aktuell sind <strong>Traum-Jobs</strong> verfügbar</span>
+                <span id="js-jobcount-span" class="jobcount">Aktuell sind <strong><span id="js-job-count"><?php echo count($this->jobs) ?></span> Traum-Jobs</strong> verfügbar</span>
+                <span id="js-no-jobcount-span" class="jobcount" style="display: none;">Aktuell sind leider keine Jobs verfügbar</span>
                 <div id="js-joblist">
                     <ul class="resultlist list js-joblist"> </ul>
                     <ul class="pagination"></ul>
@@ -90,6 +92,7 @@
             </div>
         </div>
     </div>
+
     <!-- Job-Template -->
     <div style="display: none;">
         <li id="js-list-entry-template" class="resultlist__item js-resultlist__item">
@@ -119,6 +122,7 @@
             </a>
         </li>
     </div>
+
 </section>
 
 <div id="overlay">
@@ -131,6 +135,7 @@
 
 
 <script type="text/javascript">
+    var pagination = <?php echo (($this->show_filter) ? 'true' : 'false') ?>;
     var jobs = <?php echo json_encode($this->jobs) ?>;
     var jobMapping = <?php echo json_encode($this->job_mapping) ?>;
 
