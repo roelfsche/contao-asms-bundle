@@ -18,6 +18,21 @@
             <trans-unit id="tl_subjects.title.1">
                 <target>Bitte geben Sie den Titel ein.</target>
             </trans-unit>
+            <trans-unit id="tl_subjects.images_legend">
+                <target>Bilder</target>
+            </trans-unit>
+            <trans-unit id="tl_subjects.img1.0">
+                <target>Bild</target>
+            </trans-unit>
+            <trans-unit id="tl_subjects.img2.0">
+                <target>2. Bild</target>
+            </trans-unit>
+            <trans-unit id="tl_subjects.img3.0">
+                <target>3. Bild</target>
+            </trans-unit>            
+            <trans-unit id="tl_subjects.alt.0">
+                <target>Alt-Text</target>
+            </trans-unit>
 
             <trans-unit id="tl_subjects.new.0">
                 <target>Fachgebiet hinzufügen</target>
