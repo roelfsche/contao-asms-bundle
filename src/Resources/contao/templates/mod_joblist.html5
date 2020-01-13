@@ -17,6 +17,8 @@
                                 <option value="10">10 km</option>
                                 <option value="20">20 km</option>
                                 <option value="50">50 km</option>
+                                <option value="100">100 km</option>
+                                <option value="200">200 km</option>
                                 <option value="0">mehr als 50 km</option>
                             </select>
                         </div>
@@ -88,7 +90,10 @@
                     <ul class="resultlist list js-joblist"> </ul>
                     <ul class="pagination"></ul>
                 </div>
-                <!--pagination-->
+                <div id="js-next-greater-surrounding-joblist" style="display: none;">
+                    <span class="jobcount"><span id="js-next-greater-surrounding-count"></span> Ergebnisse im Umkreis von <span id="js-next-greater-surrounding-radius"></span>km</span>
+                    <ul class="resultlist list js-joblist"> </ul>
+                </div>
             </div>
         </div>
     </div>

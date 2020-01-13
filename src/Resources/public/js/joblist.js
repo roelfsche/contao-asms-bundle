@@ -6,15 +6,14 @@ $(function () {
         $filterJobId = $('.js-filter-jobid'),
         $filterSurrounding = $('.js-search-surrounding'),
         $filterSearchButton = $('.js-search-button'),
-        $filterResetButton = $('.js-reset-filter')
+        $filterResetButton = $('.js-reset-filter'),
         $noJobCountSpan = $('#js-no-jobcount-span'),
         $jobCountSpan = $('#js-jobcount-span'),
-        $jobCount = $('#js-job-count');
+        $jobCount = $('#js-job-count'),
+        nextGreaterSurroundingList = null;
     var latLon = { lat: 0, lon: 0 };
 
     var listConfig = {
-        // page: 5,
-        // pagination: pagination, 
         valueNames: ['id', 'jobTitle', 'jobTitle2', 'jobType', 'jobSubject', 'jobId', 'subjectTitle', 'subjectTitle2', 'clinicTitle', 'city', 'city2', 'zipCode', 'typeFulltime', 'typeParttime', 'typeLimited'],
         item: 'js-list-entry-template'
     }
@@ -65,12 +64,15 @@ $(function () {
         }
     });
 
-    var filterList = (function () {
+    /**
+     * erstellt die Filter für die beiden Listen
+     * @param {boolean} primaryList 
+     */
+    var createFilterFunction = function (theList, primaryList) {
+        var myList = theList;
+
         function _filterGlobal(job) {
             var globalVal = $filterGlobal.val();
-            // if (globalVal = '') {
-            //     return true;
-            // }
 
             var regExp = new RegExp(globalVal, 'i');
             return (job.jobTitle.search(regExp) != -1 ||
@@ -91,6 +93,7 @@ $(function () {
 
         function _filterBySurrounding(job) {
             var filterVal = parseInt($filterSurrounding.val());
+
             if (filterVal == 0) {
                 return true;
             }
@@ -103,8 +106,35 @@ $(function () {
                 return false;
             }
             var dist = distance(latLon.lat, latLon.lon, lat, lon, 'K');
+            console.log(dist);
             return (dist <= filterVal);
         }
+
+        function _filterByNextGreaterSurrounding(job) {
+            var filterVal = parseInt($filterSurrounding.val());
+            var nextRadius = parseInt($filterSurrounding.find('option:selected').next().val());
+
+            if (nextRadius == 0) {
+                return true;
+            }
+            if (latLon.lat == 0 || latLon.lon == 0) {
+                return true;
+            }
+            var lat = parseFloat(job.lat),
+                lon = parseFloat(job.lon);
+            if (!lat || !lon) {
+                return false;
+            }
+            var dist = distance(latLon.lat, latLon.lon, lat, lon, 'K');
+            if (dist <= filterVal) {
+                return false; // passt schon in akt. Filterval, also nicht in erw. Liste anzeigen
+            }
+
+            if (dist <= nextRadius) {
+                return true;
+            }
+        }
+
 
         function _filterByFunction(job) {
             var filterVal = parseInt($filterTypeSelect.val());
@@ -140,16 +170,19 @@ $(function () {
         }
 
         var filter = function (item) {
-            // var id = item.values().id;
             var job = item.values();
-            return _filterGlobal(job)
+            var ret = _filterGlobal(job)
                 && _filterByCityZip(job)
-                && _filterBySurrounding(job)
                 && _filterByFunction(job)
                 && _filterBySubject(job)
                 && _filterByJobId(job)
-                && _filterByJobKind(job)
-                ;
+                && _filterByJobKind(job);
+
+            if (primaryList) {
+                return ret && _filterBySurrounding(job);
+            } else {
+                return ret && _filterByNextGreaterSurrounding(job);
+            }
         };
 
         function distance(lat1, lon1, lat2, lon2, unit) {
@@ -175,11 +208,13 @@ $(function () {
         }
 
         return function () {
-            list.filter(); // filter leeren
-            list.filter(filter);
+            myList.filter(); // filter leeren
+            myList.filter(filter);
         }
-    })();
+    };
 
+    var filterList = createFilterFunction(list, true);
+    var nextGreaterSurroundingFilterList = null;// wird später definiert
 
     // ext. Filter rein / raus
     $('.js-show-extended-search-options').click(function (e) {
@@ -207,7 +242,6 @@ $(function () {
         }
         // frage https://nominatim.openstreetmap.org/search/?q=Germany,18146&format=json an
         var location = 'Germany,' + zip;
-        // var geocode = 'https://open.mapquestapi.com/search?format=json&q=' + location;
         var geocode = 'https://nominatim.openstreetmap.org/search?format=json&q=' + location;
         $.getJSON(geocode, function (data) {
             // get lat + lon from first match
@@ -220,7 +254,6 @@ $(function () {
             latLon.lat = parseFloat(data[0].lat);
             latLon.lon = parseFloat(data[0].lon);
             $('.js-search-surrounding').prop('disabled', false);
-            // console.log(data);
         });
     });
 
@@ -228,7 +261,23 @@ $(function () {
     $filterSearchButton.on('click', function (e) {
         e.preventDefault();
         filterList();
+
+        // additional Liste
+        if (parseInt($filterSurrounding.val())) {
+            $('#js-next-greater-surrounding-joblist').show();
+            if (nextGreaterSurroundingList == null) {
+                nextGreaterSurroundingList = new List('js-next-greater-surrounding-joblist', {
+                    valueNames: ['id', 'jobTitle', 'jobTitle2', 'jobType', 'jobSubject', 'jobId', 'subjectTitle', 'subjectTitle2', 'clinicTitle', 'city', 'city2', 'zipCode', 'typeFulltime', 'typeParttime', 'typeLimited'],
+                    item: 'js-list-entry-template'
+                }, jobs);
+                nextGreaterSurroundingFilterList = createFilterFunction(nextGreaterSurroundingList, false);
+            }
+            nextGreaterSurroundingFilterList();
+            $('#js-next-greater-surrounding-count').text(nextGreaterSurroundingList.matchingItems.length);
+            $('#js-next-greater-surrounding-radius').text($filterSurrounding.find('option:selected').next().val())
+        }
     });
+
     $filterResetButton.on('click', function (e) {
         e.preventDefault();
         $filterGlobal.val('');
@@ -239,6 +288,9 @@ $(function () {
         $filterJobId.val('');
         $("input[name='job_kind[]']").prop('checked', false);
         $filterSearchButton.trigger('click')
+
+        $('#js-next-greater-surrounding-joblist').hide();
+
     });
 
 
