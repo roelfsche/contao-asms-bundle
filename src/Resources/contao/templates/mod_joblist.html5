@@ -143,5 +143,6 @@
     var pagination = <?php echo (($this->show_filter) ? 'true' : 'false') ?>;
     var jobs = <?php echo json_encode($this->jobs) ?>;
     var jobMapping = <?php echo json_encode($this->job_mapping) ?>;
+    var subjectImages = <?php echo json_encode($this->subject_images) ?>;
 
 </script>

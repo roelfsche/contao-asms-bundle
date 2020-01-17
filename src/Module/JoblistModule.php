@@ -92,7 +92,13 @@ class JoblistModule extends \Module
             b.awardImage2,
             b.awardImage2Alt,
             b.equality, 
-            c.title as jobTitle, c.title as jobTitle2, d.title as subjectTitle, d.title as subjectTitle2 from tl_jobs a join tl_clinics b on (a.clinic = b.id) join tl_jobtypes c on (a.titleSelection = c.id) join tl_subjects d on (a.subjectSelection = d.id) where a.published = \'1\' AND (a.start = \'\' or a.start < ?) AND (a.stop = \'\' or a.stop > ?)';
+            c.title as jobTitle, c.title as jobTitle2, d.title as subjectTitle, d.title as subjectTitle2,
+            d.id as subjectId 
+            from tl_jobs a 
+            join tl_clinics b on (a.clinic = b.id) 
+            join tl_jobtypes c on (a.titleSelection = c.id) 
+            join tl_subjects d on (a.subjectSelection = d.id) 
+            where a.published = \'1\' AND (a.start = \'\' or a.start < ?) AND (a.stop = \'\' or a.stop > ?)';
             $arrJobs = $this->Database->prepare($strSQL)->execute(time(), time())->fetchAllAssoc();
         } else {
             // selektiere alle Job-Typen für Filter
@@ -131,7 +137,13 @@ class JoblistModule extends \Module
                         b.awardImage2,
                         b.awardImage2Alt,
                         b.equality, 
-                        c.title as jobTitle, c.title as jobTitle2, d.title as subjectTitle, d.title as subjectTitle2 from tl_jobs a join tl_clinics b on (a.clinic = b.id) join tl_jobtypes c on (a.titleSelection = c.id) join tl_subjects d on (a.subjectSelection = d.id) where a.published = \'1\' AND (a.start = \'\' or a.start < ?) AND (a.stop = \'\' or a.stop > ?) AND a.subjectSelection=?';
+                        c.title as jobTitle, c.title as jobTitle2, d.title as subjectTitle, d.title as subjectTitle2 
+                        d.id as subjectId
+                        from tl_jobs a 
+                        join tl_clinics b on (a.clinic = b.id) 
+                        join tl_jobtypes c on (a.titleSelection = c.id) 
+                        join tl_subjects d on (a.subjectSelection = d.id) 
+                        where a.published = \'1\' AND (a.start = \'\' or a.start < ?) AND (a.stop = \'\' or a.stop > ?) AND a.subjectSelection=?';
             $arrJobs = $this->Database->prepare($strSQL)->execute(time(), time(), $this->intSubjectFilterValue)->fetchAllAssoc();
             $this->Template->show_filter = FALSE;
         }
@@ -221,5 +233,48 @@ class JoblistModule extends \Module
         $this->Template->job_subjects = $arrJobFields;
         $this->Template->job_mapping = $arrFixedJobs;
         $this->Template->detailTemplate = $objDetailTemplate->parse();
+        $this->Template->subject_images = $this->getSubjectImages();
+    }
+
+    /**
+     * Jedes Fachgebiet hat bis zu 3 Bilder.
+     * 
+     * Eines davon wird (zufällig ausgewählt und) auf der Detail-Seite dargestellt
+     */
+    protected function getSubjectImages()
+    {
+        $arrSubjects = [];
+        $arrDbSubjects = $this->Database->prepare('SELECT id, img1, img1Alt, img2, img2Alt, img3, img3Alt FROM tl_subjects')->execute()->fetchAllAssoc();
+
+        // schauen, ob Bilder gesetzt sind; wenn ja, dann Pfade holen
+        foreach ($arrDbSubjects as $arrSubject) {
+            $arrFiles = [];
+            $boolFound = FALSE;
+            foreach (['img1', 'img2', 'img3'] as $strFieldName) {
+                if ($strPath = $this->getPathFromFileObj($arrSubject[$strFieldName])) {
+                    $boolFound = TRUE;
+                    $arrFiles[] = [
+                        'path' => $strPath,
+                        'alt' => $arrSubject[$strFieldName . 'Alt']
+                    ];
+                }
+            }
+            if ($boolFound) {
+                $arrSubjects[$arrSubject['id']] = $arrFiles;
+            }
+        }
+        return $arrSubjects;
+    }
+
+    private function getPathFromFileObj($strUuid)
+    {
+        if (!$strUuid) {
+            return FALSE;
+        }
+        $objFile =  \FilesModel::findOneBy('uuid', $strUuid);
+        if (!$objFile) {
+            return FALSE;
+        }
+        return '/' . $objFile->path;
     }
 }

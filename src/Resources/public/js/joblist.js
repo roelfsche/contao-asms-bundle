@@ -299,6 +299,7 @@ $(function () {
     $('.js-joblist').on('click', '.js-resultlist__item', (function () {
         var $overlay = $('#overlay'),
             $closeButton = $('.js-close-overlay'),
+            $subjectLogo = $('#js-subjectlogo'),
             $jobTitle = $('#js-jobtitle'),
             $subjectTitle = $('#js-subjecttitle'),
             $city = $('#js-city'),
@@ -357,6 +358,13 @@ $(function () {
         }
 
         function setJobDetails(job) {
+            // setze ein bild, falls vorhanden
+            if (subjectImages[job.subjectId] != undefined) {
+                var images = subjectImages[job.subjectId];
+                var index = Math.floor(Math.random() * images.length)
+                $subjectLogo.prop('src', images[index].path)
+                    .prop('alt', images[index].alt);
+            }
             $jobName.text(job.jobTitle + " - " + job.subjectTitle);
             $jobTitle.text(job.jobTitle);
             $city.text(job.city);

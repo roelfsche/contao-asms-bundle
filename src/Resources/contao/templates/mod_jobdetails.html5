@@ -1,5 +1,5 @@
 <div id="js-jobwrapper" class="jobwrapper">
-    <div class="jobimage"><img src="files/bilder/jobs/bild_klinik.jpg" alt="Klinikbild"></div>
+    <div class="jobimage"><img id="js-subjectlogo" src="files/bilder/jobs/bild_klinik.jpg" alt="Klinikbild"></div>
     <div class="container-fluid">
       <div id="js-jobname" class="jobname">Leitender Oberarzt - Pneumologie</div>
       <div class="row">
