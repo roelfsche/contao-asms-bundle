@@ -10,74 +10,59 @@ $table = 'tl_jobs';
 /**
  * Table tl_jobs
  */
-$GLOBALS['TL_DCA'][$table] = array
-(
+$GLOBALS['TL_DCA'][$table] = array(
     // Config
-    'config' => array
-    (
-        'dataContainer'               => 'Table',
-        'onsubmit_callback' => array
-        (
+    'config' => array(
+        'dataContainer'               => 'JobTable',
+        'onsubmit_callback' => array(
             array($table, 'updateTitle')
         ),
-        'sql' => array
-        (
-            'keys' => array
-            (
+        'sql' => array(
+            'keys' => array(
                 'id' => 'primary'
             )
         )
     ),
 
     // List
-    'list' => array
-    (
-        'sorting' => array
-        (
+    'list' => array(
+        'sorting' => array(
             'mode'                    => 2,
-            'flag'					  => 1,
+            'flag'                      => 1,
             'fields'                  => array('title'),
             'format'                  => '%s',
             'panelLayout'             => 'filter;sort,search,limit'
         ),
-        'label' => array
-        (
+        'label' => array(
             'fields'                  => array('title', 'clinicName'),
             'format'                  => '%s<br/><small>(%s)</small>'
         ),
-        'global_operations' => array
-        (
-            'all' => array
-            (
+        'global_operations' => array(
+            'all' => array(
                 'label'               => &$GLOBALS['TL_LANG']['MSC']['all'],
                 'href'                => 'act=select',
                 'class'               => 'header_edit_all',
                 'attributes'          => 'onclick="Backend.getScrollOffset();"'
             )
         ),
-        'operations' => array
-        (
-            'edit' => array
-            (
+        'operations' => array(
+            'edit' => array(
                 'label'               => &$GLOBALS['TL_LANG'][$table]['edit'],
                 'href'                => 'act=edit',
                 'icon'                => 'edit.gif'
             ),
-            'copy' => array
-            (
+            'copy' => array(
                 'label'               => &$GLOBALS['TL_LANG'][$table]['copy'],
                 'href'                => 'act=copy',
                 'icon'                => 'copy.gif'
             ),
-            'delete' => array
-            (
+            'delete' => array(
                 'label'               => &$GLOBALS['TL_LANG'][$table]['delete'],
                 'href'                => 'act=delete',
                 'icon'                => 'delete.gif',
                 'attributes'          => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false; Backend.getScrollOffset();"'
             ),
-            'show' => array
-            (
+            'show' => array(
                 'label'               => &$GLOBALS['TL_LANG'][$table]['show'],
                 'href'                => 'act=show',
                 'icon'                => 'show.gif'
@@ -86,16 +71,14 @@ $GLOBALS['TL_DCA'][$table] = array
     ),
 
     // Palettes
-    'palettes' => array
-    (
+    'palettes' => array(
         '__selector__'                => array('addAboutUsImage', 'availabilityFrom', /*'individualSubject', */ 'typeLimited', 'addWeOfferImage', 'has_contactperson', 'addLinkButton', 'addLink'),
         // 'default'                     => '{lbl_general},type,clinic,jobID,title,alias,meta_description,subtitle1,subtitle2,titleSelection,subjectSelection,individualSubject;{lbl_contactperson},has_contactperson;{lbl_statement},statementText;{lbl_linkbutton},addLinkButton;{lbl_link},addLink;{lbl_teaser_image},statementImage,statementImageAlt;{lbl_aboutus},aboutUs,addAboutUsImage;{lbl_availability},availabilityFrom;{lbl_type},typeFulltime,typeParttime,typeLimited;{lbl_content},weOffer,addWeOfferImage,youOffer,applicationNotes,individualTextHeadline,individualText;{lbl_published},published,start,stop'
         'default'                     => '{lbl_general},type,clinic,jobID,title,alias,meta_description,subtitle1,subtitle2,titleSelection,subjectSelection;{lbl_contactperson},has_contactperson;{lbl_statement},statementText;{lbl_linkbutton},addLinkButton;{lbl_link},addLink;{lbl_teaser_image},statementImage,statementImageAlt;{lbl_aboutus},aboutUs,addAboutUsImage;{lbl_availability},availabilityFrom;{lbl_type},typeFulltime,typeParttime,typeLimited;{lbl_content},weOffer,addWeOfferImage,youOffer,applicationNotes,individualTextHeadline,individualText;{lbl_published},published,start,stop'
     ),
 
     // Subpalettes
-    'subpalettes' => array
-    (
+    'subpalettes' => array(
         'addAboutUsImage'            => 'aboutUsImage,aboutUsImageAlt',
         'addWeOfferImage'            => 'weOfferImage,weOfferImageAlt',
         'availabilityFrom'           => 'availabilityFromDate',
@@ -107,18 +90,14 @@ $GLOBALS['TL_DCA'][$table] = array
     ),
 
     // Fields
-    'fields' => array
-    (
-        'id' => array
-        (
+    'fields' => array(
+        'id' => array(
             'sql'                     => "int(10) unsigned NOT NULL auto_increment"
         ),
-        'tstamp' => array
-        (
+        'tstamp' => array(
             'sql'                     => "int(10) unsigned NOT NULL default '0'"
         ),
-        'type' => array
-        (
+        'type' => array(
             'label'                   => &$GLOBALS['TL_LANG'][$table]['type'],
             'default'                 => 'regular',
             'exclude'                 => true,
@@ -127,130 +106,118 @@ $GLOBALS['TL_DCA'][$table] = array
             'eval'                    => array(),
             'sql'                     => "int(10) unsigned NOT NULL default '0'"
         ),
-        'titleSelection' => array
-        (
+        'titleSelection' => array(
             'label'                   => &$GLOBALS['TL_LANG'][$table]['titleSelection'],
             'inputType'               => 'select',
             'foreignKey'              => 'tl_jobtypes.title',
             'sql'                     => "int(10) unsigned NOT NULL default '0'",
-            'relation'                => array('type'=>'hasOne', 'load'=>'eager')
+            'relation'                => array('type' => 'hasOne', 'load' => 'eager')
         ),
-        'individualJobtitle' => array
-        (
+        'individualJobtitle' => array(
             'label'                   => &$GLOBALS['TL_LANG'][$table]['individualJobtitle'],
             'exclude'                 => true,
             'inputType'               => 'checkbox',
-            'eval'                    => array('submitOnChange'=>true),
+            'eval'                    => array('submitOnChange' => true),
             'sql'                     => "char(1) NOT NULL default ''"
         ),
-        'clinic' => array
-        (
+        'clinic' => array(
             'label'                   => &$GLOBALS['TL_LANG'][$table]['clinic'],
             'exclude'                 => true,
             'inputType'               => 'select',
-            'foreignKey'              => 'tl_clinics.title',
-            'sql'                     => "int(10) unsigned NOT NULL default '0'",
-            'relation'                => array('type'=>'hasOne', 'load'=>'eager'),
-            'filter'                  => true
+            'options_callback'        => array('tl_jobs', 'getClinics'),
+            // 'foreignKey'              => 'tl_clinics.title',
+            // 'sql'                     => "int(10) unsigned NOT NULL default '0'",
+            // 'eval'                    => array('multiple' => false, 'helpwizard' => true),
+            'sql'                     => "blob NULL"
+            // 'relation'                => array('type'=>'hasOne', 'load'=>'eager'),
+            // 'filter'                  => true
         ),
-        'clinicName' => array
-        (
+        'clinicName' => array(
             'label'                   => &$GLOBALS['TL_LANG'][$table]['clinicName'],
             'exclude'                 => true,
             'search'                  => true,
             'inputType'               => 'text',
-            'eval'                    => array('mandatory'=>true, 'maxlength'=>255),
+            'eval'                    => array('mandatory' => true, 'maxlength' => 255),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
-        'jobID' => array
-        (
+        'jobID' => array(
             'label'                   => &$GLOBALS['TL_LANG'][$table]['jobID'],
             'exclude'                 => true,
             'search'                  => true,
             'inputType'               => 'text',
-            'eval'                    => array('maxlength'=>255, 'rgxp'=>'alnum', 'disabled' => true),
+            'eval'                    => array('maxlength' => 255, 'rgxp' => 'alnum', 'disabled' => true),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
-        'title' => array
-        (
+        'title' => array(
             'label'                   => &$GLOBALS['TL_LANG'][$table]['title'],
             'exclude'                 => true,
             'search'                  => true,
             'inputType'               => 'text',
-            'eval'                    => array('mandatory'=>true, 'maxlength'=>255),
+            'eval'                    => array('mandatory' => true, 'maxlength' => 255),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
-        'alias' => array
-        (
+        'alias' => array(
             'label'                   => &$GLOBALS['TL_LANG'][$table]['alias'],
             'exclude'                 => true,
             'inputType'               => 'text',
             'search'                  => true,
-            'eval'                    => array('rgxp'=>'folderalias', 'doNotCopy'=>true, 'maxlength'=>128),
+            'eval'                    => array('rgxp' => 'folderalias', 'doNotCopy' => true, 'maxlength' => 128),
             'sql'                     => "varchar(128) COLLATE utf8_bin NOT NULL default ''"
         ),
-        'meta_description' => array
-        (
+        'meta_description' => array(
             'label'                   => &$GLOBALS['TL_LANG'][$table]['meta_description'],
             'exclude'                 => true,
             'inputType'               => 'text',
             'search'                  => true,
-            'eval'                    => array('doNotCopy'=>true, 'maxlength' => 255),
+            'eval'                    => array('doNotCopy' => true, 'maxlength' => 255),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
-        'subjectSelection' => array
-        (
+        'subjectSelection' => array(
             'label'                   => &$GLOBALS['TL_LANG'][$table]['subjectSelection'],
             'inputType'               => 'select',
             'foreignKey'              => 'tl_subjects.title',
             'sql'                     => "int(10) unsigned NOT NULL default '0'",
-            'relation'                => array('type'=>'hasOne', 'load'=>'eager')
+            'relation'                => array('type' => 'hasOne', 'load' => 'eager')
         ),
-        'individualSubject' => array
-        (
+        'individualSubject' => array(
             'label'                   => &$GLOBALS['TL_LANG'][$table]['individualSubject'],
             'exclude'                 => true,
             'inputType'               => 'checkbox',
-            'eval'                    => array('submitOnChange'=>true),
+            'eval'                    => array('submitOnChange' => true),
             'sql'                     => "char(1) NOT NULL default ''"
         ),
-        'subject' => array
-        (
+        'subject' => array(
             'label'                   => &$GLOBALS['TL_LANG'][$table]['subject'],
             'exclude'                 => true,
             'search'                  => true,
             'inputType'               => 'text',
-            'eval'                    => array('mandatory'=>true, 'maxlength'=>255),
+            'eval'                    => array('mandatory' => true, 'maxlength' => 255),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
-        'subtitle1' => array
-        (
+        'subtitle1' => array(
             'label'                   => &$GLOBALS['TL_LANG'][$table]['subtitle1'],
             'exclude'                 => true,
             'search'                  => true,
             'inputType'               => 'textarea',
-            'eval'                    => array('mandatory'=>true, 'maxlength'=>160),
+            'eval'                    => array('mandatory' => true, 'maxlength' => 160),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
-        'subtitle2' => array
-        (
+        'subtitle2' => array(
             'label'                   => &$GLOBALS['TL_LANG'][$table]['subtitle2'],
             'exclude'                 => true,
             'search'                  => true,
             'inputType'               => 'textarea',
-            'eval'                    => array('mandatory'=>false, 'maxlength'=>160),
+            'eval'                    => array('mandatory' => false, 'maxlength' => 160),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
-        'has_contactperson' => array
-        (
+        'has_contactperson' => array(
             'label'                   => &$GLOBALS['TL_LANG'][$table]['has_contactperson'],
             'exclude'                 => true,
             'inputType'               => 'checkbox',
-            'eval'                    => array('submitOnChange'=>true),
+            'eval'                    => array('submitOnChange' => true),
             'sql'                     => "char(1) NOT NULL default ''"
         ),
-        'contactperson_salutation' => array
-        (
+        'contactperson_salutation' => array(
             'label'                   => &$GLOBALS['TL_LANG'][$table]['contactperson_salutation'],
             'default'                 => 'regular',
             'exclude'                 => true,
@@ -259,335 +226,297 @@ $GLOBALS['TL_DCA'][$table] = array
             'eval'                    => array(),
             'sql'                     => "varchar(32) NOT NULL default ''"
         ),
-        'contactperson_position' => array
-        (
+        'contactperson_position' => array(
             'label'                   => &$GLOBALS['TL_LANG'][$table]['contactperson_position'],
             'exclude'                 => true,
             'search'                  => true,
             'inputType'               => 'text',
-            'eval'                    => array('maxlength'=>255, 'rgxp'=>'extnd'),
+            'eval'                    => array('maxlength' => 255, 'rgxp' => 'extnd'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
-        'contactperson_title' => array
-        (
+        'contactperson_title' => array(
             'label'                   => &$GLOBALS['TL_LANG'][$table]['contactperson_title'],
             'exclude'                 => true,
             'search'                  => true,
             'inputType'               => 'text',
-            'eval'                    => array('maxlength'=>255, 'rgxp'=>'extnd'),
+            'eval'                    => array('maxlength' => 255, 'rgxp' => 'extnd'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
-        'contactperson_firstname' => array
-        (
+        'contactperson_firstname' => array(
             'label'                   => &$GLOBALS['TL_LANG'][$table]['contactperson_firstname'],
             'exclude'                 => true,
             'search'                  => true,
             'inputType'               => 'text',
-            'eval'                    => array('maxlength'=>255, 'rgxp'=>'extnd'),
+            'eval'                    => array('maxlength' => 255, 'rgxp' => 'extnd'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
-        'contactperson_lastname' => array
-        (
+        'contactperson_lastname' => array(
             'label'                   => &$GLOBALS['TL_LANG'][$table]['contactperson_lastname'],
             'exclude'                 => true,
             'search'                  => true,
             'inputType'               => 'text',
-            'eval'                    => array('maxlength'=>255, 'rgxp'=>'extnd'),
+            'eval'                    => array('maxlength' => 255, 'rgxp' => 'extnd'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
-        'contactperson_email' => array
-        (
+        'contactperson_email' => array(
             'label'                   => &$GLOBALS['TL_LANG'][$table]['contactperson_email'],
             'exclude'                 => true,
             'search'                  => true,
             'inputType'               => 'text',
-            'eval'                    => array('maxlength'=>255, 'rgxp'=>'extnd'),
+            'eval'                    => array('maxlength' => 255, 'rgxp' => 'extnd'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
-        'contactperson_phone' => array
-        (
+        'contactperson_phone' => array(
             'label'                   => &$GLOBALS['TL_LANG'][$table]['contactperson_phone'],
             'exclude'                 => true,
             'search'                  => true,
             'inputType'               => 'text',
-            'eval'                    => array('maxlength'=>255, 'rgxp'=>'extnd'),
+            'eval'                    => array('maxlength' => 255, 'rgxp' => 'extnd'),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
-        'statementImage' => array
-        (
+        'statementImage' => array(
             'label'                   => &$GLOBALS['TL_LANG'][$table]['statementImage'],
             'exclude'                 => true,
             'inputType'               => 'fileTree',
-            'eval'                    => array('filesOnly'=>true, 'fieldType'=>'radio', 'mandatory'=>true, 'tl_class'=>'clr'),
+            'eval'                    => array('filesOnly' => true, 'fieldType' => 'radio', 'mandatory' => true, 'tl_class' => 'clr'),
             'sql'                     => "binary(16) NULL"
         ),
-        'statementImageAlt' => array
-        (
+        'statementImageAlt' => array(
             'label'                   => &$GLOBALS['TL_LANG'][$table]['alt'],
             'exclude'                 => true,
             'search'                  => true,
             'inputType'               => 'text',
-            'eval'                    => array('maxlength'=>255),
+            'eval'                    => array('maxlength' => 255),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
-        'statementText' => array
-        (
+        'statementText' => array(
             'label'                   => &$GLOBALS['TL_LANG'][$table]['statementText'],
             'exclude'                 => true,
             'search'                  => true,
             'inputType'               => 'textarea',
-            'eval'                    => array('mandatory'=>true, 'maxlength'=>255),
+            'eval'                    => array('mandatory' => true, 'maxlength' => 255),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
-        'addLinkButton' => array
-        (
+        'addLinkButton' => array(
             'label'                   => &$GLOBALS['TL_LANG'][$table]['addLinkButton'],
             'exclude'                 => true,
             'inputType'               => 'checkbox',
-            'eval'                    => array('submitOnChange'=>true),
+            'eval'                    => array('submitOnChange' => true),
             'sql'                     => "char(1) NOT NULL default ''"
         ),
-        'linkButtonText' => array
-        (
+        'linkButtonText' => array(
             'label'                   => &$GLOBALS['TL_LANG'][$table]['linkButtonText'],
             'exclude'                 => true,
             'search'                  => true,
             'inputType'               => 'text',
-            'eval'                    => array('mandatory'=>true, 'maxlength'=>255),
+            'eval'                    => array('mandatory' => true, 'maxlength' => 255),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
-        'linkButtonTextMobile' => array
-        (
+        'linkButtonTextMobile' => array(
             'label'                   => &$GLOBALS['TL_LANG'][$table]['linkButtonTextMobile'],
             'exclude'                 => true,
             'search'                  => true,
             'inputType'               => 'text',
-            'eval'                    => array('mandatory'=>true, 'maxlength'=>255),
+            'eval'                    => array('mandatory' => true, 'maxlength' => 255),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
-        'linkButtonLink' => array
-        (
+        'linkButtonLink' => array(
             'label'                   => &$GLOBALS['TL_LANG'][$table]['linkButtonLink'],
             'exclude'                 => true,
             'inputType'               => 'pageTree',
             'foreignKey'              => 'tl_page.title',
-            'eval'                    => array('fieldType'=>'radio'),
+            'eval'                    => array('fieldType' => 'radio'),
             'sql'                     => "int(10) unsigned NOT NULL default '0'",
-            'relation'                => array('type'=>'hasOne', 'load'=>'lazy')
+            'relation'                => array('type' => 'hasOne', 'load' => 'lazy')
         ),
-        'addLink' => array
-        (
+        'addLink' => array(
             'label'                   => &$GLOBALS['TL_LANG'][$table]['addLink'],
             'exclude'                 => true,
             'inputType'               => 'checkbox',
-            'eval'                    => array('submitOnChange'=>true),
+            'eval'                    => array('submitOnChange' => true),
             'sql'                     => "char(1) NOT NULL default ''"
         ),
-        'linkText' => array
-        (
+        'linkText' => array(
             'label'                   => &$GLOBALS['TL_LANG'][$table]['linkText'],
             'exclude'                 => true,
             'search'                  => true,
             'inputType'               => 'text',
-            'eval'                    => array('mandatory'=>true, 'maxlength'=>255),
+            'eval'                    => array('mandatory' => true, 'maxlength' => 255),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
-        'linkTextMobile' => array
-        (
+        'linkTextMobile' => array(
             'label'                   => &$GLOBALS['TL_LANG'][$table]['linkTextMobile'],
             'exclude'                 => true,
             'search'                  => true,
             'inputType'               => 'text',
-            'eval'                    => array('mandatory'=>true, 'maxlength'=>255),
+            'eval'                    => array('mandatory' => true, 'maxlength' => 255),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
-        'linkLink' => array
-        (
+        'linkLink' => array(
             'label'                   => &$GLOBALS['TL_LANG'][$table]['linkLink'],
             'exclude'                 => true,
             'inputType'               => 'pageTree',
             'foreignKey'              => 'tl_page.title',
-            'eval'                    => array('fieldType'=>'radio'),
+            'eval'                    => array('fieldType' => 'radio'),
             'sql'                     => "int(10) unsigned NOT NULL default '0'",
-            'relation'                => array('type'=>'hasOne', 'load'=>'lazy')
+            'relation'                => array('type' => 'hasOne', 'load' => 'lazy')
         ),
-        'aboutUs' => array
-        (
+        'aboutUs' => array(
             'label'                   => &$GLOBALS['TL_LANG'][$table]['aboutUs'],
             'exclude'                 => true,
             'search'                  => true,
             'inputType'               => 'textarea',
-            'eval'                    => array('mandatory'=>true, 'rte'=>'tinyMCE', 'helpwizard'=>true),
+            'eval'                    => array('mandatory' => true, 'rte' => 'tinyMCE', 'helpwizard' => true),
             'sql'                     => "mediumtext NULL"
         ),
-        'addAboutUsImage' => array
-        (
+        'addAboutUsImage' => array(
             'label'                   => &$GLOBALS['TL_LANG'][$table]['addAboutUsImage'],
             'exclude'                 => true,
             'inputType'               => 'checkbox',
-            'eval'                    => array('submitOnChange'=>true),
+            'eval'                    => array('submitOnChange' => true),
             'sql'                     => "char(1) NOT NULL default ''"
         ),
-        'aboutUsImage' => array
-        (
+        'aboutUsImage' => array(
             'label'                   => &$GLOBALS['TL_LANG'][$table]['aboutUsImage'],
             'exclude'                 => true,
             'inputType'               => 'fileTree',
-            'eval'                    => array('filesOnly'=>true, 'fieldType'=>'radio', 'mandatory'=>true, 'tl_class'=>'clr'),
+            'eval'                    => array('filesOnly' => true, 'fieldType' => 'radio', 'mandatory' => true, 'tl_class' => 'clr'),
             'sql'                     => "binary(16) NULL"
         ),
-        'aboutUsImageAlt' => array
-        (
+        'aboutUsImageAlt' => array(
             'label'                   => &$GLOBALS['TL_LANG'][$table]['alt'],
             'exclude'                 => true,
             'search'                  => true,
             'inputType'               => 'text',
-            'eval'                    => array('maxlength'=>255),
+            'eval'                    => array('maxlength' => 255),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
-        'availabilityFrom' => array
-        (
+        'availabilityFrom' => array(
             'label'                   => &$GLOBALS['TL_LANG'][$table]['availabilityFrom'],
             'exclude'                 => true,
             'inputType'               => 'checkbox',
-            'eval'                    => array('submitOnChange'=>true),
+            'eval'                    => array('submitOnChange' => true),
             'sql'                     => "char(1) NOT NULL default ''"
         ),
-        'availabilityFromDate' => array
-        (
+        'availabilityFromDate' => array(
             'exclude'                 => true,
             'label'                   => &$GLOBALS['TL_LANG'][$table]['availabilityFromDate'],
             'inputType'               => 'text',
-            'eval'                    => array('mandatory'=>true, 'rgxp'=>'date', 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
+            'eval'                    => array('mandatory' => true, 'rgxp' => 'date', 'datepicker' => true, 'tl_class' => 'w50 wizard'),
             'sql'                     => "varchar(10) NOT NULL default ''"
         ),
-        'typeFulltime' => array
-        (
+        'typeFulltime' => array(
             'label'                   => &$GLOBALS['TL_LANG'][$table]['typeFulltime'],
             'exclude'                 => true,
             'inputType'               => 'checkbox',
-            'eval'                    => array('submitOnChange'=>false),
+            'eval'                    => array('submitOnChange' => false),
             'sql'                     => "char(1) NOT NULL default ''"
         ),
-        'typeParttime' => array
-        (
+        'typeParttime' => array(
             'label'                   => &$GLOBALS['TL_LANG'][$table]['typeParttime'],
             'exclude'                 => true,
             'inputType'               => 'checkbox',
-            'eval'                    => array('submitOnChange'=>false),
+            'eval'                    => array('submitOnChange' => false),
             'sql'                     => "char(1) NOT NULL default ''"
         ),
-        'typeLimited' => array
-        (
+        'typeLimited' => array(
             'label'                   => &$GLOBALS['TL_LANG'][$table]['typeLimited'],
             'exclude'                 => true,
             'inputType'               => 'checkbox',
-            'eval'                    => array('submitOnChange'=>true),
+            'eval'                    => array('submitOnChange' => true),
             'sql'                     => "char(1) NOT NULL default ''"
         ),
-        'typeLimitedText' => array
-        (
+        'typeLimitedText' => array(
             'label'                   => &$GLOBALS['TL_LANG'][$table]['typeLimitedText'],
             'exclude'                 => true,
             'search'                  => true,
             'inputType'               => 'text',
-            'eval'                    => array('mandatory'=>true, 'maxlength'=>255),
+            'eval'                    => array('mandatory' => true, 'maxlength' => 255),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
-        'weOffer' => array
-        (
+        'weOffer' => array(
             'label'                   => &$GLOBALS['TL_LANG'][$table]['weOffer'],
             'exclude'                 => true,
             'search'                  => true,
             'inputType'               => 'textarea',
-            'eval'                    => array('mandatory'=>true, 'rte'=>'tinyMCE', 'helpwizard'=>true),
+            'eval'                    => array('mandatory' => true, 'rte' => 'tinyMCE', 'helpwizard' => true),
             'sql'                     => "mediumtext NULL"
         ),
-        'addWeOfferImage' => array
-        (
+        'addWeOfferImage' => array(
             'label'                   => &$GLOBALS['TL_LANG'][$table]['addWeOfferImage'],
             'exclude'                 => true,
             'inputType'               => 'checkbox',
-            'eval'                    => array('submitOnChange'=>true),
+            'eval'                    => array('submitOnChange' => true),
             'sql'                     => "char(1) NOT NULL default ''"
         ),
-        'weOfferImage' => array
-        (
+        'weOfferImage' => array(
             'label'                   => &$GLOBALS['TL_LANG'][$table]['weOfferImage'],
             'exclude'                 => true,
             'inputType'               => 'fileTree',
-            'eval'                    => array('filesOnly'=>true, 'fieldType'=>'radio', 'mandatory'=>true, 'tl_class'=>'clr'),
+            'eval'                    => array('filesOnly' => true, 'fieldType' => 'radio', 'mandatory' => true, 'tl_class' => 'clr'),
             'sql'                     => "binary(16) NULL"
         ),
-        'weOfferImageAlt' => array
-        (
+        'weOfferImageAlt' => array(
             'label'                   => &$GLOBALS['TL_LANG'][$table]['alt'],
             'exclude'                 => true,
             'search'                  => true,
             'inputType'               => 'text',
-            'eval'                    => array('maxlength'=>255),
+            'eval'                    => array('maxlength' => 255),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
-        'youOffer' => array
-        (
+        'youOffer' => array(
             'label'                   => &$GLOBALS['TL_LANG'][$table]['youOffer'],
             'exclude'                 => true,
             'search'                  => true,
             'inputType'               => 'textarea',
-            'eval'                    => array('mandatory'=>true, 'rte'=>'tinyMCE', 'helpwizard'=>true),
+            'eval'                    => array('mandatory' => true, 'rte' => 'tinyMCE', 'helpwizard' => true),
             'sql'                     => "mediumtext NULL"
         ),
-        'individualTextHeadline' => array
-        (
+        'individualTextHeadline' => array(
             'label'                   => &$GLOBALS['TL_LANG'][$table]['individualTextHeadline'],
             'exclude'                 => true,
             'search'                  => true,
             'inputType'               => 'text',
-            'eval'                    => array('mandatory'=>false, 'maxlength'=>255),
+            'eval'                    => array('mandatory' => false, 'maxlength' => 255),
             'sql'                     => "varchar(255) NOT NULL default ''"
         ),
-        'individualText' => array
-        (
+        'individualText' => array(
             'label'                   => &$GLOBALS['TL_LANG'][$table]['individualText'],
             'exclude'                 => true,
             'search'                  => true,
             'inputType'               => 'textarea',
-            'eval'                    => array('mandatory'=>false, 'rte'=>'tinyMCE', 'helpwizard'=>true),
+            'eval'                    => array('mandatory' => false, 'rte' => 'tinyMCE', 'helpwizard' => true),
             'sql'                     => "mediumtext NULL"
         ),
-        'applicationNotes' => array
-        (
+        'applicationNotes' => array(
             'label'                   => &$GLOBALS['TL_LANG'][$table]['applicationNotes'],
             'exclude'                 => true,
             'search'                  => true,
             'inputType'               => 'textarea',
-            'eval'                    => array('mandatory'=>true, 'rte'=>'tinyMCE', 'helpwizard'=>true),
+            'eval'                    => array('mandatory' => true, 'rte' => 'tinyMCE', 'helpwizard' => true),
             'sql'                     => "mediumtext NULL"
         ),
-        'start' => array
-        (
+        'start' => array(
             'exclude'                 => true,
             'label'                   => &$GLOBALS['TL_LANG'][$table]['start'],
             'inputType'               => 'text',
-            'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
+            'eval'                    => array('rgxp' => 'datim', 'datepicker' => true, 'tl_class' => 'w50 wizard'),
             'sql'                     => "varchar(10) NOT NULL default ''"
         ),
-        'stop' => array
-        (
+        'stop' => array(
             'exclude'                 => true,
             'label'                   => &$GLOBALS['TL_LANG'][$table]['stop'],
             'inputType'               => 'text',
-            'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
+            'eval'                    => array('rgxp' => 'datim', 'datepicker' => true, 'tl_class' => 'w50 wizard'),
             'sql'                     => "varchar(10) NOT NULL default ''"
         ),
-        'published' => array
-        (
+        'published' => array(
             'label'                   => &$GLOBALS['TL_LANG'][$table]['published'],
             'exclude'                 => true,
             'filter'                  => true,
             'flag'                    => 1,
             'inputType'               => 'checkbox',
-            'eval'                    => array('doNotCopy'=>true),
+            'eval'                    => array('doNotCopy' => true),
             'sql'                     => "char(1) NOT NULL default ''"
         )
     )
@@ -631,8 +560,7 @@ class tl_jobs extends Backend
     public function updateTitle(DataContainer $dc)
     {
         // Return if there is no ID
-        if (!$dc->id)
-        {
+        if (!$dc->id) {
             return;
         }
 
@@ -671,5 +599,25 @@ class tl_jobs extends Backend
         $objJobsModel->clinicName = $objJobsModel->getRelated('clinic')->title;
         $objJobsModel->jobID = $types[$objJobsModel->type] . '-' . $dc->id;
         $objJobsModel->save();
+    }
+
+    /**
+     * Job-Angebote können nach Zuordnung zur Klinik hier eingeschränkt werden
+     */
+    public function getClinics()
+    {
+		$this->import('BackendUser', 'User');
+        $objUser = $this->User;
+        if ($objUser->isAdmin) {
+            $arrDbClinics = $this->Database->prepare('SELECT id, title FROM tl_clinics order by title')->execute()->fetchAllAssoc();
+        } else {
+            $objResult = $this->Database->prepare('SELECT id, title FROM tl_clinics WHERE id in (' . implode(', ', [14, 15, 19]) . ') order by title')->execute();
+            $arrDbClinics = $objResult->fetchAllAssoc();
+        }
+        $arrClinics = [];
+        foreach ($arrDbClinics as $arrClinic) {
+            $arrClinics[$arrClinic['id']] = $arrClinic['title'];
+        }
+        return $arrClinics;
     }
 }
