@@ -312,14 +312,14 @@ $(function () {
             $subjectTitle = $('#js-subjecttitle'),
             $city = $('#js-city'),
             $logoWrapper = $('#js-cliniclogo-wrapper'),
-            $logo = $('js-cliniclogo'),
+            $clinicLogo = $('#js-cliniclogo'),
+            // $logo = $('js-cliniclogo'),
             $jobName = $('#js-jobname'),
             $jobDescription = $('#js-jobdescription'),
             $youOffer = $('#js-youoffer'),
             $weOffer = $('#js-weoffer'),
             $jobId = $('#js-jobid'),
             $clinicName = $('#clinicName'),
-            // $clinicCity = $('#clinicCity'),
             $clinicAddress = $('#clinicAddress'),
             $clinicUrl = $('#clinicUrl'),
             $clinicBrochure = $('#clinicBrochure'),
@@ -392,9 +392,9 @@ $(function () {
             $jobDescription.html(job.applicationNotes);
             if (job.clinicLogo != undefined) {
                 $logoWrapper.show();
-                $logo.attr('src', job.clinicLogo).attr('alt', 'clinicLogoAlt');
+                $clinicLogo.attr('src', job.clinicLogo).attr('alt', 'clinicLogoAlt');
             } else {
-                $logoWrapper.hide();
+                $clinicLogoWrapper.hide();
             }
             $youOffer.html(job.youOffer);
             $weOffer.html(job.weOffer);
