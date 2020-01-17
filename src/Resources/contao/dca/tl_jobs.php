@@ -51,6 +51,13 @@ $GLOBALS['TL_DCA'][$table] = array(
                 'href'                => 'act=edit',
                 'icon'                => 'edit.gif'
             ),
+            'toggle' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_article']['toggle'],
+				'icon'                => 'visible.gif',
+				'attributes'          => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s)"',
+				'button_callback'     => array('tl_jobs', 'toggleIcon')
+			),
             'copy' => array(
                 'label'               => &$GLOBALS['TL_LANG'][$table]['copy'],
                 'href'                => 'act=copy',
@@ -596,7 +603,9 @@ class tl_jobs extends Backend
         $types = array('1' => 'REHA', '2' => 'SMD');
         // Update clinic name
         $objJobsModel = \vacancies\JobsModel::findByPk($dc->id);
-        $objJobsModel->clinicName = $objJobsModel->getRelated('clinic')->title;
+        $objClinicModel = \vacancies\ClinicsModel::findByPk($objJobsModel->clinic);
+        // $objJobsModel->clinicName = $objJobsModel->getRelated('clinic')->title;
+        $objJobsModel->clinicName = $objClinicModel->title;
         $objJobsModel->jobID = $types[$objJobsModel->type] . '-' . $dc->id;
         $objJobsModel->save();
     }
@@ -620,4 +629,103 @@ class tl_jobs extends Backend
         }
         return $arrClinics;
     }
+    	/**
+	 * Return the "toggle visibility" button
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
+	 * @return string
+	 */
+	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
+	{
+		if (strlen(Input::get('tid')))
+		{
+			$this->toggleVisibility(Input::get('tid'), (Input::get('state') == 1), (@func_get_arg(12) ?: null));
+			$this->redirect($this->getReferer());
+		}
+
+		// Check permissions AFTER checking the tid, so hacking attempts are logged
+		// if (!$this->User->hasAccess('tl_article::published', 'alexf'))
+		// {
+		// 	return '';
+		// }
+
+		$href .= '&amp;tid='.$row['id'].'&amp;state='.($row['published'] ? '' : 1);
+
+		if (!$row['published'])
+		{
+			$icon = 'invisible.gif';
+		}
+
+		// $objPage = $this->Database->prepare("SELECT * FROM tl_page WHERE id=?")
+		// 						  ->limit(1)
+		// 						  ->execute($row['pid']);
+
+		// if (!$this->User->isAllowed(BackendUser::CAN_EDIT_ARTICLES, $objPage->row()))
+		// {
+		// 	return Image::getHtml($icon) . ' ';
+		// }
+
+		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label, 'data-state="' . ($row['published'] ? 1 : 0) . '"').'</a> ';
+	}
+
+
+	/**
+	 * Disable/enable a user group
+	 *
+	 * @param integer       $intId
+	 * @param boolean       $blnVisible
+	 * @param DataContainer $dc
+	 */
+	public function toggleVisibility($intId, $blnVisible, DataContainer $dc=null)
+	{
+		// Set the ID and action
+		Input::setGet('id', $intId);
+		Input::setGet('act', 'toggle');
+
+		if ($dc)
+		{
+			$dc->id = $intId; // see #8043
+		}
+
+		// $this->checkPermission();
+
+		// Check the field access
+		// if (!$this->User->hasAccess('tl_article::published', 'alexf'))
+		// {
+		// 	$this->log('Not enough permissions to publish/unpublish article ID "'.$intId.'"', __METHOD__, TL_ERROR);
+		// 	$this->redirect('contao/main.php?act=error');
+		// }
+
+		// $objVersions = new Versions('tl_article', $intId);
+		// $objVersions->initialize();
+
+		// Trigger the save_callback
+		// if (is_array($GLOBALS['TL_DCA']['tl_article']['fields']['published']['save_callback']))
+		// {
+		// 	foreach ($GLOBALS['TL_DCA']['tl_article']['fields']['published']['save_callback'] as $callback)
+		// 	{
+		// 		if (is_array($callback))
+		// 		{
+		// 			$this->import($callback[0]);
+		// 			$blnVisible = $this->{$callback[0]}->{$callback[1]}($blnVisible, ($dc ?: $this));
+		// 		}
+		// 		elseif (is_callable($callback))
+		// 		{
+		// 			$blnVisible = $callback($blnVisible, ($dc ?: $this));
+		// 		}
+		// 	}
+		// }
+
+		// Update the database
+		$this->Database->prepare("UPDATE tl_jobs SET tstamp=". time() .", published='" . ($blnVisible ? '1' : '') . "' WHERE id=?")
+					   ->execute($intId);
+
+		// $objVersions->create();
+	}
 }

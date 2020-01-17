@@ -62,3 +62,8 @@ array_insert($GLOBALS['FE_MOD'], 2, array(
  */
 // $GLOBALS['TL_HOOKS']['loadDataContainer'][] = array('VacancyHooks', 'loadDC');
 // $GLOBALS['TL_HOOKS']['getPageIdFromUrl'][] = array('VacancyHooks', 'handleIdRedirect');
+
+$GLOBALS['TL_MODELS']['tl_subjects'] = 'vacancies\SubjectsModel';
+$GLOBALS['TL_MODELS']['tl_jobs'] = 'vacancies\JobsModel';
+$GLOBALS['TL_MODELS']['tl_jobtypes'] = 'vacancies\JobtypesModel';
+$GLOBALS['TL_MODELS']['tl_clinics'] = 'vacancies\ClinicsModel';
