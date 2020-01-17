@@ -7,6 +7,7 @@ $(function () {
         $filterSurrounding = $('.js-search-surrounding'),
         $filterSearchButton = $('.js-search-button'),
         $filterResetButton = $('.js-reset-filter'),
+        $headlinePlural = $('#js-headline-plural'),
         $noJobCountSpan = $('#js-no-jobcount-span'),
         $jobCountSpan = $('#js-jobcount-span'),
         $jobCount = $('#js-job-count'),
@@ -20,7 +21,7 @@ $(function () {
 
     // Pagination-Config
     if (pagination) {
-        listConfig.page = 5;
+        listConfig.page = 10;
         listConfig.pagination = {
             outerWindow: 1,
         }
@@ -36,9 +37,16 @@ $(function () {
             $noJobCountSpan.hide();
             $jobCount.text(count);
             $jobCountSpan.show();
+            // Stellenangebot(e)
+            if (count == 1) {
+                $headlinePlural.hide();
+            } else {
+                $headlinePlural.show();
+            }
         } else {
             $noJobCountSpan.show();
             $jobCountSpan.hide();
+            $headlinePlural.hide();
         }
         // tags ein-/ausblenden
         $(list.visibleItems).each(function (i, elem) {

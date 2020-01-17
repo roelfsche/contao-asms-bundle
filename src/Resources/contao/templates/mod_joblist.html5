@@ -84,7 +84,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <span id="js-jobcount-span" class="jobcount">Aktuell sind <strong><span id="js-job-count"><?php echo count($this->jobs) ?></span> Traum-Jobs</strong> verfügbar</span>
+                <span id="js-jobcount-span" class="jobcount">Aktuell sind <strong><span id="js-job-count"><?php echo count($this->jobs) ?></span> Stellenangebot<span id="js-headline-plural">e</span></strong> verfügbar</span>
                 <span id="js-no-jobcount-span" class="jobcount" style="display: none;">Aktuell sind leider keine Jobs verfügbar</span>
                 <div id="js-joblist">
                     <ul class="resultlist list js-joblist"> </ul>
