@@ -41,6 +41,7 @@ array_insert($GLOBALS['FE_MOD'], 2, array(
     'vacancies' => array(
         //         'Jobdetail'         => 'ModuleJobdetail',
         'Joblist'           => 'Lumturo\ContaoAsmsBundle\Module\JoblistModule', //'ModuleJoblist',
+        'Jobmap'           => 'Lumturo\ContaoAsmsBundle\Module\JobmapModule', //'ModuleJoblist',
 
         //         'JobListPerSubject' => 'ModuleJobListPerSubject',
         //         'JobSearchSimple'   => 'ModuleJobSearchSimple',
