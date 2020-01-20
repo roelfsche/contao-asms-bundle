@@ -15,7 +15,7 @@
             <a id="clinicUrl" class="link link--external" href="#" target="_blank" title="" style="display: none">Klinik-Website</a>
             <a id="clinicBrochure" class="link link--download" href="#" title="Klinik-Broschüre" target="_blank" style="display: none;">Klinik-Broschüre</a>
             <div>
-                <a href="#" class="btn btn-primary center">Alle Jobs am Standort</a>
+                <a id="js-city-joblist" href="" class="btn btn--primary center">Alle Jobs am Standort</a>
             </div>
         </div>
     </div>

@@ -39,7 +39,7 @@ class JoblistModule extends \Module
             return $template->parse();
         } else {
             // if ($this->intSubjectFilterValue == 0) {
-            $GLOBALS['TL_JAVASCRIPT'][] = 'https://code.jquery.com/jquery-3.4.1.min.js';
+            // $GLOBALS['TL_JAVASCRIPT'][] = 'https://code.jquery.com/jquery-3.4.1.min.js';
             $GLOBALS['TL_JAVASCRIPT'][] = '//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js';
             $GLOBALS['TL_JAVASCRIPT'][] = 'bundles/contaoasms/js/joblist.js';
             // }
@@ -99,7 +99,13 @@ class JoblistModule extends \Module
             join tl_jobtypes c on (a.titleSelection = c.id) 
             join tl_subjects d on (a.subjectSelection = d.id) 
             where a.published = \'1\' AND (a.start = \'\' or a.start < ?) AND (a.stop = \'\' or a.stop > ?)';
-            $arrJobs = $this->Database->prepare($strSQL)->execute(time(), time())->fetchAllAssoc();
+            if (($strCity = $this->Input->get('city')) != '') {
+                $strSQL .= " AND b.city = ?";
+                $objResult = $this->Database->prepare($strSQL)->execute(time(), time(), $strCity);
+                $arrJobs = $objResult->fetchAllAssoc();
+            } else {
+                $arrJobs = $this->Database->prepare($strSQL)->execute(time(), time())->fetchAllAssoc();
+            }
         } else {
             // selektiere alle Job-Typen für Filter
             $arrShortJobTypes = $this->Database->prepare('select distinct a.id, a.title from tl_jobtypes a join tl_jobs b on (a.id = b.titleSelection) WHERE a.showInLinkList = 1 AND b.published=\'1\' AND b.subjectSelection=?;')->execute($this->intSubjectFilterValue)->fetchAllAssoc();
@@ -137,14 +143,20 @@ class JoblistModule extends \Module
                         b.awardImage2,
                         b.awardImage2Alt,
                         b.equality, 
-                        c.title as jobTitle, c.title as jobTitle2, d.title as subjectTitle, d.title as subjectTitle2 
+                        c.title as jobTitle, c.title as jobTitle2, d.title as subjectTitle, d.title as subjectTitle2,
                         d.id as subjectId
                         from tl_jobs a 
                         join tl_clinics b on (a.clinic = b.id) 
                         join tl_jobtypes c on (a.titleSelection = c.id) 
                         join tl_subjects d on (a.subjectSelection = d.id) 
                         where a.published = \'1\' AND (a.start = \'\' or a.start < ?) AND (a.stop = \'\' or a.stop > ?) AND a.subjectSelection=?';
-            $arrJobs = $this->Database->prepare($strSQL)->execute(time(), time(), $this->intSubjectFilterValue)->fetchAllAssoc();
+            if (($strCity = $this->Input->get('city')) != '') {
+                $strSQL .= ' AND b.city = ?';
+                $objResult = $this->Database->prepare($strSQL)->execute(time(), time(), $this->intSubjectFilterValue, $strCity);
+                $arrJobs = $objResult->fetchAllAssoc();
+            } else {
+                $arrJobs = $this->Database->prepare($strSQL)->execute(time(), time(), $this->intSubjectFilterValue)->fetchAllAssoc();
+            }
             $this->Template->show_filter = FALSE;
         }
 

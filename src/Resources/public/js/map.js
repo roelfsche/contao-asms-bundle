@@ -5,7 +5,9 @@ $(function () {
         clinicName = document.getElementById('clinicName'),
         clinicAddress = document.getElementById('clinicAddress'),
         clinicBrochure = document.getElementById('clinicBrochure'),
-        clinicUrl = document.getElementById('clinicUrl');
+        clinicUrl = document.getElementById('clinicUrl'),
+        listAnchor = document.getElementById('js-city-joblist');
+    var activeJob = [];
 
     var map = L.map('jobmap').setView([51.133481, 10.018343], 6);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -13,7 +15,8 @@ $(function () {
     }).addTo(map);
 
     var click = function (job) {
-        console.log('click' + job.id);
+        // console.log('click' + job.id);
+        activeJob = job;
         jobDetailDiv.style.display = 'block';
         jobCity.innerHTML = job.city;
         if (job.optionalImage != undefined) {
@@ -43,4 +46,12 @@ $(function () {
             click(job)
         });
     });
+
+    listAnchor.onclick = function (e) {
+        e.preventDefault();
+        // console.log(activeJob.city)
+        var url = e.target.getAttribute('href') + '?city=' + activeJob.city;
+        window.location.href = url;
+    }
+
 })
