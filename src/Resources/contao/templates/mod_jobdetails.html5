@@ -11,7 +11,7 @@
             <li id="js-typefulltime" class="taglist__item taglist__item--overlay taglist__item--time">Vollzeit</li>
             <li id="js-typeparttime" class="taglist__item taglist__item--overlay taglist__item--time">Teilzeit</li>
             <li id="js-typelimited" class="taglist__item taglist__item--overlay taglist__item--time">Befristet</li>
-            <li class="taglist__item taglist__item--overlay taglist__item--time"><span id="js-jobid"></span></li>
+            <li class="taglist__item taglist__item--overlay taglist__item--jobid"><span id="js-jobid"></span></li>
           </ul>
         </div>
         <div id="js-cliniclogo-wrapper" class="col-12 col-md-4"><img id="js-cliniclogo" src="files/bilder/stammdaten/logo_klinik.jpg" alt=""></div>
