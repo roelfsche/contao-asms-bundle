@@ -19,14 +19,16 @@
         <div class="col-8 col-lg-8"><a class="btn btn--secondary btn--fullwidth jobMailto" href="#" title="Jetzt bewerben">Jetzt bewerben</a></div>
         <div class="col-4"><div class="information">i<span class="information-overlay">Jetzt erfolgt die Weiterleitung ins Bewerbungsportal.</span></div></div>
       </div>
-      <h4>Jobbeschreibung</h4>
-      <p id="js-jobdescription">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-      <h4>Ihre Voraussetzungen</h4>
-      <p>Das erwarten wir von Ihnen:</p>
-      <div id="js-youoffer"></div>
-      <h4>Unsere Leistungen</h4>
-      <p>Das bekommen Sie:</p>
-      <div id="js-weoffer"></div>
+      <div class="job-details">
+        <h4>Jobbeschreibung</h4>
+        <p id="js-jobdescription">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+        <h4>Ihre Voraussetzungen</h4>
+        <p>Das erwarten wir von Ihnen:</p>
+        <div id="js-youoffer"></div>
+        <h4>Unsere Leistungen</h4>
+        <p>Das bekommen Sie:</p>
+        <div id="js-weoffer"></div>
+      </div>
       <div class="row">
         <div class="col-8 col-lg-8"><a class="btn btn--secondary btn--fullwidth jobMailto" href="#" title="Jetzt bewerben">Jetzt bewerben</a></div>
         <div class="col-4"><div class="information">i<span class="information-overlay">Jetzt erfolgt die Weiterleitung ins Bewerbungsportal.</span></div></div>
