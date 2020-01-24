@@ -11,15 +11,16 @@
             <li id="js-typefulltime" class="taglist__item taglist__item--overlay taglist__item--time">Vollzeit</li>
             <li id="js-typeparttime" class="taglist__item taglist__item--overlay taglist__item--time">Teilzeit</li>
             <li id="js-typelimited" class="taglist__item taglist__item--overlay taglist__item--time">Befristet</li>
+            <li class="taglist__item taglist__item--overlay taglist__item--time"><span id="js-jobid"></span></li>
           </ul>
         </div>
         <div id="js-cliniclogo-wrapper" class="col-12 col-md-4"><img id="js-cliniclogo" src="files/bilder/stammdaten/logo_klinik.jpg" alt=""></div>
       </div>
       <div class="row">
-        <div class="col-12"><a class="btn btn--secondary btn--mailto jobMailto" href="#" title="Jetzt bewerben">Jetzt bewerben</a> <div class="information">i<span class="information-overlay">Jetzt erfolgt die Weiterleitung ins Bewerbungsportal.</span></div></div>
+        <div class="col-12"><a class="btn btn--secondary btn--mailto jobMailto" href="#" title="Jetzt bewerben">Jetzt bewerben</a> <div class="information">i<span class="information-overlay">Die Übermittlung von persönlichen Daten über E-Mail ist nicht geschützt.</span></div></div>
       </div>
       <div class="job-details">
-        <h4>Jobbeschreibung</h4>
+        <h4>Stellenbeschreibung</h4>
         <p id="js-jobdescription">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
         <h4>Ihre Voraussetzungen</h4>
         <div id="js-youoffer"></div>
@@ -27,12 +28,7 @@
         <div id="js-weoffer"></div>
       </div>
       <div class="row">
-        <div class="col-12"><a class="btn btn--secondary btn--mailto jobMailto" href="#" title="Jetzt bewerben">Jetzt bewerben</a> <div class="information">i<span class="information-overlay">Jetzt erfolgt die Weiterleitung ins Bewerbungsportal.</span></div></div>
-      </div>
-      <div class="row">
-        <div class="col-12">
-          <span class="jobid">Stellen.ID: <span id="js-jobid"></span></span>
-        </div>
+        <div class="col-12"><a class="btn btn--secondary btn--mailto jobMailto" href="#" title="Jetzt bewerben">Jetzt bewerben</a> <div class="information">i<span class="information-overlay">Die Übermittlung von persönlichen Daten über E-Mail ist nicht geschützt.</span></div></div>
       </div>
     </div>
     <div class="container-fluid clinicdetail">
@@ -49,7 +45,7 @@
           <a id="clinicBrochure" class="link link--download" href="#" title="Klinik-Broschüre" target="_blank">Klinik-Broschüre</a>
         </div>
         <div class="col-md-6">
-          <p><strong>Ihr Ansprechpartner</strong></p>
+          <p><strong>Ihr Ansprechpartner/in</strong></p>
           <p><span id="clinicContactName">Susanne Brand</span><br>
           <span id="clinicContactDepartment">Leiterin der Abteilung Kliniken,<br>
           Bau und Verwaltung</span></p>
@@ -64,7 +60,7 @@
           </div>
         </div>
         <div class="col-md-6">
-          <p><br><strong>infos zur Gleichstellung</strong></p>
+          <p><br><strong>Informationen zur Gleichstellung</strong></p>
           <p id="jobEquality"></p>
         </div>
       </div>
