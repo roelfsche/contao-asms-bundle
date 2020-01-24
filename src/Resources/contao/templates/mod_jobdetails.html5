@@ -16,8 +16,7 @@
         <div id="js-cliniclogo-wrapper" class="col-12 col-md-4"><img id="js-cliniclogo" src="files/bilder/stammdaten/logo_klinik.jpg" alt=""></div>
       </div>
       <div class="row">
-        <div class="col-8 col-lg-8"><a class="btn btn--secondary btn--fullwidth jobMailto" href="#" title="Jetzt bewerben">Jetzt bewerben</a></div>
-        <div class="col-4"><div class="information">i<span class="information-overlay">Jetzt erfolgt die Weiterleitung ins Bewerbungsportal.</span></div></div>
+        <div class="col-12"><a class="btn btn--secondary btn--mailto jobMailto" href="#" title="Jetzt bewerben">Jetzt bewerben</a> <div class="information">i<span class="information-overlay">Jetzt erfolgt die Weiterleitung ins Bewerbungsportal.</span></div></div>
       </div>
       <div class="job-details">
         <h4>Jobbeschreibung</h4>
@@ -28,8 +27,7 @@
         <div id="js-weoffer"></div>
       </div>
       <div class="row">
-        <div class="col-8 col-lg-8"><a class="btn btn--secondary btn--fullwidth jobMailto" href="#" title="Jetzt bewerben">Jetzt bewerben</a></div>
-        <div class="col-4"><div class="information">i<span class="information-overlay">Jetzt erfolgt die Weiterleitung ins Bewerbungsportal.</span></div></div>
+        <div class="col-12"><a class="btn btn--secondary btn--mailto jobMailto" href="#" title="Jetzt bewerben">Jetzt bewerben</a> <div class="information">i<span class="information-overlay">Jetzt erfolgt die Weiterleitung ins Bewerbungsportal.</span></div></div>
       </div>
       <div class="row">
         <div class="col-12">
