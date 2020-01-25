@@ -45,10 +45,16 @@
                                         <?php endforeach; ?>
                                     </select>
                                     <div class="search_form__radio">
-                                        <label><input type="radio" name="job_kind[]" value="typeFulltime">Vollzeit</label>
+                                        <label>Vollzeit
+                                            <input type="radio" name="job_kind[]" value="typeFulltime">
+                                            <span class="checkmark"></span>
+                                        </label>
                                     </div>
                                     <div class="search_form__radio">
-                                        <label><input type="radio" name="job_kind[]" value="typeParttime">Teilzeit</label>
+                                        <label>Teilzeit
+                                            <input type="radio" name="job_kind[]" value="typeParttime">
+                                            <span class="checkmark"></span>
+                                        </label>
                                     </div>
                                 </div>
                                 <div class="col-12 col-sm-6 col-lg-2">
@@ -64,10 +70,8 @@
                                 </div>
                                 <div class="col-12 col-lg-3">
                                     <div class="row">
-                                        <div class="col-12 col-sm-6 col-lg-12">
-                                            
-                                        </div>
-                                        <div class="col-12 col-sm-6 col-lg-12 right">
+                                        <div class="col-12 right">
+                                            <input class="btn btn--reset_search_form js-reset-filter" type="button" value="Filter löschen">
                                             <span class="moresearch expandextras collapseextras js-hide-extended-search-options">Erweiterte Suche</span>
                                         </div>
                                     </div>
