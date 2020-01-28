@@ -24,7 +24,6 @@
                         </div>
                         <div class="col-12 col-lg-3 order-5 order-lg-4">
                             <input class="btn btn--secondary search_form__submit js-search-button" type="submit" value="Jobs finden">
-                            <input class="btn btn--secondary search_form__submit js-reset-filter" type="button" value="Filter löschen">
                         </div>
                         <div class="col-12 col-lg-8 order-lg-5 direct-search js-hide-options">
                             <span class="color-white small italic">Direktsuche</span>
@@ -32,7 +31,10 @@
                             <a href="#" class="small moresearch js-short-job-type" title="<?php echo $arrJob['title'] ?>" data-id="<?php echo $arrJob['id'] ?>"><?php echo $arrJob['title'] ?></a>
                             <?php endforeach; ?>
                         </div>
-                        <div class="col-12 col-lg-4 order-lg-6 right js-hide-options"><span class="moresearch expandextras js-show-extended-search-options">Erweiterte Suche</span></div>
+                        <div class="col-12 col-lg-4 order-lg-6 right js-hide-options">
+                            <input class="btn btn--reset_search_form js-reset-filter" type="button" value="Filter löschen">
+                            <span class="moresearch expandextras js-show-extended-search-options">Erweiterte Suche</span>
+                        </div>
                         <div class="col-12 order-lg-7 search-more js-search_more">
                             <div class="row">
                                 <div class="col-12 col-lg-5">
@@ -42,6 +44,18 @@
                                         <option value="<?php echo $arrJobSubject['id'] ?>"><?php echo $arrJobSubject['title'] ?></option>
                                         <?php endforeach; ?>
                                     </select>
+                                    <div class="search_form__radio">
+                                        <label>Vollzeit
+                                            <input type="radio" name="job_kind[]" value="typeFulltime">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                    <div class="search_form__radio">
+                                        <label>Teilzeit
+                                            <input type="radio" name="job_kind[]" value="typeParttime">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
                                 </div>
                                 <div class="col-12 col-sm-6 col-lg-2">
                                     <select id="js-filter-function" class="search_form__select" name="function">
@@ -56,15 +70,8 @@
                                 </div>
                                 <div class="col-12 col-lg-3">
                                     <div class="row">
-                                        <div class="col-12 col-sm-6 col-lg-12">
-                                            <div class="search_form__radio">
-                                                <label><input type="radio" name="job_kind[]" value="typeFulltime">Vollzeit</label>
-                                            </div>
-                                            <div class="search_form__radio">
-                                                <label><input type="radio" name="job_kind[]" value="typeParttime">Teilzeit</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-sm-6 col-lg-12 right">
+                                        <div class="col-12 right">
+                                            <input class="btn btn--reset_search_form js-reset-filter" type="button" value="Filter löschen">
                                             <span class="moresearch expandextras collapseextras js-hide-extended-search-options">Erweiterte Suche</span>
                                         </div>
                                     </div>

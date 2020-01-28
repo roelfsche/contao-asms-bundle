@@ -11,33 +11,27 @@
           <li style="<?php echo (($this->job && $this->job['typeFulltime'] == "Vollzeit") ? '' : 'display:none;') ?>" id="js-typefulltime" class="taglist__item taglist__item--overlay taglist__item--time">Vollzeit</li>
           <li style="<?php echo (($this->job && $this->job['typeParttime'] == "Teilzeit") ? '' : 'display:none;') ?>" id="js-typeparttime" class="taglist__item taglist__item--overlay taglist__item--time">Teilzeit</li>
           <li style="<?php echo (($this->job &&  $this->job['typeLimited'] == "Befristet") ? '' : 'display:none;') ?>" id="js-typelimited" class="taglist__item taglist__item--overlay taglist__item--time">Befristet</li>
+          <li class="taglist__item taglist__item--overlay taglist__item--jobid"><span id="js-jobid"><?php echo (($this->job) ? $this->job['jobId'] : '') ?></span></li>
         </ul>
       </div>
       <div style="<?php echo (($this->job && isset($this->job['clinicLogo'])) ? '' : 'display:none;') ?>" id="js-cliniclogo-wrapper" class="col-12 col-md-4"><img id="js-cliniclogo" src="<?php echo (($this->job && isset($this->job['clinicLogo'])) ? $this->job['clinicLogo'] : '') ?>" alt="<?php echo (($this->job && isset($this->job['clinicLogoAlt'])) ? $this->job['clinicLogoAlt'] : '') ?>"></div>
     </div>
     <div class="row">
-      <div class="col-8 col-lg-8"><a class="btn btn--secondary btn--fullwidth jobMailto" href="#" title="Jetzt bewerben">Jetzt bewerben</a></div>
-      <div class="col-4">
-        <div class="information">i<span class="information-overlay">Jetzt erfolgt die Weiterleitung ins Bewerbungsportal.</span></div>
+      <div class="col-12"><a class="btn btn--secondary btn--mailto jobMailto" href="#" title="Jetzt bewerben">Jetzt bewerben</a>
+        <div class="information">i<span class="information-overlay">Die Übermittlung von persönlichen Daten über E-Mail ist nicht geschützt.</span></div>
       </div>
     </div>
-    <h4>Jobbeschreibung</h4>
-    <p id="js-jobdescription"><?php echo (($this->job) ? $this->job['applicationNotes'] : '') ?></p>
-    <h4>Ihre Voraussetzungen</h4>
-    <p>Das erwarten wir von Ihnen:</p>
-    <div id="js-youoffer"><?php echo (($this->job) ? $this->job['youOffer'] : '') ?></div>
-    <h4>Unsere Leistungen</h4>
-    <p>Das bekommen Sie:</p>
-    <div id="js-weoffer"><?php echo (($this->job) ? $this->job['weOffer'] : '') ?></div>
-    <div class="row">
-      <div class="col-8 col-lg-8"><a class="btn btn--secondary btn--fullwidth jobMailto" href="#" title="Jetzt bewerben">Jetzt bewerben</a></div>
-      <div class="col-4">
-        <div class="information">i<span class="information-overlay">Jetzt erfolgt die Weiterleitung ins Bewerbungsportal.</span></div>
-      </div>
+    <div class="job-details">
+      <h4>Stellenbeschreibung</h4>
+      <p id="js-jobdescription"><?php echo (($this->job) ? $this->job['applicationNotes'] : '') ?></p>
+      <h4>Ihre Voraussetzungen</h4>
+      <div id="js-youoffer"><?php echo (($this->job) ? $this->job['youOffer'] : '') ?></div>
+      <h4>Unsere Leistungen</h4>
+      <div id="js-weoffer"><?php echo (($this->job) ? $this->job['weOffer'] : '') ?></div>
     </div>
     <div class="row">
-      <div class="col-12">
-        <span class="jobid">Stellen.ID: <span id="js-jobid"><?php echo (($this->job) ? $this->job['jobId'] : '') ?></span></span>
+      <div class="col-12"><a class="btn btn--secondary btn--mailto jobMailto" href="#" title="Jetzt bewerben">Jetzt bewerben</a>
+        <div class="information">i<span class="information-overlay">Die Übermittlung von persönlichen Daten über E-Mail ist nicht geschützt.</span></div>
       </div>
     </div>
   </div>
@@ -55,7 +49,7 @@
         <a style="<?php echo (($this->job && !$this->job['brochure']) ? 'display:none;' : '') ?>" id="clinicBrochure" class="link link--download" href="<?php echo (($this->job && $this->job['brochure']) ? $this->job['brochure'] : '#') ?>" title="Klinik-Broschüre" target="_blank">Klinik-Broschüre</a>
       </div>
       <div class="col-md-6">
-        <p><strong>Ihr Ansprechpartner</strong></p>
+        <p><strong>Ihr Ansprechpartner/in</strong></p>
         <p><span id="clinicContactName"><?php echo (($this->job) ? $this->job['contactperson_title'] . ' ' . $this->job['contactperson_firstname'] . ' ' . $this->job['contactperson_lastname']  : '') ?></span><br>
           <span id="clinicContactDepartment"><?php echo (($this->job) ? $this->job['department'] : '') ?></span></p>
         <a id="clinicContactPhone" class="link link--phone" href="#" title=""><?php echo (($this->job) ? $this->job['contactperson_phone'] : '') ?></a>
@@ -69,7 +63,7 @@
         </div>
       </div>
       <div class="col-md-6">
-        <p><br><strong>infos zur Gleichstellung</strong></p>
+        <p><br><strong>Informationen zur Gleichstellung</strong></p>
         <p id="jobEquality"><?php echo (($this->job) ? $this->job['equality'] : '') ?></p>
       </div>
     </div>
