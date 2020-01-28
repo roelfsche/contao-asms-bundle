@@ -103,70 +103,77 @@ class JobdetailsModule extends \Module
         // id -> index; Vollzeit / Teilzeit
         // $arrFixedJobs = [];
         // foreach ($arrJobs as $intId => $arrJob) {
-            // Logo
-            if ($arrJob['clinicLogo'] != NULL) {
-                $objFile = FilesModel::findOneBy('uuid', $arrJob['clinicLogo']);
-                if ($objFile) {
-                    $arrJob['clinicLogo'] = '/' . $objFile->path;
-                } else {
-                    unset($arrJob['clinicLogo']);
-                    unset($arrJob['clinicLogoAlt']);
-                }
+        // city aus title raus
+        $arrJob['clinicTitle'] = str_replace(' ' . $arrJob['city'], '', $arrJob['clinicTitle']);
+        // Logo
+        if ($arrJob['clinicLogo'] != NULL) {
+            $objFile = FilesModel::findOneBy('uuid', $arrJob['clinicLogo']);
+            if ($objFile) {
+                $arrJob['clinicLogo'] = '/' . $objFile->path;
             } else {
                 unset($arrJob['clinicLogo']);
                 unset($arrJob['clinicLogoAlt']);
             }
+        } else {
+            unset($arrJob['clinicLogo']);
+            unset($arrJob['clinicLogoAlt']);
+        }
 
-            $arrJob['typeFulltime'] = ($arrJob['typeFulltime'] == 1) ? 'Vollzeit' : '';
-            $arrJob['typeParttime'] = ($arrJob['typeParttime'] == 1) ? 'Teilzeit' : '';
-            $arrJob['typeLimited'] = ($arrJob['typeLimited'] == 1) ? 'Befristet' : '';
-            $arrJob['mailto'] = $arrJob['contactperson_email'] . '?subject=' . rawurlencode($arrJob['jobTitle'] . ' - ' . $arrJob['subjectTitle']);
+        if ($arrJob['typeFulltime'] == 1 && $arrJob['typeParttime'] == 1) {
+            unset($arrJob['typeFulltime']);
+            unset($arrJob['typeParttime']);
+            $arrJob['typeFullParttime'] = 'Voll-/Teilzeit';
+        }
+        $arrJob['typeFulltime'] = ($arrJob['typeFulltime'] == 1) ? 'Vollzeit' : '';
+        $arrJob['typeParttime'] = ($arrJob['typeParttime'] == 1) ? 'Teilzeit' : '';
+        $arrJob['typeLimited'] = ($arrJob['typeLimited'] == 1) ? 'Befristet' : '';
+        $arrJob['mailto'] = $arrJob['contactperson_email'] . '?subject=' . rawurlencode($arrJob['jobTitle'] . ' - ' . $arrJob['subjectTitle']);
 
-            if (strlen(trim($arrJob['url1']))) {
-                $arrJob['url'] = trim($arrJob['url1']);
-            } else {
-                if (strlen(trim($arrJob['url2']))) {
-                    $arrJob['url'] = trim($arrJob['url2']);
-                }
+        if (strlen(trim($arrJob['url1']))) {
+            $arrJob['url'] = trim($arrJob['url1']);
+        } else {
+            if (strlen(trim($arrJob['url2']))) {
+                $arrJob['url'] = trim($arrJob['url2']);
             }
-            // Brochüre
-            if ($arrJob['clinicPDF'] != NULL) {
-                $objFile = FilesModel::findOneBy('uuid', $arrJob['clinicPDF']);
-                if ($objFile != NULL) {
-                    $arrJob['brochure'] = '/' . $objFile->path;
-                }
-                unset($arrJob['clinicPDF']);
+        }
+        // Brochüre
+        if ($arrJob['clinicPDF'] != NULL) {
+            $objFile = FilesModel::findOneBy('uuid', $arrJob['clinicPDF']);
+            if ($objFile != NULL) {
+                $arrJob['brochure'] = '/' . $objFile->path;
             }
+            unset($arrJob['clinicPDF']);
+        }
 
-            // Auszeichungen
-            if ($arrJob['awardImage1'] != NULL) {
-                $objFile = FilesModel::findOneBy('uuid', $arrJob['awardImage1']);
-                if ($objFile) {
-                    $arrJob['awardImage1'] = '/' . $objFile->path;
-                } else {
-                    unset($arrJob['awardImage1']);
-                    unset($arrJob['awardImage1Alt']);
-                }
+        // Auszeichungen
+        if ($arrJob['awardImage1'] != NULL) {
+            $objFile = FilesModel::findOneBy('uuid', $arrJob['awardImage1']);
+            if ($objFile) {
+                $arrJob['awardImage1'] = '/' . $objFile->path;
             } else {
                 unset($arrJob['awardImage1']);
                 unset($arrJob['awardImage1Alt']);
             }
-            if ($arrJob['awardImage2'] != NULL) {
-                $objFile = FilesModel::findOneBy('uuid', $arrJob['awardImage2']);
-                if ($objFile) {
-                    $arrJob['awardImage2'] = '/' . $objFile->path;
-                } else {
-                    unset($arrJob['awardImage2']);
-                    unset($arrJob['awardImage2Alt']);
-                }
+        } else {
+            unset($arrJob['awardImage1']);
+            unset($arrJob['awardImage1Alt']);
+        }
+        if ($arrJob['awardImage2'] != NULL) {
+            $objFile = FilesModel::findOneBy('uuid', $arrJob['awardImage2']);
+            if ($objFile) {
+                $arrJob['awardImage2'] = '/' . $objFile->path;
             } else {
                 unset($arrJob['awardImage2']);
                 unset($arrJob['awardImage2Alt']);
             }
+        } else {
+            unset($arrJob['awardImage2']);
+            unset($arrJob['awardImage2Alt']);
+        }
 
-            // $arrJobs[$intId] = $arrJob;
-            // mapping aufbauen
-            // $arrFixedJobs[$arrJob['id']] = $intId;
+        // $arrJobs[$intId] = $arrJob;
+        // mapping aufbauen
+        // $arrFixedJobs[$arrJob['id']] = $intId;
         // }
 
         // $objDetailTemplate = new FrontendTemplate('mod_jobdetails');
@@ -178,7 +185,9 @@ class JobdetailsModule extends \Module
         // $this->Template->job_subjects = $arrJobFields;
         // $this->Template->job_mapping = $arrFixedJobs;
         // $this->Template->detailTemplate = $objDetailTemplate->parse();
-        // $this->Template->subject_images = $this->getSubjectImages();
+        $arrSubjectImages = $this->getSubjectImages($arrJob['jobSubject']);
+
+        $this->Template->subject_image = $this->getSubjectImages($arrJob['jobSubject']);
     }
 
     /**
@@ -186,10 +195,10 @@ class JobdetailsModule extends \Module
      * 
      * Eines davon wird (zufällig ausgewählt und) auf der Detail-Seite dargestellt
      */
-    protected function getSubjectImages()
+    protected function getSubjectImages($id)
     {
         $arrSubjects = [];
-        $arrDbSubjects = $this->Database->prepare('SELECT id, img1, img1Alt, img2, img2Alt, img3, img3Alt FROM tl_subjects')->execute()->fetchAllAssoc();
+        $arrDbSubjects = $this->Database->prepare('SELECT id, img1, img1Alt, img2, img2Alt, img3, img3Alt FROM tl_subjects WHERE id = ?')->execute($id)->fetchAllAssoc();
 
         // schauen, ob Bilder gesetzt sind; wenn ja, dann Pfade holen
         foreach ($arrDbSubjects as $arrSubject) {
@@ -205,10 +214,11 @@ class JobdetailsModule extends \Module
                 }
             }
             if ($boolFound) {
-                $arrSubjects[$arrSubject['id']] = $arrFiles;
+                shuffle($arrFiles);
+                return $arrFiles[0];
             }
         }
-        return $arrSubjects;
+        return null;
     }
 
     private function getPathFromFileObj($strUuid)

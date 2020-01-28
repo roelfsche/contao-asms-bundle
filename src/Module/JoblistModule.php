@@ -166,13 +166,16 @@ class JoblistModule extends \Module
         // wenn in der Modul-Config eine max_Anzahl hinterlegt, dann werden nur die
         // - aber zufällig - ausgegeben
         if ($this->max_results) {
-            shuffle($arrJobs);
             $arrJobs = array_slice($arrJobs, 0, $this->max_results);
         }
+        shuffle($arrJobs);
 
         // id -> index; Vollzeit / Teilzeit
         $arrFixedJobs = [];
         foreach ($arrJobs as $intId => $arrJob) {
+            // city aus title raus
+            $arrJob['clinicTitle'] = str_replace(' ' . $arrJob['city'], '', $arrJob['clinicTitle']);
+
             // Logo
             if ($arrJob['clinicLogo'] != NULL) {
                 $objFile = FilesModel::findOneBy('uuid', $arrJob['clinicLogo']);
@@ -187,6 +190,11 @@ class JoblistModule extends \Module
                 unset($arrJob['clinicLogoAlt']);
             }
 
+            if ($arrJob['typeFulltime'] == 1 && $arrJob['typeParttime'] == 1) {
+                unset($arrJob['typeFulltime']);
+                unset($arrJob['typeParttime']);
+                $arrJob['typeFullParttime'] = 'Voll-/Teilzeit';
+            }
             $arrJob['typeFulltime'] = ($arrJob['typeFulltime'] == 1) ? 'Vollzeit' : '';
             $arrJob['typeParttime'] = ($arrJob['typeParttime'] == 1) ? 'Teilzeit' : '';
             $arrJob['typeLimited'] = ($arrJob['typeLimited'] == 1) ? 'Befristet' : '';

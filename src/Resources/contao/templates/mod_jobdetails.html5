@@ -1,5 +1,7 @@
 <div id="js-jobwrapper" class="jobwrapper">
-  <div class="jobimage"><img id="js-subjectlogo" src="files/bilder/jobs/bild_klinik.jpg" alt="Klinikbild"></div>
+  <?php if (!$this->job || $this->subject_image) : ?>
+  <div class="jobimage"><img id="js-subjectlogo" src="<?php echo (($this->subject_image) ? $this->subject_image['path'] : '') ?>" alt="<?php echo (($this->subject_image) ? $this->subject_image['alt'] : '') ?>"></div>
+  <?php endif ?>
   <div class="container-fluid">
     <div id="js-jobname" class="jobname"><?php echo (($this->job) ? $this->job['jobTitle'] : '') ?> - <?php echo (($this->job) ? $this->job['subjectTitle'] : '') ?></div>
     <div class="row">
@@ -8,6 +10,7 @@
           <li id="js-jobtitle" class="taglist__item taglist__item--overlay taglist__item--person"><?php echo (($this->job) ? $this->job['jobTitle'] : '') ?></li>
           <li id="js-subjecttitle" class="taglist__item taglist__item--overlay taglist__item--star"><?php echo (($this->job) ? $this->job['subjectTitle'] : '') ?></li>
           <li id="js-city" class="taglist__item taglist__item--overlay taglist__item--pin"><?php echo (($this->job) ? $this->job['city'] : '') ?></li>
+          <li style="<?php echo (($this->job && $this->job['typeFullParttime'] == "Voll-/Teilzeit") ? '' : 'display:none;') ?>" id="js-typefullparttime" class="taglist__item taglist__item--overlay taglist__item--time">Voll-/Teilzeit</li>
           <li style="<?php echo (($this->job && $this->job['typeFulltime'] == "Vollzeit") ? '' : 'display:none;') ?>" id="js-typefulltime" class="taglist__item taglist__item--overlay taglist__item--time">Vollzeit</li>
           <li style="<?php echo (($this->job && $this->job['typeParttime'] == "Teilzeit") ? '' : 'display:none;') ?>" id="js-typeparttime" class="taglist__item taglist__item--overlay taglist__item--time">Teilzeit</li>
           <li style="<?php echo (($this->job &&  $this->job['typeLimited'] == "Befristet") ? '' : 'display:none;') ?>" id="js-typelimited" class="taglist__item taglist__item--overlay taglist__item--time">Befristet</li>
@@ -17,7 +20,7 @@
       <div style="<?php echo (($this->job && isset($this->job['clinicLogo'])) ? '' : 'display:none;') ?>" id="js-cliniclogo-wrapper" class="col-12 col-md-4"><img id="js-cliniclogo" src="<?php echo (($this->job && isset($this->job['clinicLogo'])) ? $this->job['clinicLogo'] : '') ?>" alt="<?php echo (($this->job && isset($this->job['clinicLogoAlt'])) ? $this->job['clinicLogoAlt'] : '') ?>"></div>
     </div>
     <div class="row">
-      <div class="col-12"><a class="btn btn--secondary btn--mailto jobMailto" href="#" title="Jetzt bewerben">Jetzt bewerben</a>
+      <div class="col-12"><a class="btn btn--secondary btn--mailto jobMailto" href="mailto:<?php echo (($this->job) ? $this->job['mailto'] : '') ?>" title="Jetzt bewerben">Jetzt bewerben</a>
         <div class="information">i<span class="information-overlay">Die Übermittlung von persönlichen Daten über E-Mail ist nicht geschützt.</span></div>
       </div>
     </div>
@@ -30,7 +33,7 @@
       <div id="js-weoffer"><?php echo (($this->job) ? $this->job['weOffer'] : '') ?></div>
     </div>
     <div class="row">
-      <div class="col-12"><a class="btn btn--secondary btn--mailto jobMailto" href="#" title="Jetzt bewerben">Jetzt bewerben</a>
+      <div class="col-12"><a class="btn btn--secondary btn--mailto jobMailto" href="mailto:<?php echo (($this->job) ? $this->job['mailto'] : '') ?>" title="Jetzt bewerben">Jetzt bewerben</a>
         <div class="information">i<span class="information-overlay">Die Übermittlung von persönlichen Daten über E-Mail ist nicht geschützt.</span></div>
       </div>
     </div>
@@ -38,7 +41,8 @@
   <div class="container-fluid clinicdetail">
     <div class="row">
       <div class="col-12">
-        <h3>Alles Wichtige zur Klinik</h3>
+        <h3 id="js-clinic-details-headline">Alles Wichtige zur Klinik</h3>
+        <h3 id="js-reha-details-headline">Alles Wichtige auf einen Blick</h3>
       </div>
       <div class="col-md-6">
         <p><strong>Klinikanschrift</strong></p>
@@ -68,7 +72,5 @@
       </div>
     </div>
   </div>
-  <?php if (!$this->job) : ?>
   <a style="display: none" id="jobDetailsLink" href="">Details</a>
-  <?php endif ?>
 </div>

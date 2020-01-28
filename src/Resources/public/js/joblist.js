@@ -15,7 +15,7 @@ $(function () {
     var latLon = { lat: 0, lon: 0 };
 
     var listConfig = {
-        valueNames: ['id', 'jobTitle', 'jobTitle2', 'jobType', 'jobSubject', 'jobId', 'subjectTitle', 'subjectTitle2', 'clinicTitle', 'city', 'city2', 'zipCode', 'typeFulltime', 'typeParttime', 'typeLimited'],
+        valueNames: ['id', 'jobTitle', 'jobTitle2', 'jobType', 'jobSubject', 'jobId', 'subjectTitle', 'subjectTitle2', 'clinicTitle', 'city', 'city2', 'zipCode', 'typeFulltime', 'typeFullParttime', 'typeParttime', 'typeLimited'],
         item: 'js-list-entry-template'
     }
 
@@ -49,9 +49,10 @@ $(function () {
             $headlinePlural.hide();
         }
         // tags ein-/ausblenden
+        // title-Tag setzen
         $(list.visibleItems).each(function (i, elem) {
             var $domnode = $(elem.elm);
-            $domnode.find('.js-typefulltime, .js-typeparttime, .js-typelimited').each(function (i, elem) {
+            $domnode.find('.js-typefulltime, .js-typefullparttime, .js-typeparttime, .js-typelimited').each(function (i, elem) {
                 var $elem = $(elem);
                 if ($elem.text() == '') {
                     $elem.hide();
@@ -59,11 +60,12 @@ $(function () {
                     $elem.show();
                 }
             })
+            $domnode.find('.js-showoverlay').prop('title', elem.values().jobTitle);
         })
     });
 
     // ...initiales Ausblenden 
-    $('.js-typefulltime, .js-typeparttime, .js-typelimited').each(function (i, elem) {
+    $('.js-typefulltime, .js-typefullparttime, .js-typeparttime, .js-typelimited').each(function (i, elem) {
         var $elem = $(elem);
         if ($elem.text() == '') {
             $elem.hide();
@@ -169,12 +171,13 @@ $(function () {
         }
 
         function _filterByJobKind(job) {
+            // Filter nach Voll-/Teilzeit
             var $filterElem = $("input[name='job_kind[]']:checked");
             if ($filterElem.length == 0) {
                 return true;
             }
             var filterVal = $filterElem.val();
-            return job[filterVal] != "";
+            return job[filterVal] != "" || job['typeFullParttime'] != undefined;
         }
 
         var filter = function (item) {
@@ -221,7 +224,13 @@ $(function () {
         }
     };
 
+    // Pagination: onclick --> hochscrollen
+    $(document).on('click', '.page', function (e) {
+        $('html, body').animate({ scrollTop: $jobCountSpan.offset().top }, 400);
+    })
+
     var filterList = createFilterFunction(list, true);
+    filterList();// initial aufrufen, um Werte zu füllen
     var nextGreaterSurroundingFilterList = null;// wird später definiert
 
     // ext. Filter rein / raus
@@ -238,8 +247,11 @@ $(function () {
 
     // Direktliste Jobtypen
     $('.js-short-job-type').on('click', function (e) {
+        var $this = $(this);
+        $('.js-hide-options').find('.active').removeClass('active')
         e.preventDefault();
-        $filterTypeSelect.val($(this).data('id'));
+        $this.addClass('active');
+        $filterTypeSelect.val($this.data('id'));
         $filterSearchButton.trigger('click');
     })
 
@@ -331,7 +343,9 @@ $(function () {
             $clinicContactMail = $('#clinicContactMail'),
             $jobMailto = $('.jobMailto'),
             $jobEquality = $('#jobEquality'),
-            $jobDetailsLink = $('#jobDetailsLink');
+            $jobDetailsLink = $('#jobDetailsLink'),
+            $clinicDetailHeadline = $('#js-clinic-details-headline'),
+            $rehaDetailHeadline = $('#js-reha-details-headline');
 
         $closeButton.on('click', function (e) {
             e.preventDefault();
@@ -362,7 +376,8 @@ $(function () {
 
             $overlay.css({
                 'z-index': 1,
-                'opacity': 1
+                'opacity': 1,
+                scrollTop: 0
             });
         }
 
@@ -379,11 +394,12 @@ $(function () {
             $city.text(job.city);
             $.each({
                 'typeFulltime': '#js-typefulltime',
+                'typeFullParttime': '#js-typefullparttime',
                 'typeParttime': '#js-typeparttime',
                 'typeLimited': '#js-typelimited'
             }, function (i, sel) {
                 // checke gegen Inhalt/Länge
-                if (job[i].length) {
+                if (job[i] && job[i].length) {
                     $(sel).show();
                 } else {
                     $(sel).hide();
@@ -400,6 +416,13 @@ $(function () {
             $youOffer.html(job.youOffer);
             $weOffer.html(job.weOffer);
             $jobId.text(job.jobId);
+            if (job.jobId.match(/REHA/)) {
+                $rehaDetailHeadline.show();
+                $clinicDetailHeadline.hide();
+            } else {
+                $rehaDetailHeadline.hide();
+                $clinicDetailHeadline.show();
+            }
             $clinicName.text(job.clinicTitle);
             // $clinicCity.text(job.city)
             $clinicAddress.text(job.zipCode + " " + job.city);
@@ -416,7 +439,7 @@ $(function () {
 
             if (job.awardImage1 != undefined) {
                 $awardDivWrapper.show();
-                $awardDivs.first().find('img').attr('src', job.awardImage1).attr('alt', job.awardImage1Alt);
+                $awardDivs.first().show().find('img').attr('src', job.awardImage1).attr('alt', job.awardImage1Alt);
 
                 if (job.awardImage2 != undefined) {
                     $awardDivs.eq(1).show().find('img').attr('src', job.awardImage2).attr('alt', job.awardImage2Alt);

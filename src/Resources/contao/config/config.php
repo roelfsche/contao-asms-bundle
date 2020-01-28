@@ -56,7 +56,7 @@ array_insert($GLOBALS['FE_MOD'], 2, array(
  * Hooks
  */
 // $GLOBALS['TL_HOOKS']['loadDataContainer'][] = array('VacancyHooks', 'loadDC');
-$GLOBALS['TL_HOOKS']['getPageIdFromUrl'][] = array('vacancies\Hooks', 'handleIdRedirect');
+// $GLOBALS['TL_HOOKS']['getPageIdFromUrl'][] = array('vacancies\Hooks', 'handleIdRedirect');
 
 $GLOBALS['TL_MODELS']['tl_subjects'] = 'vacancies\SubjectsModel';
 $GLOBALS['TL_MODELS']['tl_jobs'] = 'vacancies\JobsModel';
