@@ -4,6 +4,7 @@ namespace Lumturo\ContaoAsmsBundle\Module;
 
 use Contao\FilesModel;
 use Contao\FrontendTemplate;
+use Contao\PageModel;
 use Patchwork\Utf8;
 
 class JoblistModule extends \Module
@@ -39,7 +40,7 @@ class JoblistModule extends \Module
             return $template->parse();
         } else {
             // if ($this->intSubjectFilterValue == 0) {
-            // $GLOBALS['TL_JAVASCRIPT'][] = 'https://code.jquery.com/jquery-3.4.1.min.js';
+            $GLOBALS['TL_JAVASCRIPT'][] = 'https://code.jquery.com/jquery-3.4.1.min.js';
             $GLOBALS['TL_JAVASCRIPT'][] = '//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js';
             $GLOBALS['TL_JAVASCRIPT'][] = 'bundles/contaoasms/js/joblist.js';
             // }
@@ -63,6 +64,7 @@ class JoblistModule extends \Module
             $strSQL = 'select 
             a.id, 
             a.jobID as jobId, 
+            a.alias as jobAlias,
             a.typeFulltime, a.typeParttime, a.typeLimited, a.weOffer, a.youOffer, a.applicationNotes, 
             a.titleSelection as jobType,
             a.subjectSelection as jobSubject,
@@ -114,6 +116,7 @@ class JoblistModule extends \Module
             $strSQL = 'select 
                         a.id, 
                         a.jobID as jobId, 
+                        a.alias as jobAlias,
                         a.typeFulltime, a.typeParttime, a.typeLimited, a.weOffer, a.youOffer, a.applicationNotes, 
                         a.titleSelection as jobType,
                         a.subjectSelection as jobSubject,
@@ -238,6 +241,16 @@ class JoblistModule extends \Module
 
         $objDetailTemplate = new FrontendTemplate('mod_jobdetails');
         $objDetailTemplate->job = $arrJobs[0];
+
+        // Detail-Seiten-Link bauen
+
+        if ($this->detailsPage) {
+            $objPage  = PageModel::findByPk($this->detailsPage);
+            if ($objPage) {
+                $strDetailUrl = str_replace('.html', '', $this->generateFrontendUrl($objPage->row())) . '/';
+                $this->Template->detailUrl = $strDetailUrl;
+            }
+        }
 
         $this->Template->short_job_types = $arrShortJobTypes;
         $this->Template->job_types = $arrJobTypes;

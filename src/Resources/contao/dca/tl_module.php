@@ -1,7 +1,7 @@
 <?php
 
 // Add palette to tl_module
-$GLOBALS['TL_DCA']['tl_module']['palettes']['Joblist'] = '{title_legend},name,headline,type;{filter_legend:hide},subjects,max_results';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['Joblist'] = '{title_legend},name,headline,type;{filter_legend:hide},detailsPage,subjects,max_results';
 $GLOBALS['TL_DCA']['tl_module']['fields']['subjects'] = [
     'label'                   => &$GLOBALS['TL_LANG']['tl_module']['subjects'],
     'inputType'               => 'select',
@@ -21,6 +21,14 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['max_results'] = [
     ],
     'sql'                     => "int(10) unsigned NOT NULL default '0'",
 ];
+$GLOBALS['TL_DCA']['tl_module']['fields']['detailsPage'] = array(
+    'label'                   => &$GLOBALS['TL_LANG']['tl_module']['detailsPage'],
+    'exclude'                 => true,
+    'inputType'               => 'pageTree',
+    'eval'                    => array('filesOnly' => true, 'fieldType' => 'radio', 'mandatory' => true, 'tl_class' => 'clr'),
+    'sql'                     => "int(10) unsigned NOT NULL default '0'",
+    // 'sql'                     => "binary(16) NULL"
+);
 
 class Module_Helper extends Backend
 {

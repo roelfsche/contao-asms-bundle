@@ -41,14 +41,8 @@ array_insert($GLOBALS['FE_MOD'], 2, array(
     'vacancies' => array(
         //         'Jobdetail'         => 'ModuleJobdetail',
         'Joblist'           => 'Lumturo\ContaoAsmsBundle\Module\JoblistModule', //'ModuleJoblist',
+        'Jobdetails'           => 'Lumturo\ContaoAsmsBundle\Module\JobdetailsModule', //'ModuleJoblist',
         'Jobmap'           => 'Lumturo\ContaoAsmsBundle\Module\JobmapModule', //'ModuleJoblist',
-
-        //         'JobListPerSubject' => 'ModuleJobListPerSubject',
-        //         'JobSearchSimple'   => 'ModuleJobSearchSimple',
-        //         'JobSearchExtended' => 'ModuleJobSearchExtended',
-        //         'JobSearchResult'   => 'ModuleJobSearchResult',
-        //         'TabControl'        => 'ModuleTabControl',
-        //         'AjaxEvents'        => 'ModuleAjaxEvents'
     )
 ));
 
@@ -62,7 +56,7 @@ array_insert($GLOBALS['FE_MOD'], 2, array(
  * Hooks
  */
 // $GLOBALS['TL_HOOKS']['loadDataContainer'][] = array('VacancyHooks', 'loadDC');
-// $GLOBALS['TL_HOOKS']['getPageIdFromUrl'][] = array('VacancyHooks', 'handleIdRedirect');
+$GLOBALS['TL_HOOKS']['getPageIdFromUrl'][] = array('vacancies\Hooks', 'handleIdRedirect');
 
 $GLOBALS['TL_MODELS']['tl_subjects'] = 'vacancies\SubjectsModel';
 $GLOBALS['TL_MODELS']['tl_jobs'] = 'vacancies\JobsModel';

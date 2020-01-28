@@ -330,7 +330,8 @@ $(function () {
             $clinicContactPhone = $('#clinicContactPhone'),
             $clinicContactMail = $('#clinicContactMail'),
             $jobMailto = $('.jobMailto'),
-            $jobEquality = $('#jobEquality');
+            $jobEquality = $('#jobEquality'),
+            $jobDetailsLink = $('#jobDetailsLink');
 
         $closeButton.on('click', function (e) {
             e.preventDefault();
@@ -434,6 +435,9 @@ $(function () {
             $jobMailto.attr('href', 'mailto:' + job.mailto);
             $jobEquality.html(job.equality);
 
+            if (detailUrl != undefined) {
+                $jobDetailsLink.show().prop('href', detailUrl + job.jobAlias + '.html');
+            }
         }
     })());
 

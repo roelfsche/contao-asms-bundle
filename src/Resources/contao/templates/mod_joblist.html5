@@ -144,5 +144,8 @@
     var jobs = <?php echo json_encode($this->jobs) ?>;
     var jobMapping = <?php echo json_encode($this->job_mapping) ?>;
     var subjectImages = <?php echo json_encode($this->subject_images) ?>;
+    <?php if ($this->detailUrl) : ?>
+    var detailUrl = '<?php echo $this->detailUrl ?>';
+    <?php endif ?>
 
 </script>
