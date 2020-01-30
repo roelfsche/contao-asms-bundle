@@ -25,13 +25,13 @@
                         <div class="col-12 col-lg-3 order-5 order-lg-4">
                             <input class="btn btn--secondary search_form__submit js-search-button" type="submit" value="Jobs finden">
                         </div>
-                        <div class="col-12 col-lg-8 order-lg-5 direct-search js-hide-options">
+                        <div class="col-12 col-lg-9 order-lg-5 direct-search js-hide-options">
                             <span class="color-white small italic">Direktsuche</span>
                             <?php foreach($this->short_job_types as $arrJob) : ?>
                             <a href="#" class="small moresearch js-short-job-type" title="<?php echo $arrJob['title'] ?>" data-id="<?php echo $arrJob['id'] ?>"><?php echo $arrJob['title'] ?></a>
                             <?php endforeach; ?>
                         </div>
-                        <div class="col-12 col-lg-4 order-lg-6 right js-hide-options">
+                        <div class="col-12 col-lg-3 order-lg-6 filter-more-button js-hide-options">
                             <input class="btn btn--reset_search_form js-reset-filter" type="button" value="Filter löschen">
                             <span class="moresearch expandextras js-show-extended-search-options">Erweiterte Suche</span>
                         </div>
