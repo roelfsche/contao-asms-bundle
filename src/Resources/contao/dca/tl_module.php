@@ -1,7 +1,7 @@
 <?php
 
 // Add palette to tl_module
-$GLOBALS['TL_DCA']['tl_module']['palettes']['Joblist'] = '{title_legend},name,headline,type;{filter_legend:hide},detailsPage,subjects,max_results';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['Joblist'] = '{title_legend},name,headline,type;{filter_legend:hide},job_type,subjects,max_results';
 $GLOBALS['TL_DCA']['tl_module']['fields']['subjects'] = [
     'label'                   => &$GLOBALS['TL_LANG']['tl_module']['subjects'],
     'inputType'               => 'select',
@@ -13,6 +13,17 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['subjects'] = [
     'sql'                     => "int(10) unsigned NOT NULL default '0'",
     // 'relation'                => array('type'=>'hasOne', 'load'=>'eager')
 ];
+$GLOBALS['TL_DCA']['tl_module']['fields']['job_type'] = [
+        'label'                   => &$GLOBALS['TL_LANG']['tl_module']['job_type'],
+        'default'                 => 'regular',
+        'exclude'                 => true,
+        'inputType'               => 'select',
+        'options_callback'        => array('Module_Helper', 'getTypes'),
+        'eval' => [
+            'includeBlankOption' => true,
+        ],
+        'sql'                     => "int(10) unsigned NOT NULL default '0'"
+];
 $GLOBALS['TL_DCA']['tl_module']['fields']['max_results'] = [
     'label'                   => &$GLOBALS['TL_LANG']['tl_module']['max_results'],
     'inputType'               => 'text',
@@ -21,14 +32,6 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['max_results'] = [
     ],
     'sql'                     => "int(10) unsigned NOT NULL default '0'",
 ];
-$GLOBALS['TL_DCA']['tl_module']['fields']['detailsPage'] = array(
-    'label'                   => &$GLOBALS['TL_LANG']['tl_module']['detailsPage'],
-    'exclude'                 => true,
-    'inputType'               => 'pageTree',
-    'eval'                    => array('filesOnly' => true, 'fieldType' => 'radio', 'mandatory' => true, 'tl_class' => 'clr'),
-    'sql'                     => "int(10) unsigned NOT NULL default '0'",
-    // 'sql'                     => "binary(16) NULL"
-);
 
 class Module_Helper extends Backend
 {
@@ -40,5 +43,9 @@ class Module_Helper extends Backend
             $arrRetTypes[$arrType['id']] = $arrType['title'];
         }
         return $arrRetTypes;
+    }
+    public function getTypes()
+    {
+        return array(1 => "Rehabilitationskliniken", 2 => "Sozialmedizinischer Dienst");
     }
 }

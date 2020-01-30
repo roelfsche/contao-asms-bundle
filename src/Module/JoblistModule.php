@@ -18,6 +18,10 @@ class JoblistModule extends \Module
      * enthält den Fachbereich, falls einer am Modul eingestellt
      */
     protected $intSubjectFilterValue = 0;
+    /**
+     * enthält den typ (1/2 => Reha/Soz.Med.Dienst), falls einer am Modul eingestellt
+     */
+    protected $intTypeFilterValue = 0;
 
     /**
      * Displays a wildcard in the back end.
@@ -27,6 +31,7 @@ class JoblistModule extends \Module
     public function generate()
     {
         $this->intSubjectFilterValue = (int) $this->subjects;
+        $this->intTypeFilterValue = (int) $this->job_type;
 
         if (TL_MODE == 'BE') {
             $template = new \BackendTemplate('be_wildcard');
@@ -55,7 +60,8 @@ class JoblistModule extends \Module
      */
     protected function compile()
     {
-        if (!$this->intSubjectFilterValue) {
+        // keine Modul-Filter-Config...
+        if (!($this->intSubjectFilterValue || $this->intTypeFilterValue)) {
             $this->Template->show_filter = TRUE;
             // selektiere alle Job-Typen für Filter
             $arrShortJobTypes = $this->Database->prepare('select distinct a.id, a.title from tl_jobtypes a join tl_jobs b on (a.id = b.titleSelection) WHERE a.showInLinkList = 1 AND b.published=\'1\';')->execute()->fetchAllAssoc();
@@ -109,56 +115,78 @@ class JoblistModule extends \Module
                 $arrJobs = $this->Database->prepare($strSQL)->execute(time(), time())->fetchAllAssoc();
             }
         } else {
-            // selektiere alle Job-Typen für Filter
-            $arrShortJobTypes = $this->Database->prepare('select distinct a.id, a.title from tl_jobtypes a join tl_jobs b on (a.id = b.titleSelection) WHERE a.showInLinkList = 1 AND b.published=\'1\' AND b.subjectSelection=?;')->execute($this->intSubjectFilterValue)->fetchAllAssoc();
-            $arrJobTypes = $this->Database->prepare('select distinct a.id, a.title from tl_jobtypes a join tl_jobs b on (a.id = b.titleSelection) WHERE b.published=\'1\' AND b.subjectSelection=?;')->execute($this->intSubjectFilterValue)->fetchAllAssoc();
-            $arrJobFields = $this->Database->prepare('select distinct a.id, a.title from tl_subjects a join tl_jobs b on (a.id = b.subjectSelection) WHERE b.published=\'1\' AND b.subjectSelection=? ORDER BY a.title;')->execute($this->intSubjectFilterValue)->fetchAllAssoc();
+            // selektiere nach Modul-Filter: Typ / Subject
+            $arrParams = [];
+            $strSql = 'select distinct a.id, a.title from tl_jobtypes a join tl_jobs b on (a.id = b.titleSelection) WHERE a.showInLinkList = 1 AND b.published=\'1\'';
+            $arrParams = [];
+            $strFilterSql = '';
+            if ($this->intSubjectFilterValue) {
+                $strFilterSql .= ' AND b.subjectSelection=?';
+                $arrParams[] = $this->intSubjectFilterValue;
+            }
+            if ($this->intTypeFilterValue) {
+                $strFilterSql .= ' AND b.type=?';
+                $arrParams[] = $this->intTypeFilterValue;
+            }
+            
+            $arrShortJobTypes = $this->Database->prepare('select distinct a.id, a.title from tl_jobtypes a join tl_jobs b on (a.id = b.titleSelection) WHERE a.showInLinkList = 1 AND b.published=\'1\'' . $strFilterSql)->execute($arrParams)->fetchAllAssoc();
+
+
+            $arrJobTypes = $this->Database->prepare('select distinct a.id, a.title from tl_jobtypes a join tl_jobs b on (a.id = b.titleSelection) WHERE b.published=\'1\'' . $strFilterSql)->execute($arrParams)->fetchAllAssoc();
+            $arrJobFields = $this->Database->prepare('select distinct a.id, a.title from tl_subjects a join tl_jobs b on (a.id = b.subjectSelection) WHERE b.published=\'1\'' . $strFilterSql . ' ORDER BY a.title;')->execute($arrParams)->fetchAllAssoc();
             $strSQL = 'select 
-                        a.id, 
-                        a.jobID as jobId, 
-                        a.alias as jobAlias,
-                        a.typeFulltime, a.typeParttime, a.typeLimited, a.weOffer, a.youOffer, a.applicationNotes, 
-                        a.titleSelection as jobType,
-                        a.subjectSelection as jobSubject,
-                        b.title as clinicTitle, 
-                        b.city, 
-                        b.city as city2, 
-                        b.logo as clinicLogo,
-                        b.logoAlt as clinicLogoAlt,
-                        b.zipCode, 
-                        b.lat, 
-                        b.lon, 
-                        b.contactperson_salutation, 
-                        b.contactperson_title , 
-                        b.contactperson_firstname, 
-                        b.contactperson_lastname, 
-                        b.contactperson_phone, 
-                        b.contactperson_email, 
-                        b.department, 
-                        b.street, 
-                        b.houseNumber, 
-                        b.zipCode, 
-                        b.url1, 
-                        b.url2, 
-                        b.clinicPDF, 
-                        b.awardImage1,
-                        b.awardImage1Alt,
-                        b.awardImage2,
-                        b.awardImage2Alt,
-                        b.equality, 
+                        b.id, 
+                        b.jobID as jobId, 
+                        b.alias as jobAlias,
+                        b.typeFulltime, b.typeParttime, b.typeLimited, b.weOffer, b.youOffer, b.applicationNotes, 
+                        b.titleSelection as jobType,
+                        b.subjectSelection as jobSubject,
+                        a.title as clinicTitle, 
+                        a.city, 
+                        a.city as city2, 
+                        a.logo as clinicLogo,
+                        a.logoAlt as clinicLogoAlt,
+                        a.zipCode, 
+                        a.lat, 
+                        a.lon, 
+                        a.contactperson_salutation, 
+                        a.contactperson_title , 
+                        a.contactperson_firstname, 
+                        a.contactperson_lastname, 
+                        a.contactperson_phone, 
+                        a.contactperson_email, 
+                        a.department, 
+                        a.street, 
+                        a.houseNumber, 
+                        a.zipCode, 
+                        a.url1, 
+                        a.url2, 
+                        a.clinicPDF, 
+                        a.awardImage1,
+                        a.awardImage1Alt,
+                        a.awardImage2,
+                        a.awardImage2Alt,
+                        a.equality, 
                         c.title as jobTitle, c.title as jobTitle2, d.title as subjectTitle, d.title as subjectTitle2,
                         d.id as subjectId
-                        from tl_jobs a 
-                        join tl_clinics b on (a.clinic = b.id) 
-                        join tl_jobtypes c on (a.titleSelection = c.id) 
-                        join tl_subjects d on (a.subjectSelection = d.id) 
-                        where a.published = \'1\' AND (a.start = \'\' or a.start < ?) AND (a.stop = \'\' or a.stop > ?) AND a.subjectSelection=?';
+                        from tl_jobs b 
+                        join tl_clinics a on (b.clinic = a.id) 
+                        join tl_jobtypes c on (b.titleSelection = c.id) 
+                        join tl_subjects d on (b.subjectSelection = d.id) 
+                        where b.published = \'1\'' . $strFilterSql . ' AND (b.start = \'\' or b.start < ?) AND (b.stop = \'\' or b.stop > ?)';
+
+                        $arrParams[] = time();
+                        $arrParams[] = time();
+
             if (($strCity = $this->Input->get('city')) != '') {
                 $strSQL .= ' AND b.city = ?';
-                $objResult = $this->Database->prepare($strSQL)->execute(time(), time(), $this->intSubjectFilterValue, $strCity);
+                $arrParams[] = $strCity;
+                // $objResult = $this->Database->prepare($strSQL)->execute(time(), time(), $this->intSubjectFilterValue, $strCity);
+                $objResult = $this->Database->prepare($strSQL)->execute($arrParams);
                 $arrJobs = $objResult->fetchAllAssoc();
             } else {
-                $arrJobs = $this->Database->prepare($strSQL)->execute(time(), time(), $this->intSubjectFilterValue)->fetchAllAssoc();
+                // $arrJobs = $this->Database->prepare($strSQL)->execute(time(), time(), $this->intSubjectFilterValue)->fetchAllAssoc();
+                $arrJobs = $this->Database->prepare($strSQL)->execute($arrParams)->fetchAllAssoc();
             }
             $this->Template->show_filter = FALSE;
         }
@@ -252,8 +280,8 @@ class JoblistModule extends \Module
 
         // Detail-Seiten-Link bauen
 
-        if ($this->detailsPage) {
-            $objPage  = PageModel::findByPk($this->detailsPage);
+        if (isset($GLOBALS['TL_CONFIG']['detailsPage']) && (int) $GLOBALS['TL_CONFIG']['detailsPage']) {
+            $objPage  = PageModel::findByPk($GLOBALS['TL_CONFIG']['detailsPage']);
             if ($objPage) {
                 $strDetailUrl = str_replace('.html', '', $this->generateFrontendUrl($objPage->row())) . '/';
                 $this->Template->detailUrl = $strDetailUrl;

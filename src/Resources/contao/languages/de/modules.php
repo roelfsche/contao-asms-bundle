@@ -5,3 +5,5 @@ $GLOBALS['TL_LANG']['FMD']['vacancies'] = ['Arzt Sein Mensch sein', 'Arzt Sein M
 $GLOBALS['TL_LANG']['FMD']['Joblist'] = ['Jobliste', 'Jobliste'];
 $GLOBALS['TL_LANG']['FMD']['Jobdetails'] = ['Jobdetails', 'Jobdetails'];
 $GLOBALS['TL_LANG']['FMD']['Jobmap'] = ['Jobkarte', 'Jobkarte'];
+
+$GLOBALS['TL_LANG']['tl_module']['job_type'] = ['Typ'];

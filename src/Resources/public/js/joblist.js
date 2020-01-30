@@ -229,90 +229,91 @@ $(function () {
         $('html, body').animate({ scrollTop: $jobCountSpan.offset().top }, 400);
     })
 
-    var filterList = createFilterFunction(list, true);
-    filterList();// initial aufrufen, um Werte zu füllen
-    var nextGreaterSurroundingFilterList = null;// wird später definiert
+    if ($filterGlobal.length) {
+        var filterList = createFilterFunction(list, true);
+        filterList();// initial aufrufen, um Werte zu füllen
+        var nextGreaterSurroundingFilterList = null;// wird später definiert
 
-    // ext. Filter rein / raus
-    $('.js-show-extended-search-options').click(function (e) {
-        e.preventDefault();
-        $('.js-hide-options').hide();
-        $('.js-search_more').show();
-    });
-    $('.js-hide-extended-search-options').click(function (e) {
-        e.preventDefault();
-        $('.js-hide-options').show();
-        $('.js-search_more').hide();
-    });
+        // ext. Filter rein / raus
+        $('.js-show-extended-search-options').click(function (e) {
+            e.preventDefault();
+            $('.js-hide-options').hide();
+            $('.js-search_more').show();
+        });
+        $('.js-hide-extended-search-options').click(function (e) {
+            e.preventDefault();
+            $('.js-hide-options').show();
+            $('.js-search_more').hide();
+        });
 
-    // Direktliste Jobtypen
-    $('.js-short-job-type').on('click', function (e) {
-        var $this = $(this);
-        $('.js-hide-options').find('.active').removeClass('active')
-        e.preventDefault();
-        $this.addClass('active');
-        $filterTypeSelect.val($this.data('id'));
-        $filterSearchButton.trigger('click');
-    })
+        // Direktliste Jobtypen
+        $('.js-short-job-type').on('click', function (e) {
+            var $this = $(this);
+            $('.js-hide-options').find('.active').removeClass('active')
+            e.preventDefault();
+            $this.addClass('active');
+            $filterTypeSelect.val($this.data('id'));
+            $filterSearchButton.trigger('click');
+        })
 
-    $('.js-search-city').on('input', function () {
-        var zip = $(this).val();
-        if (zip.length < 5) {
-            return;
-        }
-        // frage https://nominatim.openstreetmap.org/search/?q=Germany,18146&format=json an
-        var location = 'Germany,' + zip;
-        var geocode = 'https://nominatim.openstreetmap.org/search?format=json&q=' + location;
-        $.getJSON(geocode, function (data) {
-            // get lat + lon from first match
-            if (!data.length) {
-                // disabled
-                $('.js-search-surrounding').prop('disabled', true);
-                latLon.lat = latLon.lon = 0;
+        $('.js-search-city').on('input', function () {
+            var zip = $(this).val();
+            if (zip.length < 5) {
                 return;
             }
-            latLon.lat = parseFloat(data[0].lat);
-            latLon.lon = parseFloat(data[0].lon);
-            $('.js-search-surrounding').prop('disabled', false);
+            // frage https://nominatim.openstreetmap.org/search/?q=Germany,18146&format=json an
+            var location = 'Germany,' + zip;
+            var geocode = 'https://nominatim.openstreetmap.org/search?format=json&q=' + location;
+            $.getJSON(geocode, function (data) {
+                // get lat + lon from first match
+                if (!data.length) {
+                    // disabled
+                    $('.js-search-surrounding').prop('disabled', true);
+                    latLon.lat = latLon.lon = 0;
+                    return;
+                }
+                latLon.lat = parseFloat(data[0].lat);
+                latLon.lon = parseFloat(data[0].lon);
+                $('.js-search-surrounding').prop('disabled', false);
+            });
         });
-    });
 
 
-    $filterSearchButton.on('click', function (e) {
-        e.preventDefault();
-        filterList();
+        $filterSearchButton.on('click', function (e) {
+            e.preventDefault();
+            filterList();
 
-        // additional Liste
-        if (parseInt($filterSurrounding.val())) {
-            $('#js-next-greater-surrounding-joblist').show();
-            if (nextGreaterSurroundingList == null) {
-                nextGreaterSurroundingList = new List('js-next-greater-surrounding-joblist', {
-                    valueNames: ['id', 'jobTitle', 'jobTitle2', 'jobType', 'jobSubject', 'jobId', 'subjectTitle', 'subjectTitle2', 'clinicTitle', 'city', 'city2', 'zipCode', 'typeFulltime', 'typeParttime', 'typeLimited'],
-                    item: 'js-list-entry-template'
-                }, jobs);
-                nextGreaterSurroundingFilterList = createFilterFunction(nextGreaterSurroundingList, false);
+            // additional Liste
+            if (parseInt($filterSurrounding.val())) {
+                $('#js-next-greater-surrounding-joblist').show();
+                if (nextGreaterSurroundingList == null) {
+                    nextGreaterSurroundingList = new List('js-next-greater-surrounding-joblist', {
+                        valueNames: ['id', 'jobTitle', 'jobTitle2', 'jobType', 'jobSubject', 'jobId', 'subjectTitle', 'subjectTitle2', 'clinicTitle', 'city', 'city2', 'zipCode', 'typeFulltime', 'typeParttime', 'typeLimited'],
+                        item: 'js-list-entry-template'
+                    }, jobs);
+                    nextGreaterSurroundingFilterList = createFilterFunction(nextGreaterSurroundingList, false);
+                }
+                nextGreaterSurroundingFilterList();
+                $('#js-next-greater-surrounding-count').text(nextGreaterSurroundingList.matchingItems.length);
+                $('#js-next-greater-surrounding-radius').text($filterSurrounding.find('option:selected').next().val())
             }
-            nextGreaterSurroundingFilterList();
-            $('#js-next-greater-surrounding-count').text(nextGreaterSurroundingList.matchingItems.length);
-            $('#js-next-greater-surrounding-radius').text($filterSurrounding.find('option:selected').next().val())
-        }
-    });
+        });
 
-    $filterResetButton.on('click', function (e) {
-        e.preventDefault();
-        $filterGlobal.val('');
-        $filterCity.val('');
-        $filterSurrounding.val(0);
-        $filterSubject.val(0);
-        $filterTypeSelect.val(0);
-        $filterJobId.val('');
-        $("input[name='job_kind[]']").prop('checked', false);
-        $filterSearchButton.trigger('click')
+        $filterResetButton.on('click', function (e) {
+            e.preventDefault();
+            $filterGlobal.val('');
+            $filterCity.val('');
+            $filterSurrounding.val(0);
+            $filterSubject.val(0);
+            $filterTypeSelect.val(0);
+            $filterJobId.val('');
+            $("input[name='job_kind[]']").prop('checked', false);
+            $filterSearchButton.trigger('click')
 
-        $('#js-next-greater-surrounding-joblist').hide();
+            $('#js-next-greater-surrounding-joblist').hide();
 
-    });
-
+        });
+    }
 
     // click auf Liste --> Anzeige details
     // $('.js-resultlist__item').on('click', (function () {
@@ -458,9 +459,11 @@ $(function () {
             $jobMailto.attr('href', 'mailto:' + job.mailto);
             $jobEquality.html(job.equality);
 
-            if (detailUrl != undefined) {
-                $jobDetailsLink.show().prop('href', detailUrl + job.jobAlias + '.html');
-            }
+            try {
+                if (detailUrl != undefined) {
+                    $jobDetailsLink.show().prop('href', detailUrl + job.jobAlias + '.html');
+                }
+            } catch (e) { }
         }
     })());
 

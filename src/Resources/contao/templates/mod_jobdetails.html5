@@ -1,7 +1,5 @@
 <div id="js-jobwrapper" class="jobwrapper">
-  <?php if (!$this->job || $this->subject_image) : ?>
   <div class="jobimage"><img id="js-subjectlogo" src="<?php echo (($this->subject_image) ? $this->subject_image['path'] : '') ?>" alt="<?php echo (($this->subject_image) ? $this->subject_image['alt'] : '') ?>"></div>
-  <?php endif ?>
   <div class="container-fluid">
     <div id="js-jobname" class="jobname"><?php echo (($this->job) ? $this->job['jobTitle'] : '') ?> - <?php echo (($this->job) ? $this->job['subjectTitle'] : '') ?></div>
     <div class="row">
