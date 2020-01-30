@@ -25,20 +25,20 @@
                         <div class="col-12 col-lg-3 order-5 order-lg-4">
                             <input class="btn btn--secondary search_form__submit js-search-button" type="submit" value="Jobs finden">
                         </div>
-                        <div class="col-12 col-lg-8 order-lg-5 direct-search js-hide-options">
+                        <div class="col-12 col-lg-9 order-lg-5 direct-search js-hide-options">
                             <span class="color-white small italic">Direktsuche</span>
                             <?php foreach($this->short_job_types as $arrJob) : ?>
                             <a href="#" class="small moresearch js-short-job-type" title="<?php echo $arrJob['title'] ?>" data-id="<?php echo $arrJob['id'] ?>"><?php echo $arrJob['title'] ?></a>
                             <?php endforeach; ?>
                         </div>
-                        <div class="col-12 col-lg-4 order-lg-6 right js-hide-options">
-                            <input class="btn btn--reset_search_form js-reset-filter" type="button" value="Filter löschen">
+                        <div class="col-12 col-lg-3 order-lg-6 filter-more-button js-hide-options">
                             <span class="moresearch expandextras js-show-extended-search-options">Erweiterte Suche</span>
+                            <input class="btn btn--reset_search_form js-reset-filter" type="button" value="Filter löschen">
                         </div>
-                        <div class="col-12 order-lg-7 search-more js-search_more">
+                        <div class="col-12 order-1 order-lg-7 search-more js-search_more">
                             <div class="row">
-                                <div class="col-12 col-lg-5">
-                                    <select id="js-filter-subject" class="search_form__select" name="section">
+                                <div class="order-2 col-12 col-lg-5 order-lg-1 filter-subject-wrapper">
+                                    <select id="js-filter-subject" class="search_form__select search_form--subject" name="section">
                                         <option value="0">Fachgebiet</option>
                                         <?php foreach($this->job_subjects as $arrJobSubject) : ?>
                                         <option value="<?php echo $arrJobSubject['id'] ?>"><?php echo $arrJobSubject['title'] ?></option>
@@ -57,7 +57,7 @@
                                         </label>
                                     </div>
                                 </div>
-                                <div class="col-12 col-sm-6 col-lg-2">
+                                <div class="col-12 col-sm-6 col-lg-2 order-lg-2">
                                     <select id="js-filter-function" class="search_form__select" name="function">
                                         <option value="0">Funktion</option>
                                         <?php foreach($this->job_types as $arrJob) : ?>
@@ -65,14 +65,14 @@
                                         <?php endforeach; ?>
                                     </select>
                                 </div>
-                                <div class="col-12 col-sm-6 col-lg-2">
+                                <div class="col-12 col-sm-6 col-lg-2 order-lg-3">
                                     <input class="search_form__input js-filter-jobid" type="text" name="jobid" placeholder="Stellen-ID">
                                 </div>
-                                <div class="col-12 col-lg-3">
+                                <div class="col-12 col-lg-3 order-3">
                                     <div class="row">
-                                        <div class="col-12 right">
-                                            <input class="btn btn--reset_search_form js-reset-filter" type="button" value="Filter löschen">
+                                        <div class="col-12 filter-more-button">
                                             <span class="moresearch expandextras collapseextras js-hide-extended-search-options">Erweiterte Suche</span>
+                                            <input class="btn btn--reset_search_form js-reset-filter" type="button" value="Filter löschen">
                                         </div>
                                     </div>
                                 </div>
@@ -91,7 +91,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <span id="js-jobcount-span" class="jobcount">Aktuell sind <strong><span id="js-job-count"><?php echo count($this->jobs) ?></span> Stellenangebot<span id="js-headline-plural">e</span></strong> verfügbar</span>
+                <span id="js-jobcount-span" class="jobcount">Aktuell sind <strong><span id="js-job-count"><?php echo count($this->jobs) ?></span> Stellenangebot<span id="js-headline-plural">e</span></strong> für Ärztinnen und Ärzte verfügbar</span>
                 <span id="js-no-jobcount-span" class="jobcount" style="display: none;">Aktuell sind leider keine Stellenangebote verfügbar</span>
                 <div id="js-joblist">
                     <ul class="resultlist list js-joblist"> </ul>

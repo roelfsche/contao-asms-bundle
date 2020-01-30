@@ -70,5 +70,5 @@
       </div>
     </div>
   </div>
-  <a style="display: none" id="jobDetailsLink" href="">Details</a>
+  <a style="display: none" id="jobDetailsLink" href="" target="_blank">Details</a>
 </div>
