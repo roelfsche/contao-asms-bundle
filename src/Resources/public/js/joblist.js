@@ -87,6 +87,8 @@ $(function () {
             var regExp = new RegExp(globalVal, 'i');
             return (job.jobTitle.search(regExp) != -1 ||
                 job.subjectTitle.search(regExp) != -1 ||
+                job.jobId.search(regExp) != -1 ||
+                job.city.search(regExp) != -1 ||
                 job.clinicTitle.search(regExp) != -1
             );
         }
