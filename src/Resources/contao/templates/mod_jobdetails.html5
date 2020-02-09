@@ -44,7 +44,7 @@
       </div>
       <div class="col-md-6">
         <img class="clinicimage" src="/assets/asms/img/clinic_default.png" alt="Foto der Einrichtung">
-        <div style="<?php echo (($this->job && isset($this->job['clinicLogo'])) ? '' : 'display:none;') ?>" id="js-cliniclogo-wrapper"><img id="js-cliniclogo" src="<?php echo (($this->job && isset($this->job['clinicLogo'])) ? $this->job['clinicLogo'] : '') ?>" alt="<?php echo (($this->job && isset($this->job['clinicLogoAlt'])) ? $this->job['clinicLogoAlt'] : '') ?>"></div>
+        <div style="<?php echo (($this->job && isset($this->job['clinicLogo'])) ? '' : 'display:none;') ?>" id="js-cliniclogo-wrapper"><img class="clinicimage" id="js-cliniclogo" src="<?php echo (($this->job && isset($this->job['clinicLogo'])) ? $this->job['clinicLogo'] : '') ?>" alt="<?php echo (($this->job && isset($this->job['clinicLogoAlt'])) ? $this->job['clinicLogoAlt'] : '') ?>"></div>
       </div>
       <div class="col-md-6">
         <p class="clinicdetailsubline">Ihr Ansprechpartner/in</p>
