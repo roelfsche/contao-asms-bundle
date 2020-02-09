@@ -1,9 +1,8 @@
-<h2>Karte</h2>
 <div class="row" style="position: relative">
     <div class="col-sm-12">
         <div id="jobmap" style="height: 600px; width: 100%"></div>
     </div>
-    <div class="col-sm-6" style="position: absolute; top: 2em; right: 2em; width: 33%; border: 2px solid black; z-index: 500; background-color: white; width: 320px;">
+    <div class="map_overlay">
         <div id="jobdetails" style="display: none;">
             <h3 id="clinicCity">Rostock</h3>
             <img id="clinicImage" class="responsive" src="" alt="">
