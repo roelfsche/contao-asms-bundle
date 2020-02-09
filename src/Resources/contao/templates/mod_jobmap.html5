@@ -1,25 +1,26 @@
 <div class="row" style="position: relative">
-    <div class="col-sm-12">
-        <div id="jobmap" style="height: 600px; width: 100%"></div>
-    </div>
-    <div class="map_overlay">
-        <div id="jobdetails" style="display: none;">
-            <h3 id="clinicCity">Rostock</h3>
-            <img id="clinicImage" class="responsive" src="" alt="">
-            <h4>Anschrift</h4>
-            <p>
-                <span id="clinicName">Psychosomatische Klinik Buching</span><br>
-                <span id="clinicAddress">87642 Halblech</span>
-            </p>
-            <a id="clinicUrl" class="link link--external" href="#" target="_blank" title="" style="display: none">Klinik-Website</a>
-            <a id="clinicBrochure" class="link link--download" href="#" title="Klinik-Broschüre" target="_blank" style="display: none;">Klinik-Broschüre</a>
-            <div>
-                <a id="js-city-joblist" href="{{link_url::146}}" class="btn btn--primary center">Alle Jobs am Standort</a>
-            </div>
+  <div class="col-sm-12">
+    <div id="jobmap" style="height: 600px; width: 100%"></div>
+  </div>
+  <div class="map_overlay">
+    <div id="jobdetails" style="display: none;">
+      <div class="mapoverlayheader"><span id="clinicCity">Rostock</span></div>
+      <img id="clinicImage" class="responsive" src="" alt="">
+      <div class="mapoverlaycontent">
+        <p><strong>Anschrift</strong><br>
+          <span id="clinicName">Psychosomatische Klinik Buching</span><br>
+          <span id="clinicAddress">87642 Halblech</span>
+        </p>
+        <a id="clinicUrl" class="link link--external link--small" href="#" target="_blank" title="" style="display: none">Klinik-Website</a>
+        <a id="clinicBrochure" class="link link--download link--small" href="#" title="Klinik-Broschüre" target="_blank" style="display: none;">Klinik-Broschüre</a>
+        <div>
+          <a id="js-city-joblist" href="{{link_url::146}}" class="btn btn--primary btn--small center">Alle Jobs am Standort</a>
         </div>
+      </div>
     </div>
+  </div>
 </div>
 
 <script>
-    var jobs =<?php echo json_encode($this->jobs) ?>;
+  var jobs =<?php echo json_encode($this->jobs) ?>;
 </script>
