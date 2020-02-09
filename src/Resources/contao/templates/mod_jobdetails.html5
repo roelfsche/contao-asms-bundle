@@ -1,9 +1,9 @@
 <div id="js-jobwrapper" class="jobwrapper">
   <div class="jobimage"><img id="js-subjectlogo" src="<?php echo (($this->subject_image) ? $this->subject_image['path'] : '') ?>" alt="<?php echo (($this->subject_image) ? $this->subject_image['alt'] : '') ?>"></div>
-  <div class="container-fluid">
+  <div class="container-fluid container--overlay">
     <div id="js-jobname" class="jobname"><?php echo (($this->job) ? $this->job['jobTitle'] : '') ?> - <?php echo (($this->job) ? $this->job['subjectTitle'] : '') ?></div>
     <div class="row">
-      <div class="col-12 col-md-8">
+      <div class="col-12">
         <ul class="taglist taglist--overlay">
           <li id="js-jobtitle" class="taglist__item taglist__item--overlay taglist__item--person"><?php echo (($this->job) ? $this->job['jobTitle'] : '') ?></li>
           <li id="js-subjecttitle" class="taglist__item taglist__item--overlay taglist__item--star"><?php echo (($this->job) ? $this->job['subjectTitle'] : '') ?></li>
@@ -15,7 +15,7 @@
           <li class="taglist__item taglist__item--overlay taglist__item--jobid"><span id="js-jobid"><?php echo (($this->job) ? $this->job['jobId'] : '') ?></span></li>
         </ul>
       </div>
-      <div style="<?php echo (($this->job && isset($this->job['clinicLogo'])) ? '' : 'display:none;') ?>" id="js-cliniclogo-wrapper" class="col-12 col-md-4"><img id="js-cliniclogo" src="<?php echo (($this->job && isset($this->job['clinicLogo'])) ? $this->job['clinicLogo'] : '') ?>" alt="<?php echo (($this->job && isset($this->job['clinicLogoAlt'])) ? $this->job['clinicLogoAlt'] : '') ?>"></div>
+      <!--<div style="<?php echo (($this->job && isset($this->job['clinicLogo'])) ? '' : 'display:none;') ?>" id="js-cliniclogo-wrapper" class="col-12 col-md-4"><img id="js-cliniclogo" src="<?php echo (($this->job && isset($this->job['clinicLogo'])) ? $this->job['clinicLogo'] : '') ?>" alt="<?php echo (($this->job && isset($this->job['clinicLogoAlt'])) ? $this->job['clinicLogoAlt'] : '') ?>"></div>-->
     </div>
     <div class="row">
       <div class="col-12"><a class="btn btn--secondary btn--mailto jobMailto" href="mailto:<?php echo (($this->job) ? $this->job['mailto'] : '') ?>" title="Jetzt bewerben">Jetzt bewerben</a>
@@ -39,16 +39,20 @@
   <div class="container-fluid clinicdetail">
     <div class="row">
       <div class="col-12">
-        <h3 id="js-clinic-details-headline">Alles Wichtige zur Klinik</h3>
-        <h3 id="js-reha-details-headline">Alles Wichtige auf einen Blick</h3>
+        <h3 class="color-darkblue">Alles Wichtige auf einen Blick</h3>
+        <!--<h3 id="js-clinic-details-headline">Alles Wichtige zur Klinik</h3>
+        <h3 id="js-reha-details-headline">Alles Wichtige auf einen Blick</h3>-->
+      </div>
+      <div class="col-md-6">
+        <img src="/assets/asms/img/clinic_default.png" alt="Foto der Einrichtung">
       </div>
       <div class="col-md-6">
         <p><strong>Klinikanschrift</strong></p>
-        <p><span id="clinicName"><?php echo (($this->job) ? $this->job['clinicTitle'] : '') ?></span><br>
+        <h4 id="clinicName"><?php echo (($this->job) ? $this->job['clinicTitle'] : '') ?></h4>
           <!-- <span id="clinicCity">Rauhenbichl</span><br> -->
           <span id="clinicAddress"><?php echo (($this->job) ? $this->job['zipCode'] . ' ' . $this->job['city'] : '') ?></span></p>
-        <a style="<?php echo (($this->job && !$this->job['url']) ? 'display:none;' : '') ?>" id="clinicUrl" class="link link--external" href="<?php echo (($this->job && $this->job['url']) ? $this->job['url'] : '#') ?>" title="">Klinik-Website</a>
-        <a style="<?php echo (($this->job && !$this->job['brochure']) ? 'display:none;' : '') ?>" id="clinicBrochure" class="link link--download" href="<?php echo (($this->job && $this->job['brochure']) ? $this->job['brochure'] : '#') ?>" title="Klinik-Broschüre" target="_blank">Klinik-Broschüre</a>
+        <a style="<?php echo (($this->job && !$this->job['url']) ? 'display:none;' : '') ?>" id="clinicUrl" class="link link--external link--small" href="<?php echo (($this->job && $this->job['url']) ? $this->job['url'] : '#') ?>" title="">Klinik-Website</a>
+        <a style="<?php echo (($this->job && !$this->job['brochure']) ? 'display:none;' : '') ?>" id="clinicBrochure" class="link link--download link--small" href="<?php echo (($this->job && $this->job['brochure']) ? $this->job['brochure'] : '#') ?>" title="Klinik-Broschüre" target="_blank">Klinik-Broschüre</a>
       </div>
       <div class="col-md-6">
         <p><strong>Ihr Ansprechpartner/in</strong></p>
