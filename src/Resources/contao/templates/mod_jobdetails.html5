@@ -58,9 +58,8 @@
     <div class="row">
       <div class="col-md-6">
         <p class="clinicdetailsubline">Klinikanschrift</p>
-        <h4 id="clinicName"><?php echo (($this->job) ? $this->job['clinicTitle'] : '') ?></h4>
-          <!-- <span id="clinicCity">Rauhenbichl</span><br> -->
-          <span id="clinicAddress"><?php echo (($this->job) ? $this->job['zipCode'] . ' ' . $this->job['city'] : '') ?></span></p>
+        <p id="clinicName"><?php echo (($this->job) ? $this->job['clinicTitle'] : '') ?><br>
+        <span id="clinicAddress"><?php echo (($this->job) ? $this->job['zipCode'] . ' ' . $this->job['city'] : '') ?></span></p>
         <a style="<?php echo (($this->job && !$this->job['url']) ? 'display:none;' : '') ?>" id="clinicUrl" class="link link--external link--small" href="<?php echo (($this->job && $this->job['url']) ? $this->job['url'] : '#') ?>" title="">Klinik-Website</a>
         <a style="<?php echo (($this->job && !$this->job['brochure']) ? 'display:none;' : '') ?>" id="clinicBrochure" class="link link--download link--small" href="<?php echo (($this->job && $this->job['brochure']) ? $this->job['brochure'] : '#') ?>" title="Klinik-Broschüre" target="_blank">Klinik-Broschüre</a>
       </div>
