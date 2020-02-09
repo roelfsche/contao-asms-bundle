@@ -13,7 +13,7 @@
         </p>
         <a id="clinicUrl" class="link link--external link--small" href="#" target="_blank" title="" style="display: none">Klinik-Website</a>
         <a id="clinicBrochure" class="link link--download link--small" href="#" title="Klinik-Broschüre" target="_blank" style="display: none;">Klinik-Broschüre</a>
-        <div>
+        <div class="mapjoblink">
           <a id="js-city-joblist" href="{{link_url::146}}" class="btn btn--primary btn--small center">Alle Jobs am Standort</a>
         </div>
       </div>
