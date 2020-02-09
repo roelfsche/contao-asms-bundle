@@ -44,7 +44,14 @@
         <h3 id="js-reha-details-headline">Alles Wichtige auf einen Blick</h3>-->
       </div>
       <div class="col-md-6">
-        <img src="/assets/asms/img/clinic_default.png" alt="Foto der Einrichtung">
+        <img class="clinicimage" src="/assets/asms/img/clinic_default.png" alt="Foto der Einrichtung">
+      </div>
+      <div class="col-md-6">
+        <p><strong>Ihr Ansprechpartner/in</strong></p>
+        <p><span id="clinicContactName"><?php echo (($this->job) ? $this->job['contactperson_title'] . ' ' . $this->job['contactperson_firstname'] . ' ' . $this->job['contactperson_lastname']  : '') ?></span><br>
+          <span id="clinicContactDepartment"><?php echo (($this->job) ? $this->job['department'] : '') ?></span></p>
+        <a id="clinicContactPhone" class="link link--phone" href="#" title=""><?php echo (($this->job) ? $this->job['contactperson_phone'] : '') ?></a>
+        <a id="clinicContactMail" class="link link--email" href="#" title=""><?php echo (($this->job) ? $this->job['contactperson_email'] : '') ?></a>
       </div>
       <div class="col-md-6">
         <p><strong>Klinikanschrift</strong></p>
@@ -55,11 +62,8 @@
         <a style="<?php echo (($this->job && !$this->job['brochure']) ? 'display:none;' : '') ?>" id="clinicBrochure" class="link link--download link--small" href="<?php echo (($this->job && $this->job['brochure']) ? $this->job['brochure'] : '#') ?>" title="Klinik-Broschüre" target="_blank">Klinik-Broschüre</a>
       </div>
       <div class="col-md-6">
-        <p><strong>Ihr Ansprechpartner/in</strong></p>
-        <p><span id="clinicContactName"><?php echo (($this->job) ? $this->job['contactperson_title'] . ' ' . $this->job['contactperson_firstname'] . ' ' . $this->job['contactperson_lastname']  : '') ?></span><br>
-          <span id="clinicContactDepartment"><?php echo (($this->job) ? $this->job['department'] : '') ?></span></p>
-        <a id="clinicContactPhone" class="link link--phone" href="#" title=""><?php echo (($this->job) ? $this->job['contactperson_phone'] : '') ?></a>
-        <a id="clinicContactMail" class="link link--email" href="#" title=""><?php echo (($this->job) ? $this->job['contactperson_email'] : '') ?></a>
+        <p><br><strong>Informationen zur Gleichstellung</strong></p>
+        <p id="jobEquality"><?php echo (($this->job) ? $this->job['equality'] : '') ?></p>
       </div>
       <div style="<?php echo (($this->job && !$this->job['awardImage1'] && !$this->job['awardImage2']) ? 'display:none;' : '') ?>" id="js-award-div-wrapper" class="col-md-6">
         <p><br><strong>Auszeichnungen</strong></p>
@@ -67,10 +71,6 @@
           <div style="<?php echo (($this->job && !$this->job['awardImage1']) ? 'display:none;' : '') ?>" class="col-6 js-award-div"><img src="<?php echo (($this->job && $this->job['awardImage1']) ? $this->job['awardImage1'] : '') ?>" alt=""></div>
           <div style="<?php echo (($this->job && !$this->job['awardImage2']) ? 'display:none;' : '') ?>" class="col-6 js-award-div"><img src="<?php echo (($this->job && $this->job['awardImage2']) ? $this->job['awardImage2'] : '') ?>" alt=""></div>
         </div>
-      </div>
-      <div class="col-md-6">
-        <p><br><strong>Informationen zur Gleichstellung</strong></p>
-        <p id="jobEquality"><?php echo (($this->job) ? $this->job['equality'] : '') ?></p>
       </div>
     </div>
   </div>
