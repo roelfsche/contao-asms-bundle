@@ -50,9 +50,12 @@
         <p class="clinicdetailsubline">Ihr Ansprechpartner/in</p>
         <p><span id="clinicContactName"><?php echo (($this->job) ? $this->job['contactperson_title'] . ' ' . $this->job['contactperson_firstname'] . ' ' . $this->job['contactperson_lastname']  : '') ?></span><br>
           <span id="clinicContactDepartment"><?php echo (($this->job) ? $this->job['department'] : '') ?></span></p>
-        <a id="clinicContactPhone" class="link link--phone" href="#" title=""><?php echo (($this->job) ? $this->job['contactperson_phone'] : '') ?></a>
-        <a id="clinicContactMail" class="link link--email" href="#" title=""><?php echo (($this->job) ? $this->job['contactperson_email'] : '') ?></a>
+        <a id="clinicContactPhone" class="link link--phone link--small" href="#" title=""><?php echo (($this->job) ? $this->job['contactperson_phone'] : '') ?></a>
+        <a id="clinicContactMail" class="link link--email link--small" href="#" title=""><?php echo (($this->job) ? $this->job['contactperson_email'] : '') ?></a>
       </div>
+    </div>
+    <dic class="clinicdetailspacer"></dic>
+    <div class="row">
       <div class="col-md-6">
         <p class="clinicdetailsubline">Klinikanschrift</p>
         <h4 id="clinicName"><?php echo (($this->job) ? $this->job['clinicTitle'] : '') ?></h4>
@@ -65,6 +68,9 @@
         <p class="clinicdetailsubline">Informationen zur Gleichstellung</p>
         <p id="jobEquality"><?php echo (($this->job) ? $this->job['equality'] : '') ?></p>
       </div>
+    </div>
+    <dic class="clinicdetailspacer"></dic>
+    <div class="row">
       <div style="<?php echo (($this->job && !$this->job['awardImage1'] && !$this->job['awardImage2']) ? 'display:none;' : '') ?>" id="js-award-div-wrapper" class="col-md-6">
         <p class="clinicdetailsubline">Auszeichnungen</p>
         <div class="row">
