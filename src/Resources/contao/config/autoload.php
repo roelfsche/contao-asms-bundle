@@ -10,16 +10,14 @@
 /**
  * Register the classes
  */
-ClassLoader::addClasses(array
-(
+ClassLoader::addClasses(array(
     // Classes
-    'vacancies\Hooks'                   => 'vendor/lumturo/contao-asms-bundle/src/Resources/contao/classes/Hooks.php',
+    'vacancies\FrontendHooks'                   => 'vendor/lumturo/contao-asms-bundle/src/Resources/contao/classes/FrontendHooks.php',
     // Drivers
     'Contao\DC_JobTable'                => 'vendor/lumturo/contao-asms-bundle/src/Resources/contao/drivers/DC_JobTable.php',
     // Models
     'vacancies\JobtypesModel'           => 'vendor/lumturo/contao-asms-bundle/src/Resources/contao/models/JobtypesModel.php',
-	'vacancies\ClinicsModel'            => 'vendor/lumturo/contao-asms-bundle/src/Resources/contao/models/ClinicsModel.php',
-	'vacancies\JobsModel'               => 'vendor/lumturo/contao-asms-bundle/src/Resources/contao/models/JobsModel.php',
-	'vacancies\SubjectsModel'           => 'vendor/lumturo/contao-asms-bundle/src/Resources/contao/models/SubjectsModel.php',
+    'vacancies\ClinicsModel'            => 'vendor/lumturo/contao-asms-bundle/src/Resources/contao/models/ClinicsModel.php',
+    'vacancies\JobsModel'               => 'vendor/lumturo/contao-asms-bundle/src/Resources/contao/models/JobsModel.php',
+    'vacancies\SubjectsModel'           => 'vendor/lumturo/contao-asms-bundle/src/Resources/contao/models/SubjectsModel.php',
 ));
-

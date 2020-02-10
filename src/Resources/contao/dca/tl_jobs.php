@@ -5,6 +5,8 @@
  * Copyright (c) 2014 Stefan Becker
  */
 
+use Contao\Automator;
+
 $table = 'tl_jobs';
 
 /**
@@ -608,6 +610,10 @@ class tl_jobs extends Backend
         $objJobsModel->clinicName = $objClinicModel->title;
         $objJobsModel->jobID = $types[$objJobsModel->type] . '-' . $dc->id;
         $objJobsModel->save();
+
+        // sitemap.xml (2x: reha/klinik) neu generieren
+        $objAutomator = new Automator();
+        $objAutomator->generateSitemap();
     }
 
     /**
@@ -726,6 +732,9 @@ class tl_jobs extends Backend
 		$this->Database->prepare("UPDATE tl_jobs SET tstamp=". time() .", published='" . ($blnVisible ? '1' : '') . "' WHERE id=?")
 					   ->execute($intId);
 
-		// $objVersions->create();
+        // $objVersions->create();
+        
+        $objAutomator = new Automator();
+        $objAutomator->generateSitemap();
 	}
 }
