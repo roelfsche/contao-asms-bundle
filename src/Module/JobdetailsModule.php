@@ -2,6 +2,7 @@
 
 namespace Lumturo\ContaoAsmsBundle\Module;
 
+use Contao\Environment;
 use Contao\FilesModel;
 use Contao\FrontendTemplate;
 use Patchwork\Utf8;
@@ -58,11 +59,14 @@ class JobdetailsModule extends \Module
             a.id, 
             a.jobID as jobId, 
             a.typeFulltime, a.typeParttime, a.typeLimited, a.weOffer, a.youOffer, a.applicationNotes, 
+            a.stop,
             a.titleSelection as jobType,
+            a.tstamp,
             a.subjectSelection as jobSubject,
             b.title as clinicTitle, 
             b.city, 
             b.city as city2, 
+            b.state,
             b.logo as clinicLogo,
             b.logoAlt as clinicLogoAlt,
             b.zipCode, 
@@ -109,7 +113,7 @@ class JobdetailsModule extends \Module
         if ($arrJob['clinicLogo'] != NULL) {
             $objFile = FilesModel::findOneBy('uuid', $arrJob['clinicLogo']);
             if ($objFile) {
-                $arrJob['clinicLogo'] = '/' . $objFile->path;
+                $arrJob['clinicLogo'] = '//' . Environment::get('host') . '/' . $objFile->path;
             } else {
                 unset($arrJob['clinicLogo']);
                 unset($arrJob['clinicLogoAlt']);
@@ -178,8 +182,11 @@ class JobdetailsModule extends \Module
 
         // $objDetailTemplate = new FrontendTemplate('mod_jobdetails');
         // $objDetailTemplate->job = $arrJob;
+        $objGoogleJobTemplate = new FrontendTemplate('google_job');
+        $objGoogleJobTemplate->arrJob = $arrJob;
 
         $this->Template->job = $arrJob;
+        $this->Template->google_job = $objGoogleJobTemplate;
         // $this->Template->job_types = $arrJobTypes;
         // $this->Template->jobs = $arrJobs;
         // $this->Template->job_subjects = $arrJobFields;

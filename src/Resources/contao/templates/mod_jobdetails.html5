@@ -81,3 +81,6 @@
   </div>
   <a class="clinicdetaillink" style="display: none" id="jobDetailsLink" href="" target="_blank">Details</a>
 </div>
+<?php if (isset($this->google_job)) : ?>
+  <?php echo $this->google_job->parse() ?>
+<?php endif ?>

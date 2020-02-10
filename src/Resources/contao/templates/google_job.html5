@@ -1,0 +1,58 @@
+<script type="application/ld+json">
+    {
+      "@context" : "https://schema.org/",
+      "@type" : "JobPosting",
+      "employmentType": "CONTRACTOR",
+      "title" : "<?php echo $this->arrJob['jobTitle'] ?> - <?php echo $this->arrJob['subjectTitle'] ?>",
+      "description" : "<?php echo str_replace('"', '\"', $this->arrJob['applicationNotes']) ?>",
+      <?php if ($this->arrJob['tstamp']) : ?>
+      "datePosted" : "<?php echo date('Y-m-d', $this->arrJob['tstamp']) ?>",
+      <?php endif ?>
+      <?php if ((int)$this->arrJob['stop']) : ?>
+      "validThrough" : "<?php echo date('Y-m-d', $this->arrJob['stop']) ?>",
+      <?php endif ?>
+
+      "hiringOrganization" : {
+        "@type" : "Organization",
+        "name" : "<?php echo $this->arrJob['clinicTitle'] ?>",
+        <?php if ($this->arrJob['url1'] != '') : ?>
+        "sameAs" : "<?php echo $this->arrJob['url1'] ?>",
+        <?php endif ?>
+        <?php if (isset($this->arrJob['clinicLogo'])) : ?>
+        "logo" : "<?php echo $this->arrJob['clinicLogo'] ?>"
+        <?php endif ?>
+      },
+      "jobLocation" : {
+          "@type" : "Place",
+          "address" : {
+              "@type" : "PostalAddress",
+              "addressLocality" : "<?php echo $this->arrJob['city'] ?>",
+              "addressRegion": "<?php echo $this->arrJob['state'] ?>",
+              "postalCode" : "<?php echo $this->arrJob['zipCode'] ?>",
+              "streetAddress" : "<?php echo $this->arrJob['street'] ?> <?php echo $this->arrJob['houseNumber'] ?>",
+              "addressCountry" : "DE"
+    
+          }
+      }
+      <?php if($this->arrJob['gehalt_einheit'] !='' && $this->arrJob['gehalt_min'] != '') : ?>
+        ,"baseSalary":{
+          "@type": "MonetaryAmount",
+          "currency": "EUR",
+          "value": {
+            "@type": "QuantitativeValue",
+            <?php if ($this->arrJob['gehalt_min'] != '' && $this->arrJob['gehalt_max'] != '') : ?>
+            "minValue": <?php echo number_format((float)$this->arrJob['gehalt_min'], 2) ?>,
+            "maxValue": <?php echo number_format((float)$this->arrJob['gehalt_max'], 2) ?>,
+            <?php else : ?>
+            "value": <?php echo number_format((float)$this->arrJob['gehalt_min'], 2) ?>,
+            <?php endif; ?>
+            "unitText": "<?php echo $this->arrJob['gehalt_einheit'] ?>"
+          }
+        }
+      <?php endif; ?>
+      <?php if ($this->arrJob['published_until']) : ?>
+        ,
+        "validThrough": "<?php echo date('c', $this->arrJob['published_until']) ?>"
+      <?php endif; ?>
+    }
+    </script>
