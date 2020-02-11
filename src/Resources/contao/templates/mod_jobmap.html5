@@ -4,6 +4,7 @@
   </div>
   <div class="map_overlay">
     <div id="jobdetails" style="display: none;">
+      <div id="jsOverlayClose">X</div>
       <div class="mapoverlayheader"><span id="clinicCity">Rostock</span></div>
       <img id="clinicImage" class="responsive" src="" alt="">
       <div class="mapoverlaycontent">

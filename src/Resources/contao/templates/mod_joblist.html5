@@ -1,5 +1,8 @@
+<?php if ($this->is_map_list) : ?>
+
+<?php endif; ?>
 <?php if ($this->show_filter) : ?>
-<section class="section section--search">
+<section class="section section--search js-search-filter">
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -17,8 +20,6 @@
                                 <option value="10">10 km</option>
                                 <option value="20">20 km</option>
                                 <option value="50">50 km</option>
-                                <option value="100">100 km</option>
-                                <option value="200">200 km</option>
                                 <option value="0">mehr als 50 km</option>
                             </select>
                         </div>
@@ -87,11 +88,11 @@
 <?php endif; ?>
 
 
-<section class="section section--searchresult">
+<section class="section section--searchresult js-search-results">
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <span id="js-jobcount-span" class="jobcount">Aktuell sind <strong><span id="js-job-count"><?php echo count($this->jobs) ?></span> Stellenangebot<span id="js-headline-plural">e</span></strong> für Ärztinnen und Ärzte verfügbar</span>
+                <span id="js-jobcount-span" class="jobcount">Aktuell <span id="js-count-article">sind</span> <strong><span id="js-job-count"><?php echo count($this->jobs) ?></span> Stellenangebot<span id="js-headline-plural">e</span></strong> für Ärztinnen und Ärzte verfügbar</span>
                 <span id="js-no-jobcount-span" class="jobcount" style="display: none;">Aktuell sind leider keine Stellenangebote verfügbar</span>
                 <div id="js-joblist">
                     <ul class="resultlist list js-joblist"> </ul>

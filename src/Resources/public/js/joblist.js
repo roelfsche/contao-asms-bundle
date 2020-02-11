@@ -10,6 +10,7 @@ $(function () {
         $headlinePlural = $('#js-headline-plural'),
         $noJobCountSpan = $('#js-no-jobcount-span'),
         $jobCountSpan = $('#js-jobcount-span'),
+        $jobCountArticle = $('#js-count-article'),
         $jobCount = $('#js-job-count'),
         nextGreaterSurroundingList = null;
     var latLon = { lat: 0, lon: 0 };
@@ -39,8 +40,10 @@ $(function () {
             $jobCountSpan.show();
             // Stellenangebot(e)
             if (count == 1) {
+                $jobCountArticle.text('ist');
                 $headlinePlural.hide();
             } else {
+                $jobCountArticle.text('sind');
                 $headlinePlural.show();
             }
         } else {
@@ -75,10 +78,17 @@ $(function () {
     });
 
     /**
+     * Liefert Filter-Fkt. für 3 untschdl. Listen:
+     * 
+     * 1. Hauptliste
+     * 2. "nächster Umkreis"-Liste
+     * 3. Liste zur Karte (filtert nur nach Ort)
+     * 
      * erstellt die Filter für die beiden Listen
-     * @param {boolean} primaryList 
+     * @param {boolean} primaryList
+     * @param {boolean} mapList 
      */
-    var createFilterFunction = function (theList, primaryList) {
+    var createFilterFunction = function (theList, primaryList, mapList) {
         var myList = theList;
 
         function _filterGlobal(job) {
@@ -118,7 +128,7 @@ $(function () {
                 return false;
             }
             var dist = distance(latLon.lat, latLon.lon, lat, lon, 'K');
-            console.log(dist);
+            // console.log(dist);
             return (dist <= filterVal);
         }
 
@@ -184,6 +194,11 @@ $(function () {
 
         var filter = function (item) {
             var job = item.values();
+
+            if (mapList) {
+                return _filterByCityZip(job);
+            }
+
             var ret = _filterGlobal(job)
                 && _filterByCityZip(job)
                 && _filterByFunction(job)
@@ -379,7 +394,7 @@ $(function () {
 
 
             $overlay.css({
-                'z-index': 1,
+                'z-index': 1000,
                 'opacity': 1,
                 scrollTop: 0
             });

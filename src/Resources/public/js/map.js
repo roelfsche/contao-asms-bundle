@@ -1,5 +1,6 @@
 $(function () {
     var jobDetailDiv = document.getElementById('jobdetails'),
+        jobMapDetailOverlayClose = document.getElementById('jsOverlayClose'),
         jobCity = document.getElementById('clinicCity'),
         clinicImg = document.getElementById('clinicImage'),
         clinicName = document.getElementById('clinicName'),
@@ -9,6 +10,10 @@ $(function () {
         clinicUrl = document.getElementById('clinicUrl'),
         listAnchor = document.getElementById('js-city-joblist');
     var activeJob = [];
+    var $searchFilter = $('.js-search-filter'),
+        $searchResults = $('.js-search-results'),
+        $searchCity = $('.js-search-city'),
+        $filterButton = $('.js-search-button');
 
     var map = L.map('jobmap').setView([51.133481, 10.018343], 6);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -49,11 +54,23 @@ $(function () {
         });
     });
 
+    // passe die liste an, falls vorhanen
+    if ($searchFilter.length) {
+        $searchFilter.hide();
+        $searchResults.hide();
+    }
+
     listAnchor.onclick = function (e) {
         e.preventDefault();
-        // console.log(activeJob.city)
-        var url = e.target.getAttribute('href') + '?city=' + activeJob.city;
-        window.location.href = url;
+        // var url = e.target.getAttribute('href') + '?city=' + activeJob.city;
+        // window.location.href = url;
+        $searchCity.val(activeJob.city);
+        $filterButton.trigger('click');
+        $searchResults.show();
+    }
+
+    jobMapDetailOverlayClose.onclick = function (e) {
+        $(jobDetailDiv).hide();
     }
 
 })
