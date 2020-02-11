@@ -336,6 +336,7 @@ $(function () {
             $jobId = $('#js-jobid'),
             $clinicName = $('#clinicName'),
             $clinicAddress = $('#clinicAddress'),
+            $clinicStreet = $('#clinicStreet'),
             $clinicUrl = $('#clinicUrl'),
             $clinicBrochure = $('#clinicBrochure'),
             $awardDivWrapper = $('#js-award-div-wrapper'),
@@ -429,6 +430,7 @@ $(function () {
             $clinicName.text(job.clinicTitle);
             // $clinicCity.text(job.city)
             $clinicAddress.text(job.zipCode + " " + job.city);
+            $clinicStreet.text(job.street + " " + job.houseNumber)
             if (job.url != undefined) {
                 $clinicUrl.show().attr('href', job.url);
             } else {
