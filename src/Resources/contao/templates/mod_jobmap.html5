@@ -10,6 +10,7 @@
         <p><strong>Anschrift</strong><br>
           <span id="clinicName">Psychosomatische Klinik Buching</span><br>
           <span id="clinicAddress">87642 Halblech</span>
+          <span id="clinicStreet"></span>
         </p>
         <a id="clinicUrl" class="link link--external link--small" href="#" target="_blank" title="" style="display: none">Klinik-Website</a>
         <a id="clinicBrochure" class="link link--download link--small" href="#" title="Klinik-Broschüre" target="_blank" style="display: none;">Klinik-Broschüre</a>

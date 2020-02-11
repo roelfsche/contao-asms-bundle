@@ -431,6 +431,8 @@ $(function () {
             // $clinicCity.text(job.city)
             $clinicAddress.text(job.zipCode + " " + job.city);
             $clinicStreet.text(job.street + " " + job.houseNumber)
+
+            // console.log($clinicStreet);
             if (job.url != undefined) {
                 $clinicUrl.show().attr('href', job.url);
             } else {
@@ -462,6 +464,7 @@ $(function () {
             $clinicContactMail.text(job.contactperson_email).attr('href', 'mailto:' + job.contactperson_email);
             $jobMailto.attr('href', 'mailto:' + job.mailto);
             $jobEquality.html(job.equality);
+            // console.log($jobEquality.length)
 
             try {
                 if (detailUrl != undefined) {

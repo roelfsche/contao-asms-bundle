@@ -4,6 +4,7 @@ $(function () {
         clinicImg = document.getElementById('clinicImage'),
         clinicName = document.getElementById('clinicName'),
         clinicAddress = document.getElementById('clinicAddress'),
+        clinicStreet = document.getElementById('clinicStreet'),
         clinicBrochure = document.getElementById('clinicBrochure'),
         clinicUrl = document.getElementById('clinicUrl'),
         listAnchor = document.getElementById('js-city-joblist');
@@ -25,6 +26,7 @@ $(function () {
         }
         clinicName.innerHTML = job.clinicTitle;
         clinicAddress.innerHTML = job.zipCode + " " + job.city;
+        clinicStreet.innerHTML = job.street + " " + job.houseNumber;
 
         if (job.url != undefined) {
             clinicUrl.setAttribute('href', job.url);
