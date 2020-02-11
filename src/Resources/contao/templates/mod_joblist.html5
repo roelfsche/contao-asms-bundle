@@ -1,6 +1,3 @@
-<?php if ($this->is_map_list) : ?>
-
-<?php endif; ?>
 <?php if ($this->show_filter) : ?>
 <section class="section section--search js-search-filter">
     <div class="container">

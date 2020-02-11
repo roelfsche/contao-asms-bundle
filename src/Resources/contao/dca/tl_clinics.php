@@ -146,7 +146,7 @@ $GLOBALS['TL_DCA'][$table] = array(
             'sql'                     => "varchar(32) NOT NULL default ''"
         ),
         'lat' => array(
-            'sorting' => true,
+            'sorting' => false,
             'label' => &$GLOBALS['TL_LANG'][$table]['lat'],
             'exclude' => false,
             'inputType' => 'text',
@@ -160,7 +160,7 @@ $GLOBALS['TL_DCA'][$table] = array(
             'sql' => "varchar(255) NOT NULL default ''",
         ),
         'lon' => array(
-            'sorting' => true,
+            'sorting' => false,
             'label' => &$GLOBALS['TL_LANG'][$table]['lon'],
             'exclude' => false,
             'inputType' => 'text',

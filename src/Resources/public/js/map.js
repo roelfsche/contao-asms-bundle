@@ -48,7 +48,7 @@ $(function () {
         }
     }
 
-    jobs.forEach(function (job, index) {
+    mapJobs.forEach(function (job, index) {
         L.marker([job.lat, job.lon]).addTo(map).on('click', function () {
             click(job)
         });
