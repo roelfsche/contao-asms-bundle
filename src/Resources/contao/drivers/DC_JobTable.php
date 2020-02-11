@@ -61,16 +61,14 @@ class DC_JobTable extends DC_Table //\DataContainer implements \listable, \edita
 
 		// nur die Jobs, deren Kliniken dem User zugeordnet sind
 		if (!$objUser->isAdmin) {
+			$arrAllowedClinics = $objUser->job_offer_access;
+			if (!$arrAllowedClinics) {
+				$arrAllowedClinics = [-1];
+			}
 			if (strpos($query, 'WHERE') !== FALSE) {
-				if ($objUser->job_offer_access) {
-					$query .= strtr(' AND clinic in (?)', array('?' => implode(',', $objUser->job_offer_access)));
-				}
-				// $query .= ' AND ';
+				$query .= ' AND (' . strtr('clinic in (?)', array('?' => implode(',', $arrAllowedClinics))) . ' OR clinic IS NULL)';
 			} else {
-				if ($objUser->job_offer_access) {
-					$query .= strtr(' WHERE clinic in (?)', array('?' => implode(',', $objUser->job_offer_access)));
-				}
-				// $query .= ' WHERE ';
+				$query .= ' WHERE (' . strtr('clinic in (?)', array('?' => implode(',', $arrAllowedClinics))) . ' OR clinic IS NULL)';
 			}
 		}
 		if (\is_array($orderBy) && $orderBy[0] != '') {
@@ -476,16 +474,14 @@ class DC_JobTable extends DC_Table //\DataContainer implements \listable, \edita
 			}
 
 			if (!$objUser->isAdmin) {
+				$arrAllowedClinics = $objUser->job_offer_access;
+				if (!$arrAllowedClinics) {
+					$arrAllowedClinics = [-1];
+				}
 				if (strpos($query, 'WHERE') !== FALSE) {
-					if ($objUser->job_offer_access) {
-						$query .= strtr(' AND clinic in (?)', array('?' => implode(',', $objUser->job_offer_access)));
-					}
-					// $query .= ' AND ';
+					$query .= ' AND (' . strtr('clinic in (?)', array('?' => implode(',', $arrAllowedClinics))) . ' OR clinic IS NULL)';
 				} else {
-					if ($objUser->job_offer_access) {
-						$query .= strtr(' WHERE clinic in (?)', array('?' => implode(',', $objUser->job_offer_access)));
-					}
-					// $query .= ' WHERE ';
+					$query .= ' WHERE (' . strtr('clinic in (?)', array('?' => implode(',', $arrAllowedClinics))) . ' OR clinic IS NULL)';
 				}
 			}
 
@@ -580,9 +576,11 @@ class DC_JobTable extends DC_Table //\DataContainer implements \listable, \edita
 		$objUser = $this->User;
 		$query = "SELECT * FROM " . $this->strTable . " WHERE id=?";
 		if (!$objUser->isAdmin) {
-			if ($objUser->job_offer_access) {
-				$query .= ' AND ' . strtr('clinic in (?)', array('?' => implode(',', $objUser->job_offer_access)));
+			$arrAllowedClinics = $objUser->job_offer_access;
+			if (!$arrAllowedClinics) {
+				$arrAllowedClinics = [-1];
 			}
+			$query .= ' AND (' . strtr('clinic in (?)', array('?' => implode(',', $arrAllowedClinics))) . ' OR clinic IS NULL)';
 		}
 
 		$objRow = $this->Database->prepare($query)

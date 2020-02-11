@@ -53,13 +53,12 @@ $GLOBALS['TL_DCA'][$table] = array(
                 'href'                => 'act=edit',
                 'icon'                => 'edit.gif'
             ),
-            'toggle' => array
-			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_article']['toggle'],
-				'icon'                => 'visible.gif',
-				'attributes'          => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s)"',
-				'button_callback'     => array('tl_jobs', 'toggleIcon')
-			),
+            'toggle' => array(
+                'label'               => &$GLOBALS['TL_LANG']['tl_article']['toggle'],
+                'icon'                => 'visible.gif',
+                'attributes'          => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s)"',
+                'button_callback'     => array('tl_jobs', 'toggleIcon')
+            ),
             'copy' => array(
                 'label'               => &$GLOBALS['TL_LANG'][$table]['copy'],
                 'href'                => 'act=copy',
@@ -108,7 +107,7 @@ $GLOBALS['TL_DCA'][$table] = array(
         ),
         'type' => array(
             'label'                   => &$GLOBALS['TL_LANG'][$table]['type'],
-            'default'                 => 'regular',
+            'default'                 => 1,
             'exclude'                 => true,
             'inputType'               => 'select',
             'options_callback'        => array($table, 'getTypes'),
@@ -621,12 +620,16 @@ class tl_jobs extends Backend
      */
     public function getClinics()
     {
-		$this->import('BackendUser', 'User');
+        $this->import('BackendUser', 'User');
         $objUser = $this->User;
         if ($objUser->isAdmin) {
             $arrDbClinics = $this->Database->prepare('SELECT id, title FROM tl_clinics order by title')->execute()->fetchAllAssoc();
         } else {
-            $objResult = $this->Database->prepare('SELECT id, title FROM tl_clinics WHERE id in (' . implode(', ', [14, 15, 19]) . ') order by title')->execute();
+            $arrAllowedClinics = $objUser->job_offer_access;
+            if (!$arrAllowedClinics) {
+                $arrAllowedClinics = [-1];
+            }
+            $objResult = $this->Database->prepare('SELECT id, title FROM tl_clinics WHERE id in (' . implode(', ', $arrAllowedClinics) . ') order by title')->execute();
             $arrDbClinics = $objResult->fetchAllAssoc();
         }
         $arrClinics = [];
@@ -635,106 +638,103 @@ class tl_jobs extends Backend
         }
         return $arrClinics;
     }
-    	/**
-	 * Return the "toggle visibility" button
-	 *
-	 * @param array  $row
-	 * @param string $href
-	 * @param string $label
-	 * @param string $title
-	 * @param string $icon
-	 * @param string $attributes
-	 *
-	 * @return string
-	 */
-	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
-	{
-		if (strlen(Input::get('tid')))
-		{
-			$this->toggleVisibility(Input::get('tid'), (Input::get('state') == 1), (@func_get_arg(12) ?: null));
-			$this->redirect($this->getReferer());
-		}
+    /**
+     * Return the "toggle visibility" button
+     *
+     * @param array  $row
+     * @param string $href
+     * @param string $label
+     * @param string $title
+     * @param string $icon
+     * @param string $attributes
+     *
+     * @return string
+     */
+    public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
+    {
+        if (strlen(Input::get('tid'))) {
+            $this->toggleVisibility(Input::get('tid'), (Input::get('state') == 1), (@func_get_arg(12) ?: null));
+            $this->redirect($this->getReferer());
+        }
 
-		// Check permissions AFTER checking the tid, so hacking attempts are logged
-		// if (!$this->User->hasAccess('tl_article::published', 'alexf'))
-		// {
-		// 	return '';
-		// }
+        // Check permissions AFTER checking the tid, so hacking attempts are logged
+        // if (!$this->User->hasAccess('tl_article::published', 'alexf'))
+        // {
+        // 	return '';
+        // }
 
-		$href .= '&amp;tid='.$row['id'].'&amp;state='.($row['published'] ? '' : 1);
+        $href .= '&amp;tid=' . $row['id'] . '&amp;state=' . ($row['published'] ? '' : 1);
 
-		if (!$row['published'])
-		{
-			$icon = 'invisible.gif';
-		}
+        if (!$row['published']) {
+            $icon = 'invisible.gif';
+        }
 
-		// $objPage = $this->Database->prepare("SELECT * FROM tl_page WHERE id=?")
-		// 						  ->limit(1)
-		// 						  ->execute($row['pid']);
+        // $objPage = $this->Database->prepare("SELECT * FROM tl_page WHERE id=?")
+        // 						  ->limit(1)
+        // 						  ->execute($row['pid']);
 
-		// if (!$this->User->isAllowed(BackendUser::CAN_EDIT_ARTICLES, $objPage->row()))
-		// {
-		// 	return Image::getHtml($icon) . ' ';
-		// }
+        // if (!$this->User->isAllowed(BackendUser::CAN_EDIT_ARTICLES, $objPage->row()))
+        // {
+        // 	return Image::getHtml($icon) . ' ';
+        // }
 
-		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label, 'data-state="' . ($row['published'] ? 1 : 0) . '"').'</a> ';
-	}
+        return '<a href="' . $this->addToUrl($href) . '" title="' . specialchars($title) . '"' . $attributes . '>' . Image::getHtml($icon, $label, 'data-state="' . ($row['published'] ? 1 : 0) . '"') . '</a> ';
+    }
 
 
-	/**
-	 * Disable/enable a user group
-	 *
-	 * @param integer       $intId
-	 * @param boolean       $blnVisible
-	 * @param DataContainer $dc
-	 */
-	public function toggleVisibility($intId, $blnVisible, DataContainer $dc=null)
-	{
-		// Set the ID and action
-		Input::setGet('id', $intId);
-		Input::setGet('act', 'toggle');
+    /**
+     * Disable/enable a user group
+     *
+     * @param integer       $intId
+     * @param boolean       $blnVisible
+     * @param DataContainer $dc
+     */
+    public function toggleVisibility($intId, $blnVisible, DataContainer $dc = null)
+    {
+        // Set the ID and action
+        Input::setGet('id', $intId);
+        Input::setGet('act', 'toggle');
 
-		if ($dc)
-		{
-			$dc->id = $intId; // see #8043
-		}
+        if ($dc) {
+            $dc->id = $intId; // see #8043
+        }
 
-		// $this->checkPermission();
+        // $this->checkPermission();
 
-		// Check the field access
-		// if (!$this->User->hasAccess('tl_article::published', 'alexf'))
-		// {
-		// 	$this->log('Not enough permissions to publish/unpublish article ID "'.$intId.'"', __METHOD__, TL_ERROR);
-		// 	$this->redirect('contao/main.php?act=error');
-		// }
+        // Check the field access
+        // if (!$this->User->hasAccess('tl_article::published', 'alexf'))
+        // {
+        // 	$this->log('Not enough permissions to publish/unpublish article ID "'.$intId.'"', __METHOD__, TL_ERROR);
+        // 	$this->redirect('contao/main.php?act=error');
+        // }
 
-		// $objVersions = new Versions('tl_article', $intId);
-		// $objVersions->initialize();
+        // $objVersions = new Versions('tl_article', $intId);
+        // $objVersions->initialize();
 
-		// Trigger the save_callback
-		// if (is_array($GLOBALS['TL_DCA']['tl_article']['fields']['published']['save_callback']))
-		// {
-		// 	foreach ($GLOBALS['TL_DCA']['tl_article']['fields']['published']['save_callback'] as $callback)
-		// 	{
-		// 		if (is_array($callback))
-		// 		{
-		// 			$this->import($callback[0]);
-		// 			$blnVisible = $this->{$callback[0]}->{$callback[1]}($blnVisible, ($dc ?: $this));
-		// 		}
-		// 		elseif (is_callable($callback))
-		// 		{
-		// 			$blnVisible = $callback($blnVisible, ($dc ?: $this));
-		// 		}
-		// 	}
-		// }
+        // Trigger the save_callback
+        // if (is_array($GLOBALS['TL_DCA']['tl_article']['fields']['published']['save_callback']))
+        // {
+        // 	foreach ($GLOBALS['TL_DCA']['tl_article']['fields']['published']['save_callback'] as $callback)
+        // 	{
+        // 		if (is_array($callback))
+        // 		{
+        // 			$this->import($callback[0]);
+        // 			$blnVisible = $this->{$callback[0]}->{$callback[1]}($blnVisible, ($dc ?: $this));
+        // 		}
+        // 		elseif (is_callable($callback))
+        // 		{
+        // 			$blnVisible = $callback($blnVisible, ($dc ?: $this));
+        // 		}
+        // 	}
+        // }
 
-		// Update the database
-		$this->Database->prepare("UPDATE tl_jobs SET tstamp=". time() .", published='" . ($blnVisible ? '1' : '') . "' WHERE id=?")
-					   ->execute($intId);
+        // Update the database
+        $this->Database->prepare("UPDATE tl_jobs SET tstamp=" . time() . ", published='" . ($blnVisible ? '1' : '') . "' WHERE id=?")
+            ->execute($intId);
 
         // $objVersions->create();
-        
+
         $objAutomator = new Automator();
         $objAutomator->generateSitemap();
-	}
+    }
 }
