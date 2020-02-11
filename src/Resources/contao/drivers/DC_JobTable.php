@@ -62,11 +62,16 @@ class DC_JobTable extends DC_Table //\DataContainer implements \listable, \edita
 		// nur die Jobs, deren Kliniken dem User zugeordnet sind
 		if (!$objUser->isAdmin) {
 			if (strpos($query, 'WHERE') !== FALSE) {
-				$query .= ' AND ';
+				if ($objUser->job_offer_access) {
+					$query .= strtr(' AND clinic in (?)', array('?' => implode(',', $objUser->job_offer_access)));
+				}
+				// $query .= ' AND ';
 			} else {
-				$query .= ' WHERE ';
+				if ($objUser->job_offer_access) {
+					$query .= strtr(' WHERE clinic in (?)', array('?' => implode(',', $objUser->job_offer_access)));
+				}
+				// $query .= ' WHERE ';
 			}
-			$query .= strtr('clinic in (?)', array('?' => implode(',', $objUser->job_offer_access)));
 		}
 		if (\is_array($orderBy) && $orderBy[0] != '') {
 			foreach ($orderBy as $k => $v) {
@@ -472,11 +477,16 @@ class DC_JobTable extends DC_Table //\DataContainer implements \listable, \edita
 
 			if (!$objUser->isAdmin) {
 				if (strpos($query, 'WHERE') !== FALSE) {
-					$query .= ' AND ';
+					if ($objUser->job_offer_access) {
+						$query .= strtr(' AND clinic in (?)', array('?' => implode(',', $objUser->job_offer_access)));
+					}
+					// $query .= ' AND ';
 				} else {
-					$query .= ' WHERE ';
+					if ($objUser->job_offer_access) {
+						$query .= strtr(' WHERE clinic in (?)', array('?' => implode(',', $objUser->job_offer_access)));
+					}
+					// $query .= ' WHERE ';
 				}
-				$query .= strtr('clinic in (?)', array('?' => implode(',', $objUser->job_offer_access)));
 			}
 
 
@@ -570,7 +580,9 @@ class DC_JobTable extends DC_Table //\DataContainer implements \listable, \edita
 		$objUser = $this->User;
 		$query = "SELECT * FROM " . $this->strTable . " WHERE id=?";
 		if (!$objUser->isAdmin) {
-			$query .= ' AND ' . strtr('clinic in (?)', array('?' => implode(',', $objUser->job_offer_access)));
+			if ($objUser->job_offer_access) {
+				$query .= ' AND ' . strtr('clinic in (?)', array('?' => implode(',', $objUser->job_offer_access)));
+			}
 		}
 
 		$objRow = $this->Database->prepare($query)
