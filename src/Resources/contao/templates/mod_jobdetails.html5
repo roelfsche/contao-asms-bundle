@@ -18,7 +18,7 @@
     </div>
     <div class="row">
       <div class="col-12"><a class="btn btn--secondary btn--mailto jobMailto" href="mailto:<?php echo (($this->job) ? $this->job['mailto'] : '') ?>" title="Jetzt bewerben">Jetzt bewerben</a>
-        <div class="information">i<span class="information-overlay">Die Übermittlung von persönlichen Daten über E-Mail ist nicht geschützt.</span></div>
+        <div class="information">i<span class="information-overlay">Die Übermittlung von persönlichen Daten per E-Mail ist nicht geschützt. Bitte beachten.</span></div>
       </div>
     </div>
     <div class="job-details">
@@ -31,7 +31,7 @@
     </div>
     <div class="row">
       <div class="col-12"><a class="btn btn--secondary btn--mailto jobMailto" href="mailto:<?php echo (($this->job) ? $this->job['mailto'] : '') ?>" title="Jetzt bewerben">Jetzt bewerben</a>
-        <div class="information">i<span class="information-overlay">Die Übermittlung von persönlichen Daten über E-Mail ist nicht geschützt.</span></div>
+        <div class="information">i<span class="information-overlay">Die Übermittlung von persönlichen Daten per E-Mail ist nicht geschützt. Bitte beachten.</span></div>
       </div>
     </div>
   </div>
@@ -55,8 +55,8 @@
         <p class="clinicdetailsubline">Anschrift</p>
         <p>
           <span id="clinicName"><?php echo (($this->job) ? $this->job['clinicTitle'] : '') ?></span><br>
-          <span id="clinicAddress"><?php echo (($this->job) ? $this->job['zipCode'] . ' ' . $this->job['city'] : '') ?></span><br>
-          <span id="clinicStreet"><?php echo (($this->job) ? $this->job['street'] . ' ' . $this->job['houseNumber'] : '') ?></span>
+          <span id="clinicStreet"><?php echo (($this->job) ? $this->job['street'] . ' ' . $this->job['houseNumber'] : '') ?></span><br>
+          <span id="clinicAddress"><?php echo (($this->job) ? $this->job['zipCode'] . ' ' . $this->job['city'] : '') ?></span>
         </p>
         <a style="<?php echo (($this->job && !$this->job['url']) ? 'display:none;' : '') ?>" id="clinicUrl" class="link link--external link--small" href="<?php echo (($this->job && $this->job['url']) ? $this->job['url'] : '#') ?>" title="Zur Website" target="_blank">Zur Website</a>
         <a style="<?php echo (($this->job && !$this->job['brochure']) ? 'display:none;' : '') ?>" id="clinicBrochure" class="link link--download link--small" href="<?php echo (($this->job && $this->job['brochure']) ? $this->job['brochure'] : '#') ?>" title="Broschüre ansehen" target="_blank">Broschüre ansehen</a>

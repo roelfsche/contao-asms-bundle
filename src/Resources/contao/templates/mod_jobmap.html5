@@ -10,8 +10,8 @@
       <div class="mapoverlaycontent">
         <p><strong>Anschrift</strong><br>
           <span id="clinicName">Klinikname</span><br>
-          <span id="clinicAddress">PLZ Ort</span><br>
-          <span id="clinicStreet"></span>
+          <span id="clinicStreet"></span><br>
+          <span id="clinicAddress">PLZ Ort</span>
         </p>
         <a id="clinicUrl" class="link link--external link--small" href="#" target="_blank" title="Zur Website" style="display: none">Zur Website</a>
         <a id="clinicBrochure" class="link link--download link--small" href="#" title="Broschüre ansehen" target="_blank" style="display: none;">Broschüre ansehen</a>
