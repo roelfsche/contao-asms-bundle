@@ -10,7 +10,7 @@
       <div class="mapoverlaycontent">
         <p><strong>Anschrift</strong><br>
           <span id="clinicName">Psychosomatische Klinik Buching</span><br>
-          <span id="clinicAddress">87642 Halblech</span>
+          <span id="clinicAddress">87642 Halblech</span><br>
           <span id="clinicStreet"></span>
         </p>
         <a id="clinicUrl" class="link link--external link--small" href="#" target="_blank" title="Zur Website" style="display: none">Zur Website</a>
