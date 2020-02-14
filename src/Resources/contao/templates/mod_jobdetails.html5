@@ -34,6 +34,11 @@
         <div class="information">i<span class="information-overlay">Die Übermittlung von persönlichen Daten per E-Mail ist nicht geschützt. Bitte beachten.</span></div>
       </div>
     </div>
+    <div class="row">
+      <div class="col-12">
+        <a class="link icon-print" href="#" title="">Drucken</a> <a class="link icon-bookmark" href="#" title="">Merken</a> <a class="link icon-copy-link" href="#" title="">Link kopieren</a>
+      </div>
+    </div>
   </div>
   <div class="container-fluid clinicdetail">
     <div class="row">
