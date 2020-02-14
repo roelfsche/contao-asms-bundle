@@ -6,7 +6,7 @@
                 <form class="search_form">
                     <div class="row">
                         <div class="col-12 col-lg-5 order-lg-1">
-                            <input class="search_form__input js-search-form-input" type="text" name="searchterm" placeholder="Funktion, Fachgebiet, Unternehmen, Stellen-ID">
+                            <input class="search_form__input js-search-form-input" type="text" name="searchterm" placeholder="Funktion, Fachrichtung, Einrichtung, Stellen-ID">
                         </div>
                         <div class="col-12 col-sm-6 col-lg-2 order-lg-2">
                             <input class="search_form__input js-search-city" type="text" name="place" placeholder="PLZ/Ort">
@@ -37,7 +37,7 @@
                             <div class="row">
                                 <div class="order-2 col-12 col-lg-5 order-lg-1 filter-subject-wrapper">
                                     <select id="js-filter-subject" class="search_form__select search_form--subject" name="section">
-                                        <option value="0">Fachgebiet</option>
+                                        <option value="0">Fachrichtung</option>
                                         <?php foreach($this->job_subjects as $arrJobSubject) : ?>
                                         <option value="<?php echo $arrJobSubject['id'] ?>"><?php echo $arrJobSubject['title'] ?></option>
                                         <?php endforeach; ?>
