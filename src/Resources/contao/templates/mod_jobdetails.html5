@@ -67,16 +67,10 @@
 
     <div class="row">
       <div class="col-12 col-md-6">
-        <!--<img class="clinicimage" src="/assets/asms/img/clinic_default.png" alt="Foto der Einrichtung">-->
+        <img class="clinicimage" src="/assets/asms/img/clinic_default.png" alt="Foto der Einrichtung">
         <div style="<?php echo (($this->job && isset($this->job['clinicLogo'])) ? '' : 'display:none;') ?>" id="js-cliniclogo-wrapper"><img class="clinicimage" id="js-cliniclogo" src="<?php echo (($this->job && isset($this->job['clinicLogo'])) ? $this->job['clinicLogo'] : '') ?>" alt="<?php echo (($this->job && isset($this->job['clinicLogoAlt'])) ? $this->job['clinicLogoAlt'] : '') ?>"></div>
       </div>
 
-      <div class="col-12">
-        <p class="clinicdetailsubline">Informationen zur Gleichstellung</p>
-        <div id="jobEquality">
-          <span><?php echo (($this->job) ? $this->job['equality'] : '') ?></span>
-        </div>
-      </div>
     </div>
 
     <div class="clinicdetailspacer"></div>
@@ -90,6 +84,18 @@
         </div>
       </div>
     </div>
+
+    <div class="clinicdetailspacer"></div>
+
+    <div class="row">
+      <div class="col-12">
+        <p class="clinicdetailsubline">Informationen zur Gleichstellung</p>
+        <div id="jobEquality">
+          <span><?php echo (($this->job) ? $this->job['equality'] : '') ?></span>
+        </div>
+      </div>
+    </div>
+
   </div>
   <a class="clinicdetaillink" style="display: none" id="jobDetailsLink" href="" target="_blank">Details</a>
 </div>
