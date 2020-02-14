@@ -41,7 +41,7 @@
         <h3 class="color-darkblue clinicdetailheadline">Alles Wichtige auf einen Blick</h3>
       </div>
 
-      <div class="col-md-6">
+      <div class="col-12 col-md-6">
         <p class="clinicdetailsubline">Ihr Ansprechpartner/in</p>
         <p>
           <span id="clinicContactName"><?php echo (($this->job) ? $this->job['contactperson_title'] . ' ' . $this->job['contactperson_firstname'] . ' ' . $this->job['contactperson_lastname']  : '') ?></span><br>
@@ -51,7 +51,7 @@
         <a id="clinicContactMail" class="link link--email link--small" href="#" title=""><?php echo (($this->job) ? $this->job['contactperson_email'] : '') ?></a>
       </div>
 
-      <div class="col-md-6">
+      <div class="col-12 col-md-6">
         <p class="clinicdetailsubline">Anschrift</p>
         <p>
           <span id="clinicName"><?php echo (($this->job) ? $this->job['clinicTitle'] : '') ?></span><br>
@@ -66,12 +66,12 @@
     <div class="clinicdetailspacer"></div>
 
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-12 col-md-6">
         <!--<img class="clinicimage" src="/assets/asms/img/clinic_default.png" alt="Foto der Einrichtung">-->
         <div style="<?php echo (($this->job && isset($this->job['clinicLogo'])) ? '' : 'display:none;') ?>" id="js-cliniclogo-wrapper"><img class="clinicimage" id="js-cliniclogo" src="<?php echo (($this->job && isset($this->job['clinicLogo'])) ? $this->job['clinicLogo'] : '') ?>" alt="<?php echo (($this->job && isset($this->job['clinicLogoAlt'])) ? $this->job['clinicLogoAlt'] : '') ?>"></div>
       </div>
 
-      <div class="col-md-6">
+      <div class="col-12">
         <p class="clinicdetailsubline">Informationen zur Gleichstellung</p>
         <div id="jobEquality">
           <span><?php echo (($this->job) ? $this->job['equality'] : '') ?></span>
