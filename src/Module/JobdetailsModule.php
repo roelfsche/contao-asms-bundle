@@ -69,6 +69,8 @@ class JobdetailsModule extends \Module
             b.state,
             b.logo as clinicLogo,
             b.logoAlt as clinicLogoAlt,
+            b,optionalImage,
+            b.optionalImageAlt,
             b.zipCode, 
             b.lat, 
             b.lon, 
@@ -121,6 +123,20 @@ class JobdetailsModule extends \Module
         } else {
             unset($arrJob['clinicLogo']);
             unset($arrJob['clinicLogoAlt']);
+        }
+
+        // Kilinikbild
+        if ($arrJob['optionalImage'] != NULL) {
+            $objFile = FilesModel::findOneBy('uuid', $arrJob['optionalImage']);
+            if ($objFile) {
+                $arrJob['optionalImage'] = '//' . Environment::get('host') . '/' . $objFile->path;
+            } else {
+                unset($arrJob['optionalImage']);
+                unset($arrJob['optionalImageAlt']);
+            }
+        } else {
+            unset($arrJob['optionalImage']);
+            unset($arrJob['optionalImageAlt']);
         }
 
         if ($arrJob['typeFulltime'] == 1 && $arrJob['typeParttime'] == 1) {
