@@ -95,10 +95,10 @@
                     <ul class="resultlist list js-joblist"> </ul>
                     <ul class="pagination"></ul>
                 </div>
-                <div id="js-next-greater-surrounding-joblist" style="display: none;">
+                <!--<div id="js-next-greater-surrounding-joblist" style="display: none;">
                     <span class="jobcount"><span id="js-next-greater-surrounding-count"></span> Ergebnisse im Umkreis von <span id="js-next-greater-surrounding-radius"></span>km</span>
                     <ul class="resultlist list js-joblist"> </ul>
-                </div>
+                </div>-->
             </div>
         </div>
     </div>

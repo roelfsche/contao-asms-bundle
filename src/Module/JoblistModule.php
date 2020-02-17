@@ -79,7 +79,9 @@ class JoblistModule extends \Module
             b.city as city2, 
             b.logo as clinicLogo,
             b.logoAlt as clinicLogoAlt,
-            b.zipCode, 
+            b.zipCode,
+            b.optionalImage,
+            b.optionalImageAlt,
             b.lat, 
             b.lon, 
             b.contactperson_salutation, 
@@ -146,7 +148,9 @@ class JoblistModule extends \Module
                         a.city as city2, 
                         a.logo as clinicLogo,
                         a.logoAlt as clinicLogoAlt,
-                        a.zipCode, 
+                        a.zipCode,
+                        a,optionalImage,
+                        a.optionalImageAlt,
                         a.lat, 
                         a.lon, 
                         a.contactperson_salutation, 
@@ -216,6 +220,20 @@ class JoblistModule extends \Module
             } else {
                 unset($arrJob['clinicLogo']);
                 unset($arrJob['clinicLogoAlt']);
+            }
+
+            // Klinikbild
+            if ($arrJob['optionalImage'] != NULL) {
+                $objFile = FilesModel::findOneBy('uuid', $arrJob['optionalImage']);
+                if ($objFile) {
+                    $arrJob['optionalImage'] = '/' . $objFile->path;
+                } else {
+                    unset($arrJob['optionalImage']);
+                    unset($arrJob['optionalImageAlt']);
+                }
+            } else {
+                unset($arrJob['optionalImage']);
+                unset($arrJob['optionalImageAlt']);
             }
 
             if ($arrJob['typeFulltime'] == 1 && $arrJob['typeParttime'] == 1) {
