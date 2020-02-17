@@ -149,7 +149,7 @@ class JoblistModule extends \Module
                         a.logo as clinicLogo,
                         a.logoAlt as clinicLogoAlt,
                         a.zipCode,
-                        a,optionalImage,
+                        a.optionalImage,
                         a.optionalImageAlt,
                         a.lat, 
                         a.lon, 
