@@ -99,12 +99,10 @@
 
     <div class="row">
       <div class="col-12">
-        <a class="link link--jobdetails icon-print" href="javascript:window.print()" title="diese Seite drucken">Drucken</a> <a class="link link--jobdetails icon-bookmark js-bookmark" rel="sidebar" href="#" title="diese Seite zu den Favoriten hinzufügen">Merken</a> <a class="link link--jobdetails icon-copy-link" href="#" title="die URL dieser Seite in die Zwischenablage kopieren">Link kopieren</a>
+        <a class="link link--jobdetails icon-print" href="javascript:window.print()" title="diese Seite drucken">Drucken</a> <a class="link link--jobdetails icon-bookmark js-bookmark" rel="sidebar" href="#" title="diese Seite zu den Favoriten hinzufügen">Merken</a> <a class="clinicdetaillink link link--jobdetails icon-copy-link" style="display: none" id="jobDetailsLink" href="" target="_blank">zur Einzelansicht</a>
       </div>
     </div>
-
   </div>
-  <a class="clinicdetaillink" style="display: none" id="jobDetailsLink" href="" target="_blank">Details</a>
 </div>
 <?php if (isset($this->google_job)) : ?>
   <?php echo $this->google_job->parse() ?>
