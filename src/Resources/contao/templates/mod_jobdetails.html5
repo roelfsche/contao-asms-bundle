@@ -34,11 +34,6 @@
         <div class="information">i<span class="information-overlay">Die Übermittlung von persönlichen Daten per E-Mail ist nicht geschützt. Bitte beachten.</span></div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-12">
-        <a class="link icon-print" href="#" title="">Drucken</a> <a class="link icon-bookmark" href="#" title="">Merken</a> <a class="link icon-copy-link" href="#" title="">Link kopieren</a>
-      </div>
-    </div>
   </div>
   <div class="container-fluid clinicdetail">
     <div class="row">
@@ -99,6 +94,12 @@
         <div id="jobEquality">
           <span><?php echo (($this->job) ? $this->job['equality'] : '') ?></span>
         </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <a class="link link--jobdetails icon-print" href="#" title="diese Seite drucken">Drucken</a> <a class="link link--jobdetails icon-bookmark" href="#" title="diese Seite zu den Favoriten hinzufügen">Merken</a> <a class="link link--jobdetails icon-copy-link" href="#" title="die URL dieser Seite in die Zwischenablage kopieren">Link kopieren</a>
       </div>
     </div>
 
