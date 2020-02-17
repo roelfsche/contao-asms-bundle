@@ -69,7 +69,7 @@ class JobdetailsModule extends \Module
             b.state,
             b.logo as clinicLogo,
             b.logoAlt as clinicLogoAlt,
-            b,optionalImage,
+            b.optionalImage,
             b.optionalImageAlt,
             b.zipCode, 
             b.lat, 
