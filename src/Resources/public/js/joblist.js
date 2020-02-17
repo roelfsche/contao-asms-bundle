@@ -343,6 +343,7 @@ $(function () {
             $city = $('#js-city'),
             $logoWrapper = $('#js-cliniclogo-wrapper'),
             $clinicLogo = $('#js-cliniclogo'),
+            $optionalImage = $('#clinicImage'),
             // $logo = $('js-cliniclogo'),
             $jobName = $('#js-jobname'),
             $jobDescription = $('#js-jobdescription'),
@@ -432,6 +433,14 @@ $(function () {
             } else {
                 $clinicLogoWrapper.hide();
             }
+            if (job.optionalImage != undefined) {
+                //$logoWrapper.show();
+                $clinicImage.attr('src', job.optionalImage).attr('alt', 'optionalImageAlt');
+            } 
+            
+            //else {
+            //    $clinicLogoWrapper.hide();
+            // }
             $youOffer.html(job.youOffer);
             $weOffer.html(job.weOffer);
             $jobId.text(job.jobId);
