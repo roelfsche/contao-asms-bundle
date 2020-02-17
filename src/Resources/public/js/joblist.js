@@ -435,7 +435,7 @@ $(function () {
             }
             if (job.optionalImage != undefined) {
                 //$logoWrapper.show();
-                $clinicImage.attr('src', job.optionalImage).attr('alt', 'optionalImageAlt');
+                $optionalImage.attr('src', job.optionalImage).attr('alt', 'optionalImageAlt');
             } 
             
             //else {
