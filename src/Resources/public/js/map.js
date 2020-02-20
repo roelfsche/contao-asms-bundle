@@ -15,7 +15,10 @@ $(function () {
         $searchCity = $('.js-search-city'),
         $filterButton = $('.js-search-button');
 
-    var map = L.map('jobmap').setView([51.133481, 10.018343], 6);
+    var map = L.map('jobmap', {
+        minZoom: 3,
+        maxZoom: 12
+    }).setView([51.133481, 10.018343], 6);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
