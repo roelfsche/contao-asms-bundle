@@ -49,6 +49,9 @@
         </p>
         <a id="clinicContactPhone" class="link link--phone link--small" href="#" title=""><?php echo (($this->job) ? $this->job['contactperson_phone'] : '') ?></a>
         <a id="clinicContactMail" class="link link--email link--small" href="#" title=""><?php echo (($this->job) ? $this->job['contactperson_email'] : '') ?></a>
+        <div class="clinichdetailspacer--small">
+          <div style="<?php echo (($this->job && isset($this->job['clinicLogo'])) ? '' : 'display:none;') ?>" id="js-cliniclogo-wrapper"><img class="clinicimage" id="js-cliniclogo" src="<?php echo (($this->job && isset($this->job['clinicLogo'])) ? $this->job['clinicLogo'] : '') ?>" alt="<?php echo (($this->job && isset($this->job['clinicLogoAlt'])) ? $this->job['clinicLogoAlt'] : '') ?>"></div>
+        </div>
       </div>
 
       <div class="col-12 col-md-6">
@@ -60,17 +63,9 @@
         </p>
         <a style="<?php echo (($this->job && !$this->job['url']) ? 'display:none;' : '') ?>" id="clinicUrl" class="link link--external link--small" href="<?php echo (($this->job && $this->job['url']) ? $this->job['url'] : '#') ?>" title="Zur Website" target="_blank">Zur Website</a>
         <a style="<?php echo (($this->job && !$this->job['brochure']) ? 'display:none;' : '') ?>" id="clinicBrochure" class="link link--download link--small" href="<?php echo (($this->job && $this->job['brochure']) ? $this->job['brochure'] : '#') ?>" title="Broschüre ansehen" target="_blank">Broschüre ansehen</a>
-      </div>
-    </div>
-
-    <div class="clinicdetailspacer"></div>
-
-    <div class="row">
-      <div class="col-12 col-md-6">
-        <img id="clinicImage" class="clinicimage" src="<?php echo (($this->job && isset($this->job['optionalImage'])) ? $this->job['optionalImage'] : '/assets/asms/img/clinic_default.png') ?>" alt="Foto der Einrichtung">
-      </div>
-      <div class="col-12 col-md-6">
-        <div style="<?php echo (($this->job && isset($this->job['clinicLogo'])) ? '' : 'display:none;') ?>" id="js-cliniclogo-wrapper"><img class="clinicimage" id="js-cliniclogo" src="<?php echo (($this->job && isset($this->job['clinicLogo'])) ? $this->job['clinicLogo'] : '') ?>" alt="<?php echo (($this->job && isset($this->job['clinicLogoAlt'])) ? $this->job['clinicLogoAlt'] : '') ?>"></div>
+        <div class="clinichdetailspacer--small">
+          <img id="clinicImage" class="clinicimage" src="<?php echo (($this->job && isset($this->job['optionalImage'])) ? $this->job['optionalImage'] : '/assets/asms/img/clinic_default.png') ?>" alt="Foto der Einrichtung">
+        </div>
       </div>
     </div>
 
