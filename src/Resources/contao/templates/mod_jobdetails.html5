@@ -79,7 +79,7 @@
         <img id="clinicImage" class="clinicimage" src="<?php echo (($this->job && isset($this->job['optionalImage'])) ? $this->job['optionalImage'] : '/assets/asms/img/clinic_default.png') ?>" alt="Foto der Einrichtung">
       </div>
       <div class="col-12 col-md-6">
-        <div style="<?php echo (($this->job && !$this->job['awardImage1'] && !$this->job['awardImage2']) ? 'display:none;' : '') ?>" id="js-award-div-wrapper" class="col-md-6">
+        <div style="<?php echo (($this->job && !$this->job['awardImage1'] && !$this->job['awardImage2']) ? 'display:none;' : '') ?>" id="js-award-div-wrapper">
           <p class="clinicdetailsubline">Auszeichnungen</p>
           <div class="row">
             <div style="<?php echo (($this->job && !$this->job['awardImage1']) ? 'display:none;' : '') ?>" class="col-6 js-award-div"><img src="<?php echo (($this->job && $this->job['awardImage1']) ? $this->job['awardImage1'] : '') ?>" alt=""></div>
