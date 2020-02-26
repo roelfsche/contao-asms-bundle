@@ -64,7 +64,7 @@
                 <target>Stellenbezeichnung</target>
             </trans-unit>
             <trans-unit id="tl_jobs.title.1">
-                <target>Geben Sie eine individuelle Stellenbezeichnung an, sie ersetzt die Auswahl oben.</target>
+                <target>Die Stellen-ID wird vom System generiert.</target>
             </trans-unit>
             <trans-unit id="tl_jobs.jobID.0">
                 <target>Stellen-ID</target>

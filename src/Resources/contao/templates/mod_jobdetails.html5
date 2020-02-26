@@ -23,7 +23,7 @@
     </div>
     <div class="job-details">
       <h4>Über uns</h4>
-
+      <div id="js-aboutus">über uns</div>
       <h4>Unsere Leistungen</h4>
       <div id="js-weoffer"><?php echo (($this->job) ? $this->job['weOffer'] : '') ?></div>
       <h4>Ihre Voraussetzungen</h4>
