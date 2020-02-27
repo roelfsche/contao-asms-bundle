@@ -1,5 +1,5 @@
 <?php if ($this->show_filter) : ?>
-<section id="searchresults" class="section section--search js-search-filter">
+<section class="section section--search js-search-filter">
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -84,12 +84,12 @@
 <?php endif; ?>
 
 
-<section class="section section--searchresult js-search-results">
+<section id="searchresults" class="section section--searchresult js-search-results">
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <span id="js-jobcount-span" class="jobcount">Aktuell <span id="js-count-article">sind</span> <strong><span id="js-job-count"><?php echo count($this->jobs) ?></span> Stellenangebot<span id="js-headline-plural">e</span></strong> für Ärztinnen und Ärzte verfügbar</span>
-                <span id="js-no-jobcount-span" class="jobcount" style="display: none;">Aktuell sind leider keine Stellenangebote verfügbar</span>
+                <span id="js-jobcount-span" class="jobcount">Aktuell <span id="js-count-article">sind</span> <strong><span id="js-job-count"><?php echo count($this->jobs) ?></span> Stellenangebot<span id="js-headline-plural">e</span></strong> für Ärztinnen und Ärzte verfügbar.</span>
+                <span id="js-no-jobcount-span" class="jobcount" style="display: none;">Aktuell sind leider keine Stellenangebote verfügbar.</span>
                 <div id="js-joblist">
                     <ul class="resultlist list js-joblist"> </ul>
                     <ul class="pagination"></ul>
