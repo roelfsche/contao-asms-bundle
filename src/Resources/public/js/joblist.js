@@ -104,7 +104,7 @@ $(function () {
         }
 
         function _filterByCityZip(job) {
-            var val = $filterCity.val();
+            var val = $filterCity.val().trim();
             if (val == '' || parseInt($filterSurrounding.val()) != 0) {
                 return true;
             }
@@ -301,7 +301,7 @@ $(function () {
             filterList();
 
             // additional Liste
-            if (parseInt($filterSurrounding.val())) {
+            if (parseInt($filterSurrounding.val()) && parseInt($filterSurrounding.val()) != 100) {
                 $('#js-next-greater-surrounding-joblist').show();
                 if (nextGreaterSurroundingList == null) {
                     nextGreaterSurroundingList = new List('js-next-greater-surrounding-joblist', {
@@ -313,6 +313,8 @@ $(function () {
                 nextGreaterSurroundingFilterList();
                 $('#js-next-greater-surrounding-count').text(nextGreaterSurroundingList.matchingItems.length);
                 $('#js-next-greater-surrounding-radius').text($filterSurrounding.find('option:selected').next().val())
+            } else {
+                $('#js-next-greater-surrounding-joblist').hide();
             }
         });
 

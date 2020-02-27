@@ -55,6 +55,31 @@ class JobmapModule extends \Module
      */
     protected function compile()
     {
+            // $strSQL = 'select 
+            // a.id, 
+            // b.title as clinicTitle, 
+            // b.city, 
+            // b.optionalImage,
+            // b.optionalImageAlt,
+            // b.zipCode, 
+            // b.lat, 
+            // b.lon, 
+            // b.department, 
+            // b.street, 
+            // b.houseNumber, 
+            // b.zipCode, 
+            // b.url1, 
+            // b.url2, 
+            // b.clinicPDF, 
+            // c.title as jobTitle, 
+            // d.title as subjectTitle, d.title as subjectTitle2,
+            // d.id as subjectId 
+            // from tl_jobs a 
+            // join tl_clinics b on (a.clinic = b.id) 
+            // join tl_jobtypes c on (a.titleSelection = c.id) 
+            // join tl_subjects d on (a.subjectSelection = d.id) 
+            // where a.published = \'1\' AND (a.start = \'\' or a.start < ?) AND (a.stop = \'\' or a.stop > ?)
+            // AND b.lat!=\'\' AND b.lon!=\'\'';
             $strSQL = 'select 
             a.id, 
             b.title as clinicTitle, 
@@ -74,12 +99,11 @@ class JobmapModule extends \Module
             c.title as jobTitle, 
             d.title as subjectTitle, d.title as subjectTitle2,
             d.id as subjectId 
-            from tl_jobs a 
-            join tl_clinics b on (a.clinic = b.id) 
-            join tl_jobtypes c on (a.titleSelection = c.id) 
-            join tl_subjects d on (a.subjectSelection = d.id) 
-            where a.published = \'1\' AND (a.start = \'\' or a.start < ?) AND (a.stop = \'\' or a.stop > ?)
-            AND b.lat!=\'\' AND b.lon!=\'\'';
+            from tl_clinics b 
+            left join tl_jobs a on (a.clinic = b.id AND a.published = \'1\' AND (a.start = \'\' or a.start < ?) AND (a.stop = \'\' or a.stop > ?)) 
+            left join tl_jobtypes c on (a.titleSelection = c.id) 
+            left join tl_subjects d on (a.subjectSelection = d.id) 
+            where b.lat!=\'\' AND b.lon!=\'\'';
             $arrJobs = $this->Database->prepare($strSQL)->execute(time(), time())->fetchAllAssoc();
 
         // id -> index; Vollzeit / Teilzeit

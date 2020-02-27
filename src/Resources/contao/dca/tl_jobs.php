@@ -111,13 +111,20 @@ $GLOBALS['TL_DCA'][$table] = array(
             'exclude'                 => true,
             'inputType'               => 'select',
             'options_callback'        => array($table, 'getTypes'),
-            'eval'                    => array(),
+            'eval'                    => array(
+                'mandatory' => TRUE,
+                'includeBlankOption'        => TRUE,
+            ),
             'sql'                     => "int(10) unsigned NOT NULL default '0'"
         ),
         'titleSelection' => array(
             'label'                   => &$GLOBALS['TL_LANG'][$table]['titleSelection'],
             'inputType'               => 'select',
             'foreignKey'              => 'tl_jobtypes.title',
+            'eval' => array(
+                'mandatory' => TRUE,
+                'includeBlankOption'        => TRUE,
+            ),
             'sql'                     => "int(10) unsigned NOT NULL default '0'",
             'relation'                => array('type' => 'hasOne', 'load' => 'eager')
         ),
@@ -184,6 +191,10 @@ $GLOBALS['TL_DCA'][$table] = array(
             'label'                   => &$GLOBALS['TL_LANG'][$table]['subjectSelection'],
             'inputType'               => 'select',
             'foreignKey'              => 'tl_subjects.title',
+            'eval' => array(
+                'mandatory' => TRUE,
+                'includeBlankOption'        => TRUE,
+            ),
             'sql'                     => "int(10) unsigned NOT NULL default '0'",
             'relation'                => array('type' => 'hasOne', 'load' => 'eager')
         ),

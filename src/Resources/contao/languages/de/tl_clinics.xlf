@@ -117,8 +117,14 @@
             <trans-unit id="tl_clinics.url1.0">
                 <target>URL 1</target>
             </trans-unit>
+            <trans-unit id="tl_clinics.url1.1">
+                <target>z.B. https://www.arztsein-menschsein.de</target>
+            </trans-unit>
             <trans-unit id="tl_clinics.url2.0">
                 <target>URL 2</target>
+            </trans-unit>
+            <trans-unit id="tl_clinics.url2.1">
+                <target>z.B. https://www.arztsein-menschsein.de</target>
             </trans-unit>
             <trans-unit id="tl_clinics.social_facebook.0">
                 <target>Facebook</target>

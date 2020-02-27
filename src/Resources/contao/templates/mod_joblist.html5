@@ -14,10 +14,9 @@
                         <div class="col-12 col-sm-6 col-lg-2 order-lg-3">
                             <select class="search_form__select js-search-surrounding" name="range"  disabled>
                                 <option value="0">Umkreis</option>
-                                <option value="10">10 km</option>
-                                <option value="20">20 km</option>
-                                <option value="50">50 km</option>
-                                <option value="0">mehr als 50 km</option>
+                                <option value="50">bis 50km</option>
+                                <option value="100">bis 100km</option>
+                                <option value="0">alle</option>
                             </select>
                         </div>
                         <div class="col-12 col-lg-3 order-5 order-lg-4">
@@ -95,10 +94,10 @@
                     <ul class="resultlist list js-joblist"> </ul>
                     <ul class="pagination"></ul>
                 </div>
-                <!--<div id="js-next-greater-surrounding-joblist" style="display: none;">
+                <div id="js-next-greater-surrounding-joblist" style="display: none;">
                     <span class="jobcount"><span id="js-next-greater-surrounding-count"></span> Ergebnisse im Umkreis von <span id="js-next-greater-surrounding-radius"></span>km</span>
                     <ul class="resultlist list js-joblist"> </ul>
-                </div>-->
+                </div>
             </div>
         </div>
     </div>
