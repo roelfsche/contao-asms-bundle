@@ -325,8 +325,8 @@ $(function () {
             $filterTypeSelect.val(0);
             $filterJobId.val('');
             $("input[name='job_kind[]']").prop('checked', false);
-            $filterSearchButton.trigger('click')
-
+            $filterSearchButton.trigger('click');
+            $('.js-short-job-type').removeClass('active');
             $('#js-next-greater-surrounding-joblist').hide();
 
         });
