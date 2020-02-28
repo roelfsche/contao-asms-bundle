@@ -349,6 +349,7 @@ $(function () {
             $jobDescription = $('#js-jobdescription'),
             $youOffer = $('#js-youoffer'),
             $weOffer = $('#js-weoffer'),
+            $aboutUs = $('#js-aboutUs'),
             $jobId = $('#js-jobid'),
             $clinicName = $('#clinicName'),
             $clinicAddress = $('#clinicAddress'),
@@ -443,6 +444,7 @@ $(function () {
             // }
             $youOffer.html(job.youOffer);
             $weOffer.html(job.weOffer);
+            $aboutUs.html(job.aboutUs);
             $jobId.text(job.jobId);
             if (job.jobId.match(/REHA/)) {
                 $rehaDetailHeadline.show();
