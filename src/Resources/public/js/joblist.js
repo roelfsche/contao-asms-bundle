@@ -349,7 +349,7 @@ $(function () {
             $jobDescription = $('#js-jobdescription'),
             $youOffer = $('#js-youoffer'),
             $weOffer = $('#js-weoffer'),
-            $aboutUs = $('#js-aboutUs'),
+            $aboutUs = $('#js-aboutus'),
             $jobId = $('#js-jobid'),
             $clinicName = $('#clinicName'),
             $clinicAddress = $('#clinicAddress'),
