@@ -49,8 +49,8 @@
           <span id="clinicContactName"><?php echo (($this->job) ? $this->job['contactperson_title'] . ' ' . $this->job['contactperson_firstname'] . ' ' . $this->job['contactperson_lastname']  : '') ?></span><br>
           <span id="clinicContactDepartment"><?php echo (($this->job) ? $this->job['department'] : '') ?></span>
         </p>
-        <a id="clinicContactPhone" class="link link--phone link--small" href="<?php echo (($this->job) ? $this->job['contactperson_phone'] : '') ?>" title=""><?php echo (($this->job) ? $this->job['contactperson_phone'] : '') ?></a>
-        <a id="clinicContactMail" class="link link--email link--small" href="<?php echo (($this->job) ? $this->job['contactperson_email'] : '') ?>" title=""><?php echo (($this->job) ? $this->job['contactperson_email'] : '') ?></a>
+        <a id="clinicContactPhone" class="link link--phone link--small" href="tel:<?php echo (($this->job) ? $this->job['contactperson_phone'] : '') ?>" title=""><?php echo (($this->job) ? $this->job['contactperson_phone'] : '') ?></a>
+        <a id="clinicContactMail" class="link link--email link--small" href="mailto:<?php echo (($this->job) ? $this->job['contactperson_email'] : '') ?>" title=""><?php echo (($this->job) ? $this->job['contactperson_email'] : '') ?></a>
         <!--<div class="clinichdetailspacer--small">
           <div style="<?php echo (($this->job && isset($this->job['clinicLogo'])) ? '' : 'display:none;') ?>" id="js-cliniclogo-wrapper"><img class="clinicimage" id="js-cliniclogo" src="<?php echo (($this->job && isset($this->job['clinicLogo'])) ? $this->job['clinicLogo'] : '') ?>" alt="<?php echo (($this->job && isset($this->job['clinicLogoAlt'])) ? $this->job['clinicLogoAlt'] : '') ?>"></div>
         </div>-->
