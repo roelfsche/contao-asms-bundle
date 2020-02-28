@@ -45,8 +45,8 @@ class JoblistModule extends \Module
             return $template->parse();
         } else {
             // if ($this->intSubjectFilterValue == 0) {
-            $GLOBALS['TL_JAVASCRIPT'][] = 'https://code.jquery.com/jquery-3.4.1.min.js';
-            $GLOBALS['TL_JAVASCRIPT'][] = '//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js';
+            // $GLOBALS['TL_JAVASCRIPT'][] = 'https://code.jquery.com/jquery-3.4.1.min.js';
+            $GLOBALS['TL_JAVASCRIPT'][] = 'bundles/contaoasms/js/list.min.js';
             $GLOBALS['TL_JAVASCRIPT'][] = 'bundles/contaoasms/js/joblist.js';
             // }
         }

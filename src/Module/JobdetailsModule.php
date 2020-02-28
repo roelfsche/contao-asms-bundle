@@ -58,7 +58,7 @@ class JobdetailsModule extends \Module
         $strSQL = 'select 
             a.id, 
             a.jobID as jobId, 
-            a.typeFulltime, a.typeParttime, a.typeLimited, a.weOffer, a.youOffer, a.applicationNotes, 
+            a.typeFulltime, a.typeParttime, a.typeLimited, a.weOffer, a.youOffer, a.applicationNotes, a.aboutUs,
             a.stop,
             a.titleSelection as jobType,
             a.tstamp,
