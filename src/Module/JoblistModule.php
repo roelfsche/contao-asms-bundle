@@ -60,13 +60,14 @@ class JoblistModule extends \Module
      */
     protected function compile()
     {
+        $intTime = time();
         // keine Modul-Filter-Config...
         if (!($this->intSubjectFilterValue || $this->intTypeFilterValue)) {
             $this->Template->show_filter = TRUE;
             // selektiere alle Job-Typen für Filter
-            $arrShortJobTypes = $this->Database->prepare('select distinct a.id, a.title from tl_jobtypes a join tl_jobs b on (a.id = b.titleSelection) WHERE a.showInLinkList = 1 AND b.published=\'1\';')->execute()->fetchAllAssoc();
-            $arrJobTypes = $this->Database->prepare('select distinct a.id, a.title from tl_jobtypes a join tl_jobs b on (a.id = b.titleSelection) WHERE b.published=\'1\';')->execute()->fetchAllAssoc();
-            $arrJobFields = $this->Database->prepare('select distinct a.id, a.title from tl_subjects a join tl_jobs b on (a.id = b.subjectSelection) WHERE b.published=\'1\' ORDER BY a.title;')->execute()->fetchAllAssoc();
+            $arrShortJobTypes = $this->Database->prepare('select distinct a.id, a.title from tl_jobtypes a join tl_jobs b on (a.id = b.titleSelection) WHERE a.showInLinkList = 1 AND b.published=\'1\' AND (b.start = \'\' or b.start < ?) AND (b.stop = \'\' or b.stop > ?);')->execute($intTime, $intTime)->fetchAllAssoc();
+            $arrJobTypes = $this->Database->prepare('select distinct a.id, a.title from tl_jobtypes a join tl_jobs b on (a.id = b.titleSelection) WHERE b.published=\'1\' AND (b.start = \'\' or b.start < ?) AND (b.stop = \'\' or b.stop > ?);')->execute($intTime, $intTime)->fetchAllAssoc();
+            $arrJobFields = $this->Database->prepare('select distinct a.id, a.title from tl_subjects a join tl_jobs b on (a.id = b.subjectSelection) WHERE b.published=\'1\' AND (b.start = \'\' or b.start < ?) AND (b.stop = \'\' or b.stop > ?) ORDER BY a.title;')->execute($intTime, $intTime)->fetchAllAssoc();
             $strSQL = 'select 
             a.id, 
             a.jobID as jobId, 
@@ -111,16 +112,15 @@ class JoblistModule extends \Module
             where a.published = \'1\' AND (a.start = \'\' or a.start < ?) AND (a.stop = \'\' or a.stop > ?)';
             if (($strCity = $this->Input->get('city')) != '') {
                 $strSQL .= " AND b.city = ?";
-                $objResult = $this->Database->prepare($strSQL)->execute(time(), time(), $strCity);
+                $objResult = $this->Database->prepare($strSQL)->execute($intTime, $intTime, $strCity);
                 $arrJobs = $objResult->fetchAllAssoc();
             } else {
-                $arrJobs = $this->Database->prepare($strSQL)->execute(time(), time())->fetchAllAssoc();
+                $arrJobs = $this->Database->prepare($strSQL)->execute($intTime,$intTime)->fetchAllAssoc();
             }
         } else {
             // selektiere nach Modul-Filter: Typ / Subject
-            $arrParams = [];
-            $strSql = 'select distinct a.id, a.title from tl_jobtypes a join tl_jobs b on (a.id = b.titleSelection) WHERE a.showInLinkList = 1 AND b.published=\'1\'';
-            $arrParams = [];
+            // $strSql = 'select distinct a.id, a.title from tl_jobtypes a join tl_jobs b on (a.id = b.titleSelection) WHERE a.showInLinkList = 1 AND b.published=\'1\'';
+            $arrParams = [$intTime, $intTime];
             $strFilterSql = '';
             if ($this->intSubjectFilterValue) {
                 $strFilterSql .= ' AND b.subjectSelection=?';
@@ -130,12 +130,12 @@ class JoblistModule extends \Module
                 $strFilterSql .= ' AND b.type=?';
                 $arrParams[] = $this->intTypeFilterValue;
             }
-            
-            $arrShortJobTypes = $this->Database->prepare('select distinct a.id, a.title from tl_jobtypes a join tl_jobs b on (a.id = b.titleSelection) WHERE a.showInLinkList = 1 AND b.published=\'1\'' . $strFilterSql)->execute($arrParams)->fetchAllAssoc();
+
+            $arrShortJobTypes = $this->Database->prepare('select distinct a.id, a.title from tl_jobtypes a join tl_jobs b on (a.id = b.titleSelection) WHERE a.showInLinkList = 1 AND b.published=\'1\' AND (b.start = \'\' or b.start < ?) AND (b.stop = \'\' or b.stop > ?)' . $strFilterSql)->execute($arrParams)->fetchAllAssoc();
 
 
-            $arrJobTypes = $this->Database->prepare('select distinct a.id, a.title from tl_jobtypes a join tl_jobs b on (a.id = b.titleSelection) WHERE b.published=\'1\'' . $strFilterSql)->execute($arrParams)->fetchAllAssoc();
-            $arrJobFields = $this->Database->prepare('select distinct a.id, a.title from tl_subjects a join tl_jobs b on (a.id = b.subjectSelection) WHERE b.published=\'1\'' . $strFilterSql . ' ORDER BY a.title;')->execute($arrParams)->fetchAllAssoc();
+            $arrJobTypes = $this->Database->prepare('select distinct a.id, a.title from tl_jobtypes a join tl_jobs b on (a.id = b.titleSelection) WHERE b.published=\'1\' AND (b.start = \'\' or b.start < ?) AND (b.stop = \'\' or b.stop > ?)' . $strFilterSql)->execute($arrParams)->fetchAllAssoc();
+            $arrJobFields = $this->Database->prepare('select distinct a.id, a.title from tl_subjects a join tl_jobs b on (a.id = b.subjectSelection) WHERE b.published=\'1\' AND (b.start = \'\' or b.start < ?) AND (b.stop = \'\' or b.stop > ?)' . $strFilterSql . ' ORDER BY a.title;')->execute($arrParams)->fetchAllAssoc();
             $strSQL = 'select 
                         b.id, 
                         b.jobID as jobId, 
@@ -177,19 +177,14 @@ class JoblistModule extends \Module
                         join tl_clinics a on (b.clinic = a.id) 
                         join tl_jobtypes c on (b.titleSelection = c.id) 
                         join tl_subjects d on (b.subjectSelection = d.id) 
-                        where b.published = \'1\'' . $strFilterSql . ' AND (b.start = \'\' or b.start < ?) AND (b.stop = \'\' or b.stop > ?)';
-
-                        $arrParams[] = time();
-                        $arrParams[] = time();
+                        where b.published = \'1\'' . ' AND (b.start = \'\' or b.start < ?) AND (b.stop = \'\' or b.stop > ?)' . $strFilterSql;
 
             if (($strCity = $this->Input->get('city')) != '') {
                 $strSQL .= ' AND b.city = ?';
                 $arrParams[] = $strCity;
-                // $objResult = $this->Database->prepare($strSQL)->execute(time(), time(), $this->intSubjectFilterValue, $strCity);
                 $objResult = $this->Database->prepare($strSQL)->execute($arrParams);
                 $arrJobs = $objResult->fetchAllAssoc();
             } else {
-                // $arrJobs = $this->Database->prepare($strSQL)->execute(time(), time(), $this->intSubjectFilterValue)->fetchAllAssoc();
                 $arrJobs = $this->Database->prepare($strSQL)->execute($arrParams)->fetchAllAssoc();
             }
             $this->Template->show_filter = FALSE;
@@ -306,7 +301,21 @@ class JoblistModule extends \Module
             }
         }
 
-        $this->Template->short_job_types = $arrShortJobTypes;
+        // arrShortJobTypes soll sortiert werden: Assi, Arzt, Facharzt, Leitender OA, Chef
+        // => 7, 1, 3, 4, 2
+        $arrSortedShortJobTypes = array();
+        foreach (array(7, 1, 3, 4, 2) as $intIndex) {
+            if (isset($arrShortJobTypes[$intIndex])) {
+                $arrSortedShortJobTypes[] = $arrShortJobTypes[$intIndex];
+                unset($arrShortJobTypes[$intIndex]);
+            }
+        }
+        // wenn noch (neue) übrig --> hinten anhängen
+        if (count($arrShortJobTypes)) {
+            $arrSortedShortJobTypes = array_merge($arrSortedShortJobTypes,$arrShortJobTypes);
+        }
+
+        $this->Template->short_job_types = $arrSortedShortJobTypes;//$arrShortJobTypes;
         $this->Template->job_types = $arrJobTypes;
         $this->Template->jobs = $arrJobs;
         $this->Template->job_subjects = $arrJobFields;

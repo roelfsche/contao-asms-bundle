@@ -191,23 +191,11 @@ class JobdetailsModule extends \Module
             unset($arrJob['awardImage2Alt']);
         }
 
-        // $arrJobs[$intId] = $arrJob;
-        // mapping aufbauen
-        // $arrFixedJobs[$arrJob['id']] = $intId;
-        // }
-
-        // $objDetailTemplate = new FrontendTemplate('mod_jobdetails');
-        // $objDetailTemplate->job = $arrJob;
         $objGoogleJobTemplate = new FrontendTemplate('google_job');
         $objGoogleJobTemplate->arrJob = $arrJob;
 
         $this->Template->job = $arrJob;
         $this->Template->google_job = $objGoogleJobTemplate;
-        // $this->Template->job_types = $arrJobTypes;
-        // $this->Template->jobs = $arrJobs;
-        // $this->Template->job_subjects = $arrJobFields;
-        // $this->Template->job_mapping = $arrFixedJobs;
-        // $this->Template->detailTemplate = $objDetailTemplate->parse();
         $arrSubjectImages = $this->getSubjectImages($arrJob['jobSubject']);
 
         $this->Template->subject_image = $this->getSubjectImages($arrJob['jobSubject']);

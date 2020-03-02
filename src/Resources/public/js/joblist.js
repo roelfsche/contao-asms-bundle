@@ -128,7 +128,7 @@ $(function () {
                 return false;
             }
             var dist = distance(latLon.lat, latLon.lon, lat, lon, 'K');
-            // console.log(dist);
+            console.log(job.city + ": " + dist);
             return (dist <= filterVal);
         }
 
