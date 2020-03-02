@@ -235,6 +235,11 @@ class JobdetailsModule extends \Module
 
         $this->Template->job = $arrJob;
         $this->Template->google_job = $objGoogleJobTemplate;
+
+        // title setzen
+        // nicht schön aber hat Marco vorgeschlagen und funktioniert
+        global $job_detail_title;
+        $job_detail_title = $arrJob['jobTitle'] . ' - ' . $arrJob['subjectTitle'] . ' in ' . $arrJob['city'];
     }
 
     /**
