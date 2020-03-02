@@ -338,6 +338,7 @@ $(function () {
     // $('.js-resultlist__item').on('click', (function () {
     $('.js-joblist').on('click', '.js-resultlist__item', (function () {
         var $overlay = $('#overlay'),
+            $overlayWrapper = $('.overlay-wrapper'),
             $closeButton = $('.js-close-overlay'),
             $subjectLogo = $('#js-subjectlogo'),
             $jobTitle = $('#js-jobtitle'),
@@ -396,11 +397,11 @@ $(function () {
             // console.log(job);
             setJobDetails(job);
 
-
+            $overlayWrapper.scrollTop(0);
             $overlay.css({
                 'z-index': 1000,
-                'opacity': 1,
-                scrollTop: 0
+                'opacity': 1//,
+                // scrollTop: 0
             });
         }
 
