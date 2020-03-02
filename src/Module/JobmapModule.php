@@ -39,7 +39,7 @@ class JobmapModule extends \Module
             return $template->parse();
         } else {
             // if ($this->intSubjectFilterValue == 0) {
-            $GLOBALS['TL_JAVASCRIPT'][] = 'https://code.jquery.com/jquery-3.4.1.min.js';
+            // $GLOBALS['TL_JAVASCRIPT'][] = 'https://code.jquery.com/jquery-3.4.1.min.js';
             $GLOBALS['TL_JAVASCRIPT'][] = 'bundles/contaoasms/js/leaflet.js';
             $GLOBALS['TL_JAVASCRIPT'][] = 'bundles/contaoasms/js/map.js';
             $GLOBALS['TL_CSS'][] = 'bundles/contaoasms/css/leaflet.css';

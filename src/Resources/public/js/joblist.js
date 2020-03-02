@@ -327,8 +327,8 @@ $(function () {
             $filterTypeSelect.val(0);
             $filterJobId.val('');
             $("input[name='job_kind[]']").prop('checked', false);
-            $filterSearchButton.trigger('click')
-
+            $filterSearchButton.trigger('click');
+            $('.js-short-job-type').removeClass('active');
             $('#js-next-greater-surrounding-joblist').hide();
 
         });
@@ -351,6 +351,7 @@ $(function () {
             $jobDescription = $('#js-jobdescription'),
             $youOffer = $('#js-youoffer'),
             $weOffer = $('#js-weoffer'),
+            $aboutUs = $('#js-aboutus'),
             $jobId = $('#js-jobid'),
             $clinicName = $('#clinicName'),
             $clinicAddress = $('#clinicAddress'),
@@ -445,6 +446,7 @@ $(function () {
             // }
             $youOffer.html(job.youOffer);
             $weOffer.html(job.weOffer);
+            $aboutUs.html(job.aboutUs);
             $jobId.text(job.jobId);
             if (job.jobId.match(/REHA/)) {
                 $rehaDetailHeadline.show();

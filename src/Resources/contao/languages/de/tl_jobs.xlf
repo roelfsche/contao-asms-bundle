@@ -64,13 +64,14 @@
                 <target>Stellenbezeichnung</target>
             </trans-unit>
             <trans-unit id="tl_jobs.title.1">
-                <target>Die Stellen-ID wird vom System generiert.</target>
+                <target>Geben Sie einen aussagekräftigen Titel ein.</target>
             </trans-unit>
             <trans-unit id="tl_jobs.jobID.0">
                 <target>Stellen-ID</target>
             </trans-unit>
             <trans-unit id="tl_jobs.jobID.1">
                 <target>Die Stellen-ID wird vom System generiert</target>
+                <target>Die Stellen-ID wird vom System generiert.</target>
             </trans-unit>
             <trans-unit id="tl_jobs.alias.0">
                 <target>Alias</target>

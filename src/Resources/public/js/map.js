@@ -16,8 +16,8 @@ $(function () {
         $filterButton = $('.js-search-button');
 
     var map = L.map('jobmap', {
-        minZoom: 8,
-        maxZoom: 12
+        minZoom: 6,
+        maxZoom: 10
     }).setView([51.133481, 10.018343], 6);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

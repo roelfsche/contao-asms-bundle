@@ -45,8 +45,8 @@ class JoblistModule extends \Module
             return $template->parse();
         } else {
             // if ($this->intSubjectFilterValue == 0) {
-            $GLOBALS['TL_JAVASCRIPT'][] = 'https://code.jquery.com/jquery-3.4.1.min.js';
-            $GLOBALS['TL_JAVASCRIPT'][] = '//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js';
+            // $GLOBALS['TL_JAVASCRIPT'][] = 'https://code.jquery.com/jquery-3.4.1.min.js';
+            $GLOBALS['TL_JAVASCRIPT'][] = 'bundles/contaoasms/js/list.min.js';
             $GLOBALS['TL_JAVASCRIPT'][] = 'bundles/contaoasms/js/joblist.js';
             // }
         }
@@ -71,7 +71,7 @@ class JoblistModule extends \Module
             a.id, 
             a.jobID as jobId, 
             a.alias as jobAlias,
-            a.typeFulltime, a.typeParttime, a.typeLimited, a.weOffer, a.youOffer, a.applicationNotes, 
+            a.typeFulltime, a.typeParttime, a.typeLimited, a.weOffer, a.youOffer, a.applicationNotes, a.aboutUs,
             a.titleSelection as jobType,
             a.subjectSelection as jobSubject,
             b.title as clinicTitle, 
@@ -140,7 +140,7 @@ class JoblistModule extends \Module
                         b.id, 
                         b.jobID as jobId, 
                         b.alias as jobAlias,
-                        b.typeFulltime, b.typeParttime, b.typeLimited, b.weOffer, b.youOffer, b.applicationNotes, 
+                        b.typeFulltime, b.typeParttime, b.typeLimited, b.weOffer, b.youOffer, b.applicationNotes, b.aboutUs,
                         b.titleSelection as jobType,
                         b.subjectSelection as jobSubject,
                         a.title as clinicTitle, 
