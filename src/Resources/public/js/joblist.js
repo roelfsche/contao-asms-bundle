@@ -16,7 +16,7 @@ $(function () {
     var latLon = { lat: 0, lon: 0 };
 
     var listConfig = {
-        valueNames: ['id', 'jobTitle', 'jobTitle2', 'jobType', 'jobSubject', 'jobId', 'subjectTitle', 'subjectTitle2', 'clinicTitle', 'city', 'city2', 'zipCode', 'typeFulltime', 'typeFullParttime', 'typeParttime', 'typeLimited'],
+        valueNames: ['id', 'jobTitle', 'jobTitle2', 'jobType', 'jobSubject', 'jobId', 'subjectTitle', 'subjectTitle2', 'clinicTitle', 'city', 'city2', 'zipCode', 'zipCodeCity', 'typeFulltime', 'typeFullParttime', 'typeParttime', 'typeLimited'],
         item: 'js-list-entry-template'
     }
 
@@ -92,7 +92,7 @@ $(function () {
         var myList = theList;
 
         function _filterGlobal(job) {
-            var globalVal = $filterGlobal.val();
+            var globalVal = $filterGlobal.val().trim();
 
             var regExp = new RegExp(globalVal, 'i');
             return (job.jobTitle.search(regExp) != -1 ||
