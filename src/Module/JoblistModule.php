@@ -275,7 +275,6 @@ class JoblistModule extends \Module
             $arrJob['typeFulltime'] = ($arrJob['typeFulltime'] == 1) ? 'Vollzeit' : '';
             $arrJob['typeParttime'] = ($arrJob['typeParttime'] == 1) ? 'Teilzeit' : '';
             $arrJob['typeLimited'] = ($arrJob['typeLimited'] == 1) ? 'Befristet' : '';
-            $arrJob['mailto'] = $arrJob['contactperson_email'] . '?subject=' . rawurlencode($arrJob['jobTitle'] . ' - ' . $arrJob['subjectTitle'] . ' in ' . $arrJob['city']);
 
             if (strlen(trim($arrJob['url1']))) {
                 $arrJob['url'] = trim($arrJob['url1']);
@@ -311,6 +310,8 @@ class JoblistModule extends \Module
             foreach ($arrFieldKeys as $strKey) {
                 unset($arrJob['clinic_' . $strKey]);
             }
+            
+            $arrJob['mailto'] = $arrJob['contactperson_email'] . '?subject=' . rawurlencode($arrJob['jobTitle'] . ' - ' . $arrJob['subjectTitle'] . ' in ' . $arrJob['city']);
 
             // Auszeichungen
             if ($arrJob['awardImage1'] != NULL) {
