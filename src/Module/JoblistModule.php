@@ -217,7 +217,8 @@ class JoblistModule extends \Module
         $arrFixedJobs = [];
         foreach ($arrJobs as $intId => $arrJob) {
             // city aus title raus
-            $arrJob['clinicTitle'] = str_replace(' ' . $arrJob['city'], '', $arrJob['clinicTitle']);
+            // $arrJob['clinicTitle'] = str_replace(' ' . $arrJob['city'], '', $arrJob['clinicTitle']);
+            $arrJob['zipCodeCity'] = $arrJob['zipCode'] . ' ' . $arrJob['city'];
 
             // Logo
             if ($arrJob['clinicLogo'] != NULL) {
@@ -255,7 +256,7 @@ class JoblistModule extends \Module
             $arrJob['typeFulltime'] = ($arrJob['typeFulltime'] == 1) ? 'Vollzeit' : '';
             $arrJob['typeParttime'] = ($arrJob['typeParttime'] == 1) ? 'Teilzeit' : '';
             $arrJob['typeLimited'] = ($arrJob['typeLimited'] == 1) ? 'Befristet' : '';
-            $arrJob['mailto'] = $arrJob['contactperson_email'] . '?subject=' . rawurlencode($arrJob['jobTitle'] . ' - ' . $arrJob['subjectTitle']);
+            $arrJob['mailto'] = $arrJob['contactperson_email'] . '?subject=' . rawurlencode($arrJob['jobTitle'] . ' - ' . $arrJob['subjectTitle'] . ' in ' . $arrJob['city']);
 
             if (strlen(trim($arrJob['url1']))) {
                 $arrJob['url'] = trim($arrJob['url1']);
