@@ -358,20 +358,31 @@ class JoblistModule extends \Module
 
         // arrShortJobTypes soll sortiert werden: Assi, Arzt, Facharzt, Leitender OA, Chef
         // => 7, 1, 3, 4, 2
-        $arrSortedShortJobTypes = array();
-        foreach (array(7, 1, 3, 4, 2) as $intIndex) {
-            if (isset($arrShortJobTypes[$intIndex])) {
-                $arrSortedShortJobTypes[] = $arrShortJobTypes[$intIndex];
-                unset($arrShortJobTypes[$intIndex]);
+        $sortJobArr = function ($arr) {
+            // db-indizes nutzen
+            $arrTmp = [];
+            foreach ($arr as $arrJob) {
+                $arrTmp[$arrJob['id']] = $arrJob; //['title'];
             }
-        }
-        // wenn noch (neue) übrig --> hinten anhängen
-        if (count($arrShortJobTypes)) {
-            $arrSortedShortJobTypes = array_merge($arrSortedShortJobTypes, $arrShortJobTypes);
-        }
+            $arrRet = [];
+            foreach (array(7, 1, 3, 4, 2) as $intIndex) {
+                if (isset($arrTmp[$intIndex])) {
+                    $arrRet[] = $arrTmp[$intIndex];
+                    unset($arrTmp[$intIndex]);
+                }
+            }
+            // wenn noch (neue) übrig --> hinten anhängen
+            if (count($arrTmp)) {
+                $arrRet = array_merge($arrRet, $arrTmp);
+            }
+            return $arrRet;
+        };
+        $arrSortedShortJobTypes = $sortJobArr($arrShortJobTypes);
+        $arrSortedJobTypes = $sortJobArr($arrJobTypes);
+
 
         $this->Template->short_job_types = $arrSortedShortJobTypes; //$arrShortJobTypes;
-        $this->Template->job_types = $arrJobTypes;
+        $this->Template->job_types = $arrSortedJobTypes;
         $this->Template->jobs = $arrJobs;
         $this->Template->job_subjects = $arrJobFields;
         $this->Template->job_mapping = $arrFixedJobs;
