@@ -108,8 +108,10 @@ class JoblistModule extends \Module
             b.url1, 
             b.url2, 
             b.clinicPDF, 
+            b.addAwardImage1,
             b.awardImage1,
             b.awardImage1Alt,
+            b.addAwardImage2,
             b.awardImage2,
             b.awardImage2Alt,
             b.equality, 
@@ -186,8 +188,10 @@ class JoblistModule extends \Module
                         a.url1, 
                         a.url2, 
                         a.clinicPDF, 
+                        a.addAwardImage1,
                         a.awardImage1,
                         a.awardImage1Alt,
+                        a.addAwardImage2,
                         a.awardImage2,
                         a.awardImage2Alt,
                         a.equality, 
@@ -310,11 +314,11 @@ class JoblistModule extends \Module
             foreach ($arrFieldKeys as $strKey) {
                 unset($arrJob['clinic_' . $strKey]);
             }
-            
+
             $arrJob['mailto'] = $arrJob['contactperson_email'] . '?subject=' . rawurlencode($arrJob['jobTitle'] . ' - ' . $arrJob['subjectTitle'] . ' in ' . $arrJob['city']);
 
             // Auszeichungen
-            if ($arrJob['awardImage1'] != NULL) {
+            if ($arrJob['addAwardImage1'] == '1' && $arrJob['awardImage1'] != NULL) {
                 $objFile = FilesModel::findOneBy('uuid', $arrJob['awardImage1']);
                 if ($objFile) {
                     $arrJob['awardImage1'] = '/' . $objFile->path;
@@ -326,7 +330,7 @@ class JoblistModule extends \Module
                 unset($arrJob['awardImage1']);
                 unset($arrJob['awardImage1Alt']);
             }
-            if ($arrJob['awardImage2'] != NULL) {
+            if ($arrJob['addAwardImage2'] == '1' && $arrJob['awardImage2'] != NULL) {
                 $objFile = FilesModel::findOneBy('uuid', $arrJob['awardImage2']);
                 if ($objFile) {
                     $arrJob['awardImage2'] = '/' . $objFile->path;
