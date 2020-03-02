@@ -55,31 +55,6 @@ class JobmapModule extends \Module
      */
     protected function compile()
     {
-            // $strSQL = 'select 
-            // a.id, 
-            // b.title as clinicTitle, 
-            // b.city, 
-            // b.optionalImage,
-            // b.optionalImageAlt,
-            // b.zipCode, 
-            // b.lat, 
-            // b.lon, 
-            // b.department, 
-            // b.street, 
-            // b.houseNumber, 
-            // b.zipCode, 
-            // b.url1, 
-            // b.url2, 
-            // b.clinicPDF, 
-            // c.title as jobTitle, 
-            // d.title as subjectTitle, d.title as subjectTitle2,
-            // d.id as subjectId 
-            // from tl_jobs a 
-            // join tl_clinics b on (a.clinic = b.id) 
-            // join tl_jobtypes c on (a.titleSelection = c.id) 
-            // join tl_subjects d on (a.subjectSelection = d.id) 
-            // where a.published = \'1\' AND (a.start = \'\' or a.start < ?) AND (a.stop = \'\' or a.stop > ?)
-            // AND b.lat!=\'\' AND b.lon!=\'\'';
             $strSQL = 'select 
             a.id, 
             b.title as clinicTitle, 
@@ -122,11 +97,6 @@ class JobmapModule extends \Module
                 unset($arrJob['optionalImage']);
                 unset($arrJob['optionalImageAlt']);
             }
-
-            // $arrJob['typeFulltime'] = ($arrJob['typeFulltime'] == 1) ? 'Vollzeit' : '';
-            // $arrJob['typeParttime'] = ($arrJob['typeParttime'] == 1) ? 'Teilzeit' : '';
-            // $arrJob['typeLimited'] = ($arrJob['typeLimited'] == 1) ? 'Befristet' : '';
-            // $arrJob['mailto'] = $arrJob['contactperson_email'] . '?subject=' . rawurlencode($arrJob['jobTitle'] . ' - ' . $arrJob['subjectTitle']);
 
             if (strlen(trim($arrJob['url1']))) {
                 $arrJob['url'] = trim($arrJob['url1']);
@@ -178,13 +148,7 @@ class JobmapModule extends \Module
         $objDetailTemplate = new FrontendTemplate('mod_jobdetails');
         $objDetailTemplate->job = $arrJobs[0];
 
-        // $this->Template->short_job_types = $arrShortJobTypes;
-        // $this->Template->job_types = $arrJobTypes;
         $this->Template->jobs = $arrJobs;
-        // $this->Template->job_subjects = $arrJobFields;
-        // $this->Template->job_mapping = $arrFixedJobs;
-        // $this->Template->detailTemplate = $objDetailTemplate->parse();
-        // $this->Template->subject_images = $this->getSubjectImages();
     }
 
     /**
@@ -192,40 +156,40 @@ class JobmapModule extends \Module
      * 
      * Eines davon wird (zufällig ausgewählt und) auf der Detail-Seite dargestellt
      */
-    protected function getSubjectImages()
-    {
-        $arrSubjects = [];
-        $arrDbSubjects = $this->Database->prepare('SELECT id, img1, img1Alt, img2, img2Alt, img3, img3Alt FROM tl_subjects')->execute()->fetchAllAssoc();
+    // protected function getSubjectImages()
+    // {
+    //     $arrSubjects = [];
+    //     $arrDbSubjects = $this->Database->prepare('SELECT id, img1, img1Alt, img2, img2Alt, img3, img3Alt FROM tl_subjects')->execute()->fetchAllAssoc();
 
-        // schauen, ob Bilder gesetzt sind; wenn ja, dann Pfade holen
-        foreach ($arrDbSubjects as $arrSubject) {
-            $arrFiles = [];
-            $boolFound = FALSE;
-            foreach (['img1', 'img2', 'img3'] as $strFieldName) {
-                if ($strPath = $this->getPathFromFileObj($arrSubject[$strFieldName])) {
-                    $boolFound = TRUE;
-                    $arrFiles[] = [
-                        'path' => $strPath,
-                        'alt' => $arrSubject[$strFieldName . 'Alt']
-                    ];
-                }
-            }
-            if ($boolFound) {
-                $arrSubjects[$arrSubject['id']] = $arrFiles;
-            }
-        }
-        return $arrSubjects;
-    }
+    //     // schauen, ob Bilder gesetzt sind; wenn ja, dann Pfade holen
+    //     foreach ($arrDbSubjects as $arrSubject) {
+    //         $arrFiles = [];
+    //         $boolFound = FALSE;
+    //         foreach (['img1', 'img2', 'img3'] as $strFieldName) {
+    //             if ($strPath = $this->getPathFromFileObj($arrSubject[$strFieldName])) {
+    //                 $boolFound = TRUE;
+    //                 $arrFiles[] = [
+    //                     'path' => $strPath,
+    //                     'alt' => $arrSubject[$strFieldName . 'Alt']
+    //                 ];
+    //             }
+    //         }
+    //         if ($boolFound) {
+    //             $arrSubjects[$arrSubject['id']] = $arrFiles;
+    //         }
+    //     }
+    //     return $arrSubjects;
+    // }
 
-    private function getPathFromFileObj($strUuid)
-    {
-        if (!$strUuid) {
-            return FALSE;
-        }
-        $objFile =  \FilesModel::findOneBy('uuid', $strUuid);
-        if (!$objFile) {
-            return FALSE;
-        }
-        return '/' . $objFile->path;
-    }
+    // private function getPathFromFileObj($strUuid)
+    // {
+    //     if (!$strUuid) {
+    //         return FALSE;
+    //     }
+    //     $objFile =  \FilesModel::findOneBy('uuid', $strUuid);
+    //     if (!$objFile) {
+    //         return FALSE;
+    //     }
+    //     return '/' . $objFile->path;
+    // }
 }
