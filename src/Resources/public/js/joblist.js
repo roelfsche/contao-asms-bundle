@@ -503,7 +503,7 @@ $(function () {
 
             try {
                 if (detailUrl != undefined) {
-                    $jobDetailsLink.show().prop('href', detailUrl + job.jobAlias + '.html');
+                    $jobDetailsLink.css('display', 'inline-block').prop('href', detailUrl + job.jobAlias + '.html');
                 }
             } catch (e) { }
         }
