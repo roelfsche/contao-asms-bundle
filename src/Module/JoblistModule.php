@@ -82,6 +82,8 @@ class JoblistModule extends \Module
             a.contactperson_lastname, 
             a.contactperson_phone, 
             a.contactperson_email, 
+            a.subjectImage,
+            a.subjectImageAlt,
             b.title as clinicTitle, 
             b.city, 
             b.city as city2, 
@@ -158,6 +160,8 @@ class JoblistModule extends \Module
                         b.contactperson_lastname, 
                         b.contactperson_phone, 
                         b.contactperson_email, 
+                        b.subjectImage,
+                        b.subjectImageAlt,
                         a.title as clinicTitle, 
                         a.city, 
                         a.city as city2, 
@@ -216,9 +220,24 @@ class JoblistModule extends \Module
         // id -> index; Vollzeit / Teilzeit
         $arrFixedJobs = [];
         foreach ($arrJobs as $intId => $arrJob) {
-            // city aus title raus
+            // // city aus title raus
             // $arrJob['clinicTitle'] = str_replace(' ' . $arrJob['city'], '', $arrJob['clinicTitle']);
+            // Baue für extra Feld zip + City zusammen
             $arrJob['zipCodeCity'] = $arrJob['zipCode'] . ' ' . $arrJob['city'];
+
+            // Subject-Image
+            if ($arrJob['subjectImage'] != NULL) {
+                $objFile = FilesModel::findOneBy('uuid', $arrJob['subjectImage']);
+                if ($objFile) {
+                    $arrJob['subjectImage'] = '/' . $objFile->path;
+                } else {
+                    unset($arrJob['subjectImage']);
+                    unset($arrJob['subjectImageAlt']);
+                }
+            } else {
+                unset($arrJob['subjectImage']);
+                unset($arrJob['subjectImageAlt']);
+            }
 
             // Logo
             if ($arrJob['clinicLogo'] != NULL) {

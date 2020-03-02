@@ -81,7 +81,6 @@ $GLOBALS['TL_DCA'][$table] = array(
     // Palettes
     'palettes' => array(
         '__selector__'                => array('addAboutUsImage', 'availabilityFrom', /*'individualSubject', */ 'typeLimited', 'addWeOfferImage', 'has_contactperson', 'addLinkButton', 'addLink'),
-        // 'default'                     => '{lbl_general},type,clinic,jobID,title,alias,meta_description,subtitle1,subtitle2,titleSelection,subjectSelection,individualSubject;{lbl_contactperson},has_contactperson;{lbl_statement},statementText;{lbl_linkbutton},addLinkButton;{lbl_link},addLink;{lbl_teaser_image},statementImage,statementImageAlt;{lbl_aboutus},aboutUs,addAboutUsImage;{lbl_availability},availabilityFrom;{lbl_type},typeFulltime,typeParttime,typeLimited;{lbl_content},weOffer,addWeOfferImage,youOffer,applicationNotes,individualTextHeadline,individualText;{lbl_published},published,start,stop'
         'default'                     => '{lbl_general},type,clinic,jobID,title,alias,meta_description,subtitle1,subtitle2,titleSelection,subjectSelection;{lbl_contactperson},has_contactperson;{lbl_statement},statementText;{lbl_linkbutton},addLinkButton;{lbl_link},addLink;{lbl_teaser_image},statementImage,statementImageAlt;{lbl_aboutus},aboutUs,addAboutUsImage;{lbl_availability},availabilityFrom;{lbl_type},typeFulltime,typeParttime,typeLimited;{lbl_content},weOffer,addWeOfferImage,youOffer,applicationNotes,individualTextHeadline,individualText;{lbl_published},published,start,stop'
     ),
 
@@ -302,6 +301,24 @@ $GLOBALS['TL_DCA'][$table] = array(
         ),
         'statementImageAlt' => array(
             'label'                   => &$GLOBALS['TL_LANG'][$table]['alt'],
+            'exclude'                 => true,
+            'search'                  => true,
+            'inputType'               => 'text',
+            'eval'                    => array('maxlength' => 255),
+            'sql'                     => "varchar(255) NOT NULL default ''"
+        ),
+        // wird nicht angezeigt. Beim speichern wird zufällig eines von 3 Bildern aus dem Fachgebiet
+        // gewählt, wenn noch nicht gesetzt
+        'subjectImage' => array(
+            // 'label'                   => &$GLOBALS['TL_LANG'][$table]['statementImage'],
+            'exclude'                 => true,
+            'inputType'               => 'fileTree',
+            'eval'                    => array('filesOnly' => true, 'fieldType' => 'radio', 'mandatory' => true, 'tl_class' => 'clr'),
+            // save wird in update-Callbck erledigt
+            'sql'                     => "binary(16) NULL"
+        ),
+        'subjectImageAlt' => array(
+            // 'label'                   => &$GLOBALS['TL_LANG'][$table]['alt'],
             'exclude'                 => true,
             'search'                  => true,
             'inputType'               => 'text',
@@ -581,6 +598,32 @@ class tl_jobs extends Backend
         // Return if there is no ID
         if (!$dc->id) {
             return;
+        }
+
+        // setze das subject-Image
+        if ($dc->activeRecord->subjectImage == NULL) {
+            if ($dc->activeRecord->subjectSelection) {
+                $objResult = $this->Database->prepare('SELECT id, img1, img1Alt, img2, img2Alt, img3, img3Alt FROM tl_subjects where id = ? LIMIT 1;')->execute($dc->activeRecord->subjectSelection);
+                if ($objResult && $objResult->numRows == 1) {
+                    $arrSubject = $objResult->fetchAssoc();
+                    $arrImages = [];
+                    foreach (['img1', 'img2', 'img3'] as $strIndex) {
+                        if ($arrSubject[$strIndex]) {
+                            $arrImages[] = array($arrSubject[$strIndex], $arrSubject[$strIndex . 'Alt']);
+                        }
+                    }
+                    if (count($arrImages)) {
+                        if (count($arrImages) > 1) {
+                            shuffle($arrImages);
+                        }
+
+                        $objJobsModel = \vacancies\JobsModel::findByPk($dc->id);
+                        $objJobsModel->subjectImage = $arrImages[0][0];
+                        $objJobsModel->subjectImageAlt = $arrImages[0][1];
+                        $objJobsModel->save();
+                    }
+                }
+            }
         }
 
         // Update jobtitle

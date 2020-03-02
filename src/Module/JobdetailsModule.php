@@ -70,6 +70,8 @@ class JobdetailsModule extends \Module
             a.contactperson_lastname, 
             a.contactperson_phone, 
             a.contactperson_email, 
+            a.subjectImage,
+            a.subjectImageAlt,
             b.title as clinicTitle, 
             b.city, 
             b.city as city2, 
@@ -114,11 +116,22 @@ class JobdetailsModule extends \Module
         }
 
         $arrJob = $arrJobs[0];
-        // id -> index; Vollzeit / Teilzeit
-        // $arrFixedJobs = [];
-        // foreach ($arrJobs as $intId => $arrJob) {
-        // city aus title raus
-        $arrJob['clinicTitle'] = str_replace(' ' . $arrJob['city'], '', $arrJob['clinicTitle']);
+        // SubjectImage
+        // neue Jobs bringen das mit
+        if ($arrJob['subjectImage'] != NULL) {
+            $objFile = FilesModel::findOneBy('uuid', $arrJob['subjectImage']);
+            if ($objFile) {
+                $this->Template->subject_image = [
+                    'path' => '/' . $objFile->path,
+                    'alt' => $arrJob['subjectImageAlt']
+                ];
+            }
+        } else {
+            $this->Template->subject_image = $this->getSubjectImages($arrJob['jobSubject']);
+        }
+        unset($arrJob['subjectImage']);
+        unset($arrJob['subjectImageAlt']);
+
         // Logo
         if ($arrJob['clinicLogo'] != NULL) {
             $objFile = FilesModel::findOneBy('uuid', $arrJob['clinicLogo']);
@@ -164,8 +177,8 @@ class JobdetailsModule extends \Module
                 $arrJob['url'] = trim($arrJob['url2']);
             }
         }
-         //Kontaktperson: wenn nicht im Job gesetzt, dann aus der Klinik kopieren
-         $arrFieldKeys = array(
+        //Kontaktperson: wenn nicht im Job gesetzt, dann aus der Klinik kopieren
+        $arrFieldKeys = array(
             'contactperson_salutation',
             'contactperson_position',
             'contactperson_title',
@@ -222,9 +235,6 @@ class JobdetailsModule extends \Module
 
         $this->Template->job = $arrJob;
         $this->Template->google_job = $objGoogleJobTemplate;
-        $arrSubjectImages = $this->getSubjectImages($arrJob['jobSubject']);
-
-        $this->Template->subject_image = $this->getSubjectImages($arrJob['jobSubject']);
     }
 
     /**
@@ -251,7 +261,7 @@ class JobdetailsModule extends \Module
                 }
             }
             if ($boolFound) {
-                shuffle($arrFiles);
+                // shuffle($arrFiles);
                 return $arrFiles[0];
             }
         }

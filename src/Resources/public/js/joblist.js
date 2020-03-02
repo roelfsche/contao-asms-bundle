@@ -406,11 +406,17 @@ $(function () {
 
         function setJobDetails(job) {
             // setze ein bild, falls vorhanden
-            if (subjectImages[job.subjectId] != undefined) {
-                var images = subjectImages[job.subjectId];
-                var index = Math.floor(Math.random() * images.length)
-                $subjectLogo.prop('src', images[index].path)
-                    .prop('alt', images[index].alt);
+            // neue jobs bringen bereits eins mit
+            if (job.subjectImage != undefined) {
+                $subjectLogo.prop('src', job.subjectImage)
+                    .prop('alt', job.subjectImageAlt);
+            } else {
+                if (subjectImages[job.subjectId] != undefined) {
+                    var images = subjectImages[job.subjectId];
+                    var index = 0;//Math.floor(Math.random() * images.length)
+                    $subjectLogo.prop('src', images[index].path)
+                        .prop('alt', images[index].alt);
+                }
             }
             $jobName.text(job.jobTitle + " - " + job.subjectTitle);
             $jobTitle.text(job.jobTitle);
@@ -439,8 +445,8 @@ $(function () {
             if (job.optionalImage != undefined) {
                 //$logoWrapper.show();
                 $optionalImage.attr('src', job.optionalImage).attr('alt', 'optionalImageAlt');
-            } 
-            
+            }
+
             //else {
             //    $clinicLogoWrapper.hide();
             // }
