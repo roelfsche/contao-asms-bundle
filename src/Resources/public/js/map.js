@@ -1,13 +1,13 @@
 $(function () {
     var jobDetailDiv = document.getElementById('jobdetails'),
         jobMapDetailOverlayClose = document.getElementById('jsOverlayClose'),
-        jobCity = document.getElementById('clinicCity'),
-        clinicImg = document.getElementById('clinicImage'),
-        clinicName = document.getElementById('clinicName'),
-        clinicAddress = document.getElementById('clinicAddress'),
-        clinicStreet = document.getElementById('clinicStreet'),
-        clinicBrochure = document.getElementById('clinicBrochure'),
-        clinicUrl = document.getElementById('clinicUrl'),
+        jobCity = document.getElementById('js-mapClinicCity'),
+        clinicImg = document.getElementById('js-mapClinicImage'),
+        clinicName = document.getElementById('js-mapClinicName'),
+        clinicAddress = document.getElementById('js-mapClinicAddress'),
+        clinicStreet = document.getElementById('js-mapClinicStreet'),
+        clinicBrochure = document.getElementById('js-mapClinicBrochure'),
+        clinicUrl = document.getElementById('js-mapClinicUrl'),
         listAnchor = document.getElementById('js-city-joblist'),
         noJobSpan = document.getElementById('js-no-joblist');
     var activeJob = [];

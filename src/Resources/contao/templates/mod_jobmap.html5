@@ -5,16 +5,16 @@
   <div class="map_overlay">
     <div id="jobdetails" style="display: none;">
       <div id="jsOverlayClose">l</div>
-      <div class="mapoverlayheader"><span id="clinicCity">Stadt</span></div>
-      <img id="clinicImage" class="responsive" src="" alt="">
+      <div class="mapoverlayheader"><span id="js-mapClinicCity">Stadt</span></div>
+      <img id="js-mapClinicImage" class="responsive" src="" alt="">
       <div class="mapoverlaycontent">
         <p><strong>Anschrift</strong><br>
-          <span id="clinicName">Klinikname</span><br>
-          <span id="clinicStreet"></span><br>
-          <span id="clinicAddress">PLZ Ort</span>
+          <span id="js-mapClinicName">Klinikname</span><br>
+          <span id="js-mapClinicStreet"></span><br>
+          <span id="js-mapClinicAddress">PLZ Ort</span>
         </p>
-        <a id="clinicUrl" class="link link--external link--small" href="#" target="_blank" title="Zur Website" style="display: none">Zur Website</a>
-        <a id="clinicBrochure" class="link link--download link--small" href="#" title="Broschüre ansehen" target="_blank" style="display: none;">Broschüre ansehen</a>
+        <a id="js-mapClinicUrl" class="link link--external link--small" href="#" target="_blank" title="Zur Website" style="display: none">Zur Website</a>
+        <a id="js-mapClinicBrochure" class="link link--download link--small" href="#" title="Broschüre ansehen" target="_blank" style="display: none;">Broschüre ansehen</a>
         <div class="mapjoblink">
           <a id="js-city-joblist" href="{{link_url::146}}" class="btn btn--primary btn--small center">Alle Jobs am Standort</a>
           <span id="js-no-joblist" style="display: none;">Leider keine Jobs am Standort vorhanden</span>
