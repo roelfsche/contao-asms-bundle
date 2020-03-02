@@ -75,6 +75,13 @@ class JoblistModule extends \Module
             a.typeFulltime, a.typeParttime, a.typeLimited, a.weOffer, a.youOffer, a.applicationNotes, a.aboutUs,
             a.titleSelection as jobType,
             a.subjectSelection as jobSubject,
+            a.contactperson_salutation, 
+            a.contactperson_position, 
+            a.contactperson_title , 
+            a.contactperson_firstname, 
+            a.contactperson_lastname, 
+            a.contactperson_phone, 
+            a.contactperson_email, 
             b.title as clinicTitle, 
             b.city, 
             b.city as city2, 
@@ -85,12 +92,13 @@ class JoblistModule extends \Module
             b.optionalImageAlt,
             b.lat, 
             b.lon, 
-            b.contactperson_salutation, 
-            b.contactperson_title , 
-            b.contactperson_firstname, 
-            b.contactperson_lastname, 
-            b.contactperson_phone, 
-            b.contactperson_email, 
+            b.contactperson_salutation as clinic_contactperson_salutation, 
+            \'\' as clinic_contactperson_position,
+            b.contactperson_title as clinic_contactperson_title, 
+            b.contactperson_firstname as clinic_contactperson_firstname, 
+            b.contactperson_lastname  as clinic_contactperson_lastname, 
+            b.contactperson_phone as clinic_contactperson_phone, 
+            b.contactperson_email as clinic_contactperson_email, 
             b.department, 
             b.street, 
             b.houseNumber, 
@@ -115,7 +123,7 @@ class JoblistModule extends \Module
                 $objResult = $this->Database->prepare($strSQL)->execute($intTime, $intTime, $strCity);
                 $arrJobs = $objResult->fetchAllAssoc();
             } else {
-                $arrJobs = $this->Database->prepare($strSQL)->execute($intTime,$intTime)->fetchAllAssoc();
+                $arrJobs = $this->Database->prepare($strSQL)->execute($intTime, $intTime)->fetchAllAssoc();
             }
         } else {
             // selektiere nach Modul-Filter: Typ / Subject
@@ -143,6 +151,13 @@ class JoblistModule extends \Module
                         b.typeFulltime, b.typeParttime, b.typeLimited, b.weOffer, b.youOffer, b.applicationNotes, b.aboutUs,
                         b.titleSelection as jobType,
                         b.subjectSelection as jobSubject,
+                        b.contactperson_salutation, 
+                        b.contactperson_position, 
+                        b.contactperson_title , 
+                        b.contactperson_firstname, 
+                        b.contactperson_lastname, 
+                        b.contactperson_phone, 
+                        b.contactperson_email, 
                         a.title as clinicTitle, 
                         a.city, 
                         a.city as city2, 
@@ -153,12 +168,13 @@ class JoblistModule extends \Module
                         a.optionalImageAlt,
                         a.lat, 
                         a.lon, 
-                        a.contactperson_salutation, 
-                        a.contactperson_title , 
-                        a.contactperson_firstname, 
-                        a.contactperson_lastname, 
-                        a.contactperson_phone, 
-                        a.contactperson_email, 
+                        a.contactperson_salutation as clinic_contactperson_salutation, 
+                        \'\' as clinic_contactperson_position,
+                        a.contactperson_title as clinic_contactperson_title, 
+                        a.contactperson_firstname as clinic_contactperson_firstname, 
+                        a.contactperson_lastname  as clinic_contactperson_lastname, 
+                        a.contactperson_phone as clinic_contactperson_phone, 
+                        a.contactperson_email as clinic_contactperson_email, 
                         a.department, 
                         a.street, 
                         a.houseNumber, 
@@ -257,6 +273,25 @@ class JoblistModule extends \Module
                 unset($arrJob['clinicPDF']);
             }
 
+            //Kontaktperson: wenn nicht im Job gesetzt, dann aus der Klinik kopieren
+            $arrFieldKeys = array(
+                'contactperson_salutation',
+                'contactperson_position',
+                'contactperson_title',
+                'contactperson_firstname',
+                'contactperson_lastname',
+                'contactperson_phone',
+                'contactperson_email',
+            );
+            if (!strlen(trim($arrJob['contactperson_firstname']))) {
+                foreach ($arrFieldKeys as $strKey) {
+                    $arrJob[$strKey] = $arrJob['clinic_' . $strKey];
+                }
+            }
+            foreach ($arrFieldKeys as $strKey) {
+                unset($arrJob['clinic_' . $strKey]);
+            }
+
             // Auszeichungen
             if ($arrJob['awardImage1'] != NULL) {
                 $objFile = FilesModel::findOneBy('uuid', $arrJob['awardImage1']);
@@ -312,10 +347,10 @@ class JoblistModule extends \Module
         }
         // wenn noch (neue) übrig --> hinten anhängen
         if (count($arrShortJobTypes)) {
-            $arrSortedShortJobTypes = array_merge($arrSortedShortJobTypes,$arrShortJobTypes);
+            $arrSortedShortJobTypes = array_merge($arrSortedShortJobTypes, $arrShortJobTypes);
         }
 
-        $this->Template->short_job_types = $arrSortedShortJobTypes;//$arrShortJobTypes;
+        $this->Template->short_job_types = $arrSortedShortJobTypes; //$arrShortJobTypes;
         $this->Template->job_types = $arrJobTypes;
         $this->Template->jobs = $arrJobs;
         $this->Template->job_subjects = $arrJobFields;

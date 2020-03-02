@@ -63,6 +63,13 @@ class JobdetailsModule extends \Module
             a.titleSelection as jobType,
             a.tstamp,
             a.subjectSelection as jobSubject,
+            a.contactperson_salutation, 
+            a.contactperson_position, 
+            a.contactperson_title , 
+            a.contactperson_firstname, 
+            a.contactperson_lastname, 
+            a.contactperson_phone, 
+            a.contactperson_email, 
             b.title as clinicTitle, 
             b.city, 
             b.city as city2, 
@@ -73,13 +80,14 @@ class JobdetailsModule extends \Module
             b.optionalImageAlt,
             b.zipCode, 
             b.lat, 
-            b.lon, 
-            b.contactperson_salutation, 
-            b.contactperson_title , 
-            b.contactperson_firstname, 
-            b.contactperson_lastname, 
-            b.contactperson_phone, 
-            b.contactperson_email, 
+            b.lon,
+            b.contactperson_salutation as clinic_contactperson_salutation, 
+            \'\' as clinic_contactperson_position,
+            b.contactperson_title as clinic_contactperson_title, 
+            b.contactperson_firstname as clinic_contactperson_firstname, 
+            b.contactperson_lastname  as clinic_contactperson_lastname, 
+            b.contactperson_phone as clinic_contactperson_phone, 
+            b.contactperson_email as clinic_contactperson_email,  
             b.department, 
             b.street, 
             b.houseNumber, 
@@ -155,6 +163,24 @@ class JobdetailsModule extends \Module
             if (strlen(trim($arrJob['url2']))) {
                 $arrJob['url'] = trim($arrJob['url2']);
             }
+        }
+         //Kontaktperson: wenn nicht im Job gesetzt, dann aus der Klinik kopieren
+         $arrFieldKeys = array(
+            'contactperson_salutation',
+            'contactperson_position',
+            'contactperson_title',
+            'contactperson_firstname',
+            'contactperson_lastname',
+            'contactperson_phone',
+            'contactperson_email',
+        );
+        if (!strlen(trim($arrJob['contactperson_firstname']))) {
+            foreach ($arrFieldKeys as $strKey) {
+                $arrJob[$strKey] = $arrJob['clinic_' . $strKey];
+            }
+        }
+        foreach ($arrFieldKeys as $strKey) {
+            unset($arrJob['clinic_' . $strKey]);
         }
         // Brochüre
         if ($arrJob['clinicPDF'] != NULL) {
