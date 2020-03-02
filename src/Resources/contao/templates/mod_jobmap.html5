@@ -17,7 +17,7 @@
         <a id="js-mapClinicBrochure" class="link link--download link--small" href="#" title="Broschüre ansehen" target="_blank" style="display: none;">Broschüre ansehen</a>
         <div class="mapjoblink">
           <a id="js-city-joblist" href="{{link_url::146}}" class="btn btn--primary btn--small center">Alle Jobs am Standort</a>
-          <span id="js-no-joblist" style="display: none;">Leider keine Jobs am Standort vorhanden</span>
+          <span id="js-no-joblist" class="no-jobs" style="display: none;">Leider haben wir aktuell keine offenen Stellenangebote. Wir freuen uns aber über Ihre Initiativbewerbung.</span>
         </div>
       </div>
     </div>
