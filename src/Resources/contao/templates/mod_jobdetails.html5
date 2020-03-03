@@ -81,9 +81,9 @@
       <div class="col-12 col-md-6">
         <div style="<?php echo (($this->job && !$this->job['awardImage1'] && !$this->job['awardImage2']) ? 'display:none;' : '') ?>" id="js-award-div-wrapper">
           <p class="clinicdetailsubline">Auszeichnungen</p>
-          <div class="row">
-            <div style="<?php echo (($this->job && !$this->job['awardImage1']) ? 'display:none;' : '') ?>" class="col-6 js-award-div"><img src="<?php echo (($this->job && $this->job['awardImage1']) ? $this->job['awardImage1'] : '') ?>" alt=""></div>
-            <div style="<?php echo (($this->job && !$this->job['awardImage2']) ? 'display:none;' : '') ?>" class="col-6 js-award-div"><img src="<?php echo (($this->job && $this->job['awardImage2']) ? $this->job['awardImage2'] : '') ?>" alt=""></div>
+          <div class="awardimagewrapper">
+            <div style="<?php echo (($this->job && !$this->job['awardImage1']) ? 'display:none;' : '') ?>" class="js-award-div awardimage"><img src="<?php echo (($this->job && $this->job['awardImage1']) ? $this->job['awardImage1'] : '') ?>" alt=""></div>
+            <div style="<?php echo (($this->job && !$this->job['awardImage2']) ? 'display:none;' : '') ?>" class="js-award-div awardimage"><img src="<?php echo (($this->job && $this->job['awardImage2']) ? $this->job['awardImage2'] : '') ?>" alt=""></div>
           </div>
         </div>
       </div>
