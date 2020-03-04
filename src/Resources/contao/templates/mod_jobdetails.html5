@@ -43,7 +43,7 @@
         <h3 class="color-darkblue clinicdetailheadline">Alles Wichtige auf einen Blick</h3>
       </div>
 
-      <div class="col-12 col-md-6">
+      <div class="col-12 col-md-6 clinicdetailspacer">
         <p class="clinicdetailsubline">Ihr Ansprechpartner/in</p>
         <p>
           <span id="clinicContactName"><?php echo (($this->job) ? $this->job['contactperson_title'] . ' ' . $this->job['contactperson_firstname'] . ' ' . $this->job['contactperson_lastname']  : '') ?></span><br>
@@ -56,7 +56,7 @@
         </div>-->
       </div>
 
-      <div class="col-12 col-md-6">
+      <div class="col-12 col-md-6 clinicdetailspacer">
         <p class="clinicdetailsubline">Anschrift</p>
         <p>
           <span id="clinicName"><?php echo (($this->job) ? $this->job['clinicTitle'] : '') ?></span><br>
@@ -71,25 +71,21 @@
       </div>
     </div>
 
-    <div class="clinicdetailspacer"></div>
-
     <div class="row">
-      <div class="col-12 col-md-6">
+      <div class="col-12 col-md-6 clinicdetailspacer">
         <p class="clinicdetailsubline">Ihr Arbeitsplatz</p>
         <img id="clinicImage" class="clinicimage" src="<?php echo (($this->job && isset($this->job['optionalImage'])) ? $this->job['optionalImage'] : '/assets/asms/img/clinic_default.png') ?>" alt="Foto der Einrichtung">
       </div>
-      <div class="col-12 col-md-6">
+      <div class="col-12 col-md-6 clinicdetailspacer">
         <div style="<?php echo (($this->job && !$this->job['awardImage1'] && !$this->job['awardImage2']) ? 'display:none;' : '') ?>" id="js-award-div-wrapper">
           <p class="clinicdetailsubline">Auszeichnungen</p>
-          <div class="row">
-            <div style="<?php echo (($this->job && !$this->job['awardImage1']) ? 'display:none;' : '') ?>" class="col-6 js-award-div"><img src="<?php echo (($this->job && $this->job['awardImage1']) ? $this->job['awardImage1'] : '') ?>" alt=""></div>
-            <div style="<?php echo (($this->job && !$this->job['awardImage2']) ? 'display:none;' : '') ?>" class="col-6 js-award-div"><img src="<?php echo (($this->job && $this->job['awardImage2']) ? $this->job['awardImage2'] : '') ?>" alt=""></div>
+          <div class="awardimagewrapper">
+            <div style="<?php echo (($this->job && !$this->job['awardImage1']) ? 'display:none;' : '') ?>" class="js-award-div awardimage"><img src="<?php echo (($this->job && $this->job['awardImage1']) ? $this->job['awardImage1'] : '') ?>" alt=""></div>
+            <div style="<?php echo (($this->job && !$this->job['awardImage2']) ? 'display:none;' : '') ?>" class="js-award-div awardimage"><img src="<?php echo (($this->job && $this->job['awardImage2']) ? $this->job['awardImage2'] : '') ?>" alt=""></div>
           </div>
         </div>
       </div>
     </div>
-
-    <div class="clinicdetailspacer"></div>
 
     <div class="row">
       <div class="col-12">
