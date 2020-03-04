@@ -645,7 +645,7 @@ class tl_jobs extends Backend
         // Update alias
         if ($dc->activeRecord->alias == '') {
             $objJobsModel = \vacancies\JobsModel::findByPk($dc->id);
-            $varValue = standardize(String::restoreBasicEntities($objJobsModel->title));
+            $varValue = standardize(\StringUtil::restoreBasicEntities($objJobsModel->title));
             if (\vacancies\JobsModel::findBy('alias', $varValue)) {
                 $objJobsModel->alias = $varValue . '-' . $dc->id;
             } else {
