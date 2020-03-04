@@ -242,7 +242,7 @@ class JobdetailsModule extends \Module
         // title setzen
         // nicht schön aber hat Marco vorgeschlagen und funktioniert
         global $job_detail_title;
-        $job_detail_title = 'Stellenangebot ' . $arrJob['jobTitle'] . ' - ' . $arrJob['subjectTitle'] . ' in ' . $arrJob['city'];
+        $job_detail_title = 'Stellenangebot ✔ ' . $arrJob['jobTitle'] . ' ✔ ' . $arrJob['subjectTitle'] . ' in ' . $arrJob['city'];
     }
 
     /**
