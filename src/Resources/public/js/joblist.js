@@ -379,6 +379,8 @@ $(function () {
             });
         })
 
+        console.log(this);
+
         return function (e) {
             e.preventDefault();
             var $id = $(this).find('.id');
