@@ -379,6 +379,8 @@ $(function () {
             });
         })
 
+        $(this).addClass('active');
+
         return function (e) {
             e.preventDefault();
             var $id = $(this).find('.id');
