@@ -243,6 +243,10 @@ class JobdetailsModule extends \Module
         // nicht schön aber hat Marco vorgeschlagen und funktioniert
         global $job_detail_title;
         $job_detail_title = 'Stellenangebot - ' . $arrJob['jobTitle'] . ' - ' . $arrJob['subjectTitle'] . ' in ' . $arrJob['city'] . ' - Arzt sein. Mensch sein.';
+        
+        global $job_detail_decription;
+        $job_detail_decription = 'Stellenangebot ✔ ' . $arrJob['jobTitle'] . ' ✔ ' . $arrJob['subjectTitle'] . ' in ' . $arrJob['city'] . '. ➤ Traumjob gefällig?';
+
     }
 
     /**
