@@ -247,6 +247,9 @@ class JobdetailsModule extends \Module
         global $job_detail_decription;
         $job_detail_decription = 'Stellenangebot ✔ ' . $arrJob['jobTitle'] . ' ✔ ' . $arrJob['subjectTitle'] . ' in ' . $arrJob['city'] . '. ➤ Traumjob gefällig?';
 
+        global $job_share_image;
+        $job_share_image = $this->subject_image['path'];
+
     }
 
     /**
