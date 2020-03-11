@@ -373,9 +373,12 @@ $(function () {
 
         $closeButton.on('click', function (e) {
             e.preventDefault();
+            $('.resultlist__item').removeClass('active-list');
+            $('html').removeClass('show-overlay');
+            $('#overlay').removeClass('active');
             $overlay.css({
-                'z-index': -5,
-                'opacity': 0
+              'z-index': -5,
+              'opacity': 0
             });
         })
 
@@ -403,6 +406,9 @@ $(function () {
                 'opacity': 1//,
                 // scrollTop: 0
             });
+            $(this).addClass('active-list');
+            $('html').addClass('show-overlay');
+            $('#overlay').addClass('active');
         }
 
         function setJobDetails(job) {
