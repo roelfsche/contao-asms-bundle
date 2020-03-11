@@ -1,6 +1,6 @@
 <div class="row" style="position: relative">
   <div class="col-sm-12">
-    <div id="jobmap" style="height: 600px; width: 100%"></div>
+    <div id="jobmap"></div>
   </div>
   <div class="map_overlay">
     <div id="jobdetails" style="display: none;">
