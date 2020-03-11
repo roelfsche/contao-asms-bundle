@@ -375,6 +375,7 @@ $(function () {
         $closeButton.on('click', function (e) {
             e.preventDefault();
             $('html').removeClass('show-overlay');
+            $('body').removeClass('show-overlay');
             $('#overlay').removeClass('active');
             $overlay.css({
               'z-index': -5,
@@ -409,6 +410,7 @@ $(function () {
             $('.resultlist__item').removeClass('active-list');
             $(this).addClass('active-list');
             $('html').addClass('show-overlay');
+            $('body').addClass('show-overlay');
             $('#overlay').addClass('active');
         }
 
