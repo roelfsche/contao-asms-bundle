@@ -271,6 +271,7 @@ $(function () {
             $this.addClass('active');
             $filterTypeSelect.val($this.data('id'));
             $filterSearchButton.trigger('click');
+            $('.resultlist__item').removeClass('active-list');
         })
 
         $('.js-search-city').on('input', function () {
@@ -299,7 +300,7 @@ $(function () {
         $filterSearchButton.on('click', function (e) {
             e.preventDefault();
             filterList();
-
+            $('.resultlist__item').removeClass('active-list');
             // additional Liste
             if (parseInt($filterSurrounding.val()) && parseInt($filterSurrounding.val()) != 100) {
                 $('#js-next-greater-surrounding-joblist').show();
@@ -330,7 +331,7 @@ $(function () {
             $filterSearchButton.trigger('click');
             $('.js-short-job-type').removeClass('active');
             $('#js-next-greater-surrounding-joblist').hide();
-
+            $('.resultlist__item').removeClass('active-list');
         });
     }
 
@@ -373,7 +374,6 @@ $(function () {
 
         $closeButton.on('click', function (e) {
             e.preventDefault();
-            $('.resultlist__item').removeClass('active-list');
             $('html').removeClass('show-overlay');
             $('#overlay').removeClass('active');
             $overlay.css({
@@ -406,6 +406,7 @@ $(function () {
                 'opacity': 1//,
                 // scrollTop: 0
             });
+            $('.resultlist__item').removeClass('active-list');
             $(this).addClass('active-list');
             $('html').addClass('show-overlay');
             $('#overlay').addClass('active');
