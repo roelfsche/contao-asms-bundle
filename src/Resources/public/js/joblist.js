@@ -12,6 +12,7 @@ $(function () {
         $jobCountSpan = $('#js-jobcount-span'),
         $jobCountArticle = $('#js-count-article'),
         $jobCount = $('#js-job-count'),
+        $searchResults = $('.js-search-results'),
         nextGreaterSurroundingList = null;
     var latLon = { lat: 0, lon: 0 };
 
@@ -301,6 +302,10 @@ $(function () {
             e.preventDefault();
             filterList();
             $('.resultlist__item').removeClass('active-list');
+            // scrolle in mobile zur liste
+            if (window.innerWidth < 768) {
+                $('html, body').animate({ scrollTop: $searchResults.offset().top }, 400);
+            }
             // additional Liste
             if (parseInt($filterSurrounding.val()) && parseInt($filterSurrounding.val()) != 100) {
                 $('#js-next-greater-surrounding-joblist').show();
