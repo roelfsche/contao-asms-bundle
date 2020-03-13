@@ -134,6 +134,11 @@ class JobdetailsModule extends \Module
         unset($arrJob['subjectImage']);
         unset($arrJob['subjectImageAlt']);
 
+        global $jobImage;
+        $jobImage = '//' . \Environment::get('httpHost') . $this->Template->subject_image['path'];
+
+
+
         // Logo
         if ($arrJob['clinicLogo'] != NULL) {
             $objFile = FilesModel::findOneBy('uuid', $arrJob['clinicLogo']);
@@ -243,13 +248,12 @@ class JobdetailsModule extends \Module
         // nicht schön aber hat Marco vorgeschlagen und funktioniert
         global $job_detail_title;
         $job_detail_title = 'Stellenangebot - ' . $arrJob['jobTitle'] . ' - ' . $arrJob['subjectTitle'] . ' in ' . $arrJob['city'] . ' - Arzt sein. Mensch sein.';
-        
+
         global $job_detail_decription;
         $job_detail_decription = 'Stellenangebot ✔ ' . $arrJob['jobTitle'] . ' ✔ ' . $arrJob['subjectTitle'] . ' in ' . $arrJob['city'] . '. ➤ Traumjob gefällig?';
 
         global $job_share_image;
         $job_share_image = $this->subject_image['path'];
-
     }
 
     /**
