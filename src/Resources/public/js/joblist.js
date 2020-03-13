@@ -337,6 +337,7 @@ $(function () {
             $('.js-short-job-type').removeClass('active');
             $('#js-next-greater-surrounding-joblist').hide();
             $('.resultlist__item').removeClass('active-list');
+            $('.js-close-overlay').focus();
         });
     }
 
