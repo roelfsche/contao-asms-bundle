@@ -68,6 +68,10 @@ $(function () {
         })
     });
 
+    // Liste initial einmal updaten, damit das dom korrekt manipuliert wird
+    // (auch auf seiten, wo keine filter und nur x / 0 Jobangebote..)
+    list.update();
+    
     // ...initiales Ausblenden 
     $('.js-typefulltime, .js-typefullparttime, .js-typeparttime, .js-typelimited').each(function (i, elem) {
         var $elem = $(elem);
