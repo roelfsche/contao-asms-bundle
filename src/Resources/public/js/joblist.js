@@ -17,8 +17,9 @@ $(function () {
     var latLon = { lat: 0, lon: 0 };
 
     var listConfig = {
-        valueNames: ['id', 'jobTitle', 'jobTitle2', 'jobType', 'jobSubject', 'jobId', 'subjectTitle', 'subjectTitle2', 'clinicTitle', 'city', 'city2', 'zipCode', 'zipCodeCity', 'typeFulltime', 'typeFullParttime', 'typeParttime', 'typeLimited'],
-        item: 'js-list-entry-template'
+        valueNames: ['id', 'jobTitle', 'jobType', 'jobSubject', 'jobId', 'subjectTitle', 'clinicTitle', 'city', 'zipCode', 'zipCodeCity', 'typeFulltime', 'typeFullParttime', 'typeParttime', 'typeLimited'],
+        // valueNames: ['id', 'jobTitle', 'jobTitle2', 'jobType', 'jobSubject', 'jobId', 'subjectTitle', 'subjectTitle2', 'clinicTitle', 'city', 'city2', 'zipCode', 'zipCodeCity', 'typeFulltime', 'typeFullParttime', 'typeParttime', 'typeLimited'],
+        // item: 'js-list-entry-template'
     }
 
     // Pagination-Config
@@ -29,7 +30,8 @@ $(function () {
         }
     }
 
-    var list = new List('js-joblist', listConfig, jobs);
+    var list = new List('js-joblist', listConfig);
+    // var list = new List('js-joblist', listConfig, jobs);
 
     // blende nach pagination / filter leere Elemente aus (Vollzeit / Teilzeit) ...
     list.on('updated', function (list) {

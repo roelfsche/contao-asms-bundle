@@ -12,7 +12,7 @@
                             <input class="search_form__input js-search-city" type="text" name="place" placeholder="PLZ/Ort">
                         </div>
                         <div class="col-12 col-sm-6 col-lg-2 order-lg-3">
-                            <select class="search_form__select js-search-surrounding" name="range"  disabled>
+                            <select class="search_form__select js-search-surrounding" name="range" disabled>
                                 <option value="0">Umkreis</option>
                                 <option value="50">bis 50km</option>
                                 <option value="100">bis 100km</option>
@@ -90,19 +90,65 @@
                 <span id="js-jobcount-span" class="jobcount">Aktuell <span id="js-count-article">sind</span> <strong><span id="js-job-count"><?php echo count($this->jobs) ?></span> Stellenangebot<span id="js-headline-plural">e</span></strong> für Ärztinnen und Ärzte verfügbar.</span>
                 <span id="js-no-jobcount-span" class="jobcount" style="display: none;">Aktuell sind leider keine Stellenangebote verfügbar.</span>
                 <div id="js-joblist">
-                    <ul class="resultlist list js-joblist"> </ul>
-                    <ul class="pagination"></ul>
+                    <ul class="resultlist list js-joblist">
+                        <?php foreach($this->jobs as $arrJob) : ?>
+
+                        <li class="resultlist__item _js-resultlist__item">
+                            <div style="display: none;">
+                                <span class="id"><?php echo $arrJob['id'] ?></span>
+                                <span class="zipCode"><?php echo $arrJob['zipCode'] ?></span>
+                                <span class="city"><?php echo $arrJob['city'] ?></span>
+                                <span class="jobType"><?php echo $arrJob['jobType'] ?></span>
+                                <span class="jobId"><?php echo $arrJob['jobId'] ?></span>
+                                <span class="jobSubject"><?php echo $arrJob['jobSubject'] ?></span>
+                            </div>
+                            <a href="#" title="" class="js-showoverlay">
+                                <div class="row">
+                                    <div class="col-12 col-md-6">
+                                        <span class="color-black"><strong><span class="jobTitle"><?php echo $arrJob['jobTitle'] ?></span> - <span class="subjectTitle"><?php echo $arrJob['subjectTitle'] ?></span></strong><br><span class="clinicTitle"><?php echo $arrJob['clinicTitle'] ?></span><br>
+                                            <span class="zipCodeCity"><?php echo $arrJob['zipCodeCity'] ?></span>
+                                        </span>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <ul class="taglist">
+                                            <li class="taglist__item taglist__item--person"><?php echo $arrJob['jobTitle'] ?></li>
+                                            <li class="taglist__item taglist__item--star"><?php echo $arrJob['subjectTitle'] ?></li>
+                                            <li class="taglist__item taglist__item--pin"><?php echo $arrJob['city'] ?></li>
+                                            <?php if (isset($arrJob['typeFullParttime'])) : ?>
+                                            <li class="taglist__item taglist__item--time typeFullParttime js-typefullparttime"><?php echo $arrJob['typeFullParttime'] ?></li>
+                                            <?php endif ?>
+                                            <?php if (strlen($arrJob['typeFulltime'])) : ?>
+                                            <li class="taglist__item taglist__item--time typeFulltime js-typefulltime"><?php echo $arrJob['typeFulltime'] ?></li>
+                                            <?php endif ?>
+                                            <?php if (strlen($arrJob['typeParttime'])) : ?>
+                                            <li class="taglist__item taglist__item--time typeParttime js-typeparttime"><?php echo $arrJob['typeParttime'] ?></li>
+                                            <?php endif ?>
+                                            <?php if (strlen($arrJob['typeLimited'])) : ?>
+                                            <li class="taglist__item taglist__item--time typeLimited js-typelimited"><?php echo $arrJob['typeLimited'] ?></li>
+                                            <?php endif ?>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <?php endforeach ?>
+
+                    </ul>
+                    <ul class="pagination">
+
+                    </ul>
                 </div>
                 <div id="js-next-greater-surrounding-joblist" style="display: none;">
                     <span class="jobcount"><span id="js-next-greater-surrounding-count"></span> Ergebnisse im Umkreis von <span id="js-next-greater-surrounding-radius"></span>km</span>
-                    <ul class="resultlist list js-joblist"> </ul>
+                    <ul class="resultlist list js-joblist">
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Job-Template -->
-    <div style="display: none;">
+    <!-- <div style="display: none;">
         <li id="js-list-entry-template" class="resultlist__item js-resultlist__item">
             <div style="display: none;">
                 <span class="id"></span>
@@ -133,14 +179,14 @@
                 </div>
             </a>
         </li>
-    </div>
+    </div> -->
 
 </section>
 
 <div id="overlay">
     <div class="overlay-wrapper">
-      <button class="btn btn--close-overlay js-close-overlay">schließen</button>
-      <?php echo $this->detailTemplate ?>
+        <button class="btn btn--close-overlay js-close-overlay">schließen</button>
+        <?php echo $this->detailTemplate ?>
     </div>
 </div>
 
@@ -148,10 +194,10 @@
 
 <script type="text/javascript">
     var pagination = true;
-    var jobs = <?php echo json_encode($this->jobs) ?>;
-    var jobMapping = <?php echo json_encode($this->job_mapping) ?>;
+    // var jobs = <?php echo json_encode($this->jobs) ?>;
+    // var jobMapping = <? php echo json_encode($this -> job_mapping) ?>;
     var subjectImages = <?php echo json_encode($this->subject_images) ?>;
-    <?php if ($this->detailUrl) : ?>
+    <?php if($this->detailUrl) : ?>
     var detailUrl = '<?php echo $this->detailUrl ?>';
     <?php endif ?>
 
