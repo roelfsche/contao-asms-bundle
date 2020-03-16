@@ -93,7 +93,7 @@
                     <ul class="resultlist list js-joblist">
                         <?php foreach($this->jobs as $arrJob) : ?>
 
-                        <li class="resultlist__item _js-resultlist__item">
+                        <li class="resultlist__item js-resultlist__item">
                             <div style="display: none;">
                                 <span class="id"><?php echo $arrJob['id'] ?></span>
                                 <span class="zipCode"><?php echo $arrJob['zipCode'] ?></span>
@@ -194,8 +194,8 @@
 
 <script type="text/javascript">
     var pagination = true;
-    // var jobs = <?php echo json_encode($this->jobs) ?>;
-    // var jobMapping = <? php echo json_encode($this -> job_mapping) ?>;
+    var jobs = <?php echo json_encode($this->jobs) ?>;
+    var jobMapping = <?php echo json_encode($this->job_mapping) ?>;
     var subjectImages = <?php echo json_encode($this->subject_images) ?>;
     <?php if($this->detailUrl) : ?>
     var detailUrl = '<?php echo $this->detailUrl ?>';
