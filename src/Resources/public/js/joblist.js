@@ -73,7 +73,7 @@ $(function () {
     // Liste initial einmal updaten, damit das dom korrekt manipuliert wird
     // (auch auf seiten, wo keine filter und nur x / 0 Jobangebote..)
     list.update();
-    
+
     // ...initiales Ausblenden 
     $('.js-typefulltime, .js-typefullparttime, .js-typeparttime, .js-typelimited').each(function (i, elem) {
         var $elem = $(elem);
@@ -131,39 +131,13 @@ $(function () {
             }
             var lat = parseFloat(job.lat),
                 lon = parseFloat(job.lon);
+
             if (!lat || !lon) {
                 return false;
             }
             var dist = distance(latLon.lat, latLon.lon, lat, lon, 'K');
-            console.log(job.city + ": " + dist);
             return (dist <= filterVal);
         }
-
-        function _filterByNextGreaterSurrounding(job) {
-            var filterVal = parseInt($filterSurrounding.val());
-            var nextRadius = parseInt($filterSurrounding.find('option:selected').next().val());
-
-            if (nextRadius == 0) {
-                return true;
-            }
-            if (latLon.lat == 0 || latLon.lon == 0) {
-                return true;
-            }
-            var lat = parseFloat(job.lat),
-                lon = parseFloat(job.lon);
-            if (!lat || !lon) {
-                return false;
-            }
-            var dist = distance(latLon.lat, latLon.lon, lat, lon, 'K');
-            if (dist <= filterVal) {
-                return false; // passt schon in akt. Filterval, also nicht in erw. Liste anzeigen
-            }
-
-            if (dist <= nextRadius) {
-                return true;
-            }
-        }
-
 
         function _filterByFunction(job) {
             var filterVal = parseInt($filterTypeSelect.val());
@@ -200,23 +174,26 @@ $(function () {
         }
 
         var filter = function (item) {
-            var job = item.values();
+            try {
+                var jobFromList = item.values();
+                var index = jobMapping[jobFromList.id];
+                var job = jobs[index];
 
-            if (mapList) {
-                return _filterByCityZip(job);
-            }
+                if (mapList) {
+                    return _filterByCityZip(job);
+                }
 
-            var ret = _filterGlobal(job)
-                && _filterByCityZip(job)
-                && _filterByFunction(job)
-                && _filterBySubject(job)
-                && _filterByJobId(job)
-                && _filterByJobKind(job);
+                var ret = _filterGlobal(job)
+                    && _filterByCityZip(job)
+                    && _filterByFunction(job)
+                    && _filterBySubject(job)
+                    && _filterByJobId(job)
+                    && _filterByJobKind(job);
 
-            if (primaryList) {
                 return ret && _filterBySurrounding(job);
-            } else {
-                return ret && _filterByNextGreaterSurrounding(job);
+            } catch (e) {
+                console.log(e);
+                return false;
             }
         };
 
@@ -256,7 +233,6 @@ $(function () {
     if ($filterGlobal.length) {
         var filterList = createFilterFunction(list, true);
         filterList();// initial aufrufen, um Werte zu füllen
-        var nextGreaterSurroundingFilterList = null;// wird später definiert
 
         // ext. Filter rein / raus
         $('.js-show-extended-search-options').click(function (e) {
@@ -313,21 +289,7 @@ $(function () {
                 $('html, body').animate({ scrollTop: $searchResults.offset().top }, 400);
             }
             // additional Liste
-            if (parseInt($filterSurrounding.val()) && parseInt($filterSurrounding.val()) != 100) {
-                $('#js-next-greater-surrounding-joblist').show();
-                if (nextGreaterSurroundingList == null) {
-                    nextGreaterSurroundingList = new List('js-next-greater-surrounding-joblist', {
-                        valueNames: ['id', 'jobTitle', 'jobTitle2', 'jobType', 'jobSubject', 'jobId', 'subjectTitle', 'subjectTitle2', 'clinicTitle', 'city', 'city2', 'zipCode', 'typeFulltime', 'typeParttime', 'typeLimited'],
-                        item: 'js-list-entry-template'
-                    }, jobs);
-                    nextGreaterSurroundingFilterList = createFilterFunction(nextGreaterSurroundingList, false);
-                }
-                nextGreaterSurroundingFilterList();
-                $('#js-next-greater-surrounding-count').text(nextGreaterSurroundingList.matchingItems.length);
-                $('#js-next-greater-surrounding-radius').text($filterSurrounding.find('option:selected').next().val())
-            } else {
-                $('#js-next-greater-surrounding-joblist').hide();
-            }
+
         });
 
         $filterResetButton.on('click', function (e) {
@@ -390,8 +352,8 @@ $(function () {
             $('body').removeClass('show-overlay');
             $('#overlay').removeClass('active');
             $overlay.css({
-              'z-index': -5,
-              'opacity': 0
+                'z-index': -5,
+                'opacity': 0
             });
         })
 
