@@ -353,7 +353,8 @@ $(function () {
             $('#overlay').removeClass('active');
             $overlay.css({
                 'z-index': -5,
-                'opacity': 0
+                'opacity': 0,
+                'left' : '-110vh'
             });
         })
 
@@ -378,7 +379,8 @@ $(function () {
             $overlayWrapper.scrollTop(0);
             $overlay.css({
                 'z-index': 1000,
-                'opacity': 1//,
+                'opacity': 1,
+                'left':'initial'
                 // scrollTop: 0
             });
             $('.resultlist__item').removeClass('active-list');
