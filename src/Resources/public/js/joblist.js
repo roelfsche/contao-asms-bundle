@@ -380,7 +380,7 @@ $(function () {
             $overlay.css({
                 'z-index': 1000,
                 'opacity': 1,
-                'left':'initial'
+                'left':'auto'
                 // scrollTop: 0
             });
             $('.resultlist__item').removeClass('active-list');
