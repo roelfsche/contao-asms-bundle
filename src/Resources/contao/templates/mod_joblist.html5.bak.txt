@@ -147,6 +147,40 @@
         </div>
     </div>
 
+    <!-- Job-Template -->
+    <!-- <div style="display: none;">
+        <li id="js-list-entry-template" class="resultlist__item js-resultlist__item">
+            <div style="display: none;">
+                <span class="id"></span>
+                <span class="zipCode"></span>
+                <span class="city"></span>
+                <span class="jobType"></span>
+                <span class="jobId"></span>
+                <span class="jobSubject"></span>
+            </div>
+            <a href="#" title="" class="js-showoverlay">
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        <span class="color-black"><strong><span class="jobTitle"></span> - <span class="subjectTitle"></span></strong><br><span class="clinicTitle"></span><br>
+                            <span class="zipCodeCity"></span>
+                        </span>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <ul class="taglist">
+                            <li class="taglist__item taglist__item--person jobTitle2"></li>
+                            <li class="taglist__item taglist__item--star subjectTitle2"></li>
+                            <li class="taglist__item taglist__item--pin city2"></li>
+                            <li class="taglist__item taglist__item--time typeFullParttime js-typefullparttime"></li>
+                            <li class="taglist__item taglist__item--time typeFulltime js-typefulltime"></li>
+                            <li class="taglist__item taglist__item--time typeParttime js-typeparttime"></li>
+                            <li class="taglist__item taglist__item--time typeLimited js-typelimited"></li>
+                        </ul>
+                    </div>
+                </div>
+            </a>
+        </li>
+    </div> -->
+
 </section>
 
 <div id="overlay">
