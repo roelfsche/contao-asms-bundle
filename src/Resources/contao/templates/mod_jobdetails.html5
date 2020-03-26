@@ -100,7 +100,7 @@
       <div class="col-12">
         <?php if (isset($this->google_job)) : ?>
         <a class="link link--jobdetails icon-print" href="javascript:window.print()" title="diese Seite drucken">Drucken</a> 
-        <a class="link link--jobdetails icon-bookmark js-bookmark" rel="sidebar" href="#" title="diese Seite zu den Favoriten hinzufügen">Merken</a> 
+        <!--<a class="link link--jobdetails icon-bookmark js-bookmark" rel="sidebar" href="#" title="diese Seite zu den Favoriten hinzufügen">Merken</a> -->
         <?php else : ?>
         <a class="clinicdetaillink link link--jobdetails icon-copy-link" style="display: none" id="jobDetailsLink" href="" target="_blank">zur Einzelansicht</a>
         <?php endif ?>
