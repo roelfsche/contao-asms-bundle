@@ -149,7 +149,7 @@
 
 </section>
 
-<div id="overlay" style="left: -100vh;">
+<div id="overlay" style="left: -110vw;">
     <div class="overlay-wrapper">
         <button class="btn btn--close-overlay js-close-overlay">schließen</button>
         <?php echo $this->detailTemplate ?>
