@@ -2,7 +2,6 @@
     {
       "@context" : "https://schema.org/",
       "@type" : "JobPosting",
-      "employmentType": "CONTRACTOR",
       "title" : "<?php echo $this->arrJob['jobTitle'] ?> - <?php echo $this->arrJob['subjectTitle'] ?>",
       "description" : "<?php echo str_replace('"', '\"', $this->arrJob['applicationNotes']) ?>",
       <?php if ($this->arrJob['tstamp']) : ?>
@@ -19,7 +18,7 @@
         "sameAs" : "<?php echo $this->arrJob['url1'] ?>",
         <?php endif ?>
         <?php if (isset($this->arrJob['clinicLogo'])) : ?>
-        "logo" : "<?php echo $this->arrJob['clinicLogo'] ?>"
+        "logo" : "https:<?php echo $this->arrJob['clinicLogo'] ?>"
         <?php endif ?>
       },
       "jobLocation" : {
