@@ -116,6 +116,9 @@ $(function () {
 
     listAnchor.onclick = function (e) {
         e.preventDefault();
+        // map-overlay wieder schliessen
+        jobDetailDiv.style.display = 'none';
+        
         // var url = e.target.getAttribute('href') + '?city=' + activeJob.city;
         // window.location.href = url;
         $searchCity.val(activeJob.city);
