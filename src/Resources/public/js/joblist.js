@@ -160,7 +160,8 @@ $(function () {
             if (!filterVal.length) {
                 return true;
             }
-            return job.jobId == filterVal;
+            var regExp = new RegExp(filterVal, 'i');
+            return job.jobId.search(regExp) != -1; 
         }
 
         function _filterByJobKind(job) {
