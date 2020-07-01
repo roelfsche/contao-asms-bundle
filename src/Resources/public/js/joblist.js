@@ -152,7 +152,9 @@ $(function () {
             if (!filterVal) {
                 return true;
             }
-            return job.jobSubject == filterVal;
+            const found = job.subjects.find(element => element == filterVal);
+            return found != undefined;
+            // return job.jobSubject == filterVal;
         }
 
         function _filterByJobId(job) {
@@ -420,7 +422,15 @@ $(function () {
                     $(sel).hide();
                 }
             })
-            $subjectTitle.text(job.subjectTitle);
+            // subjectTitle; sind nun viele...
+            $('.js-subjecttitle').remove(); // alle erstmal weg
+            var $template = $('#js-subjecttitle-template');
+            $.each(job.subjectNames, function(i, name) {
+                var $newStar = $template.clone();
+                $newStar.removeAttr('id').addClass('js-subjecttitle').text(name).show().insertAfter($template);
+            })
+
+            // $subjectTitle.text(job.subjectTitle);
             $jobDescription.html(job.applicationNotes);
             if (job.clinicLogo != undefined) {
                 $logoWrapper.show();

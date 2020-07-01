@@ -112,7 +112,9 @@
                                     <div class="col-12 col-md-6">
                                         <ul class="taglist">
                                             <li class="taglist__item taglist__item--person"><?php echo $arrJob['jobTitle'] ?></li>
-                                            <li class="taglist__item taglist__item--star"><?php echo $arrJob['subjectTitle'] ?></li>
+                                            <?php foreach($arrJob['subjectNames'] as $strSubjectName) : ?>
+                                            <li class="taglist__item taglist__item--star"><?php echo $strSubjectName ?></li>
+                                            <?php endforeach ?>
                                             <li class="taglist__item taglist__item--pin"><?php echo $arrJob['city'] ?></li>
                                             <?php if (isset($arrJob['typeFullParttime'])) : ?>
                                             <li class="taglist__item taglist__item--time typeFullParttime js-typefullparttime"><?php echo $arrJob['typeFullParttime'] ?></li>
