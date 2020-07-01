@@ -6,8 +6,15 @@
       <div class="col-12">
         <ul class="taglist taglist--overlay">
           <li id="js-jobtitle" class="taglist__item taglist__item--overlay taglist__item--person"><?php echo (($this->job) ? $this->job['jobTitle'] : '') ?></li>
-          <li id="js-subjecttitle" class="taglist__item taglist__item--overlay taglist__item--star"><?php echo (($this->job) ? $this->job['subjectTitle'] : '') ?></li>
-          <li id="js-city" class="taglist__item taglist__item--overlay taglist__item--pin"><?php echo (($this->job) ? $this->job['city'] : '') ?></li>
+          <li style="display: none" id="js-subjecttitle-template" class="taglist__item taglist__item--overlay taglist__item--star"><?php echo (($this->job) ? $this->job['subjectTitle'] : '') ?></li>
+          <?php if ($this->job) : ?>
+            <?php foreach ($this->job['subjectNames'] as $strSubjectName) : ?>
+          <li class="taglist__item taglist__item--overlay taglist__item--star"><?php echo $strSubjectName ?></li>
+            <?php endforeach ?>
+          <?php else : ?>
+          <li class="taglist__item taglist__item--overlay taglist__item--star"></li>
+          <?php endif ?>
+          <li id="js-city" class="js-subjecttitle taglist__item taglist__item--overlay taglist__item--pin"><?php echo (($this->job) ? $this->job['city'] : '') ?></li>
           <li style="<?php echo (($this->job && $this->job['typeFullParttime'] == "Voll-/Teilzeit") ? '' : 'display:none;') ?>" id="js-typefullparttime" class="taglist__item taglist__item--overlay taglist__item--time">Voll-/Teilzeit</li>
           <li style="<?php echo (($this->job && $this->job['typeFulltime'] == "Vollzeit") ? '' : 'display:none;') ?>" id="js-typefulltime" class="taglist__item taglist__item--overlay taglist__item--time">Vollzeit</li>
           <li style="<?php echo (($this->job && $this->job['typeParttime'] == "Teilzeit") ? '' : 'display:none;') ?>" id="js-typeparttime" class="taglist__item taglist__item--overlay taglist__item--time">Teilzeit</li>
@@ -99,7 +106,7 @@
     <div class="row">
       <div class="col-12">
         <?php if (isset($this->google_job)) : ?>
-        <a class="link link--jobdetails icon-print" href="javascript:window.print()" title="diese Seite drucken">Drucken</a> 
+        <a class="link link--jobdetails icon-print" href="javascript:window.print()" title="diese Seite drucken">Drucken</a>
         <!--<a class="link link--jobdetails icon-bookmark js-bookmark" rel="sidebar" href="#" title="diese Seite zu den Favoriten hinzufügen">Merken</a> -->
         <?php else : ?>
         <a class="clinicdetaillink link link--jobdetails icon-copy-link" style="display: none" id="jobDetailsLink" href="" target="_blank">zur Einzelansicht</a>
@@ -109,5 +116,5 @@
   </div>
 </div>
 <?php if (isset($this->google_job)) : ?>
-  <?php echo $this->google_job->parse() ?>
+<?php echo $this->google_job->parse() ?>
 <?php endif ?>

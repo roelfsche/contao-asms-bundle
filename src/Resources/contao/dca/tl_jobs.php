@@ -188,14 +188,15 @@ $GLOBALS['TL_DCA'][$table] = array(
         ),
         'subjectSelection' => array(
             'label'                   => &$GLOBALS['TL_LANG'][$table]['subjectSelection'],
-            'inputType'               => 'select',
+            'inputType'               => 'checkbox',//'select',
             'foreignKey'              => 'tl_subjects.title',
             'eval' => array(
                 'mandatory' => TRUE,
-                'includeBlankOption'        => TRUE,
+                'multiple' => TRUE,
+                // 'includeBlankOption'        => TRUE,
             ),
-            'sql'                     => "int(10) unsigned NOT NULL default '0'",
-            'relation'                => array('type' => 'hasOne', 'load' => 'eager')
+            'sql'                     => "blob NULL",//"int(10) unsigned NOT NULL default '0'",
+            'relation'                => array('type' => 'hasMany', 'load' => 'lazy')
         ),
         'individualSubject' => array(
             'label'                   => &$GLOBALS['TL_LANG'][$table]['individualSubject'],
