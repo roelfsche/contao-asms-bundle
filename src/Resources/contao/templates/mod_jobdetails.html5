@@ -9,10 +9,10 @@
           <li style="display: none" id="js-subjecttitle-template" class="taglist__item taglist__item--overlay taglist__item--star"><?php echo (($this->job) ? $this->job['subjectTitle'] : '') ?></li>
           <?php if ($this->job) : ?>
             <?php foreach ($this->job['subjectNames'] as $strSubjectName) : ?>
-          <li class="taglist__item taglist__item--overlay taglist__item--star"><?php echo $strSubjectName ?></li>
+          <li class="taglist__item taglist__item--overlay taglist__item--star js-subjecttitle"><?php echo $strSubjectName ?></li>
             <?php endforeach ?>
           <?php else : ?>
-          <li class="taglist__item taglist__item--overlay taglist__item--star"></li>
+          <li class="taglist__item taglist__item--overlay taglist__item--star js-subjecttitle"></li>
           <?php endif ?>
           <li id="js-city" class="js-subjecttitle taglist__item taglist__item--overlay taglist__item--pin"><?php echo (($this->job) ? $this->job['city'] : '') ?></li>
           <li style="<?php echo (($this->job && $this->job['typeFullParttime'] == "Voll-/Teilzeit") ? '' : 'display:none;') ?>" id="js-typefullparttime" class="taglist__item taglist__item--overlay taglist__item--time">Voll-/Teilzeit</li>

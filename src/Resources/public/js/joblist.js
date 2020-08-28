@@ -163,7 +163,7 @@ $(function () {
                 return true;
             }
             var regExp = new RegExp(filterVal, 'i');
-            return job.jobId.search(regExp) != -1; 
+            return job.jobId.search(regExp) != -1;
         }
 
         function _filterByJobKind(job) {
@@ -357,7 +357,7 @@ $(function () {
             $overlay.css({
                 'z-index': -5,
                 'opacity': 0,
-                'left' : '-110vw'
+                'left': '-110vw'
             });
         })
 
@@ -383,7 +383,7 @@ $(function () {
             $overlay.css({
                 'z-index': 1000,
                 'opacity': 1,
-                'left':0
+                'left': 0
                 // scrollTop: 0
             });
             $('.resultlist__item').removeClass('active-list');
@@ -400,11 +400,15 @@ $(function () {
                 $subjectLogo.prop('src', job.subjectImage)
                     .prop('alt', job.subjectImageAlt);
             } else {
-                if (subjectImages[job.subjectId] != undefined) {
-                    var images = subjectImages[job.subjectId];
-                    var index = 0;//Math.floor(Math.random() * images.length)
-                    $subjectLogo.prop('src', images[index].path)
-                        .prop('alt', images[index].alt);
+                // if (subjectImages[job.subjectId] != undefined) {
+                if (Array.isArray(job.subjects) && job.subjects.length) {
+                    // var images = subjectImages[job.subjectId];
+                    var images = subjectImages[job.subjects[0]];
+                    if (Array.isArray(images) && images.length) {
+                        var index = 0;//Math.floor(Math.random() * images.length)
+                        $subjectLogo.prop('src', images[index].path)
+                            .prop('alt', images[index].alt);
+                    }
                 }
             }
             $jobName.text(job.jobTitle + " - " + job.subjectTitle);
@@ -426,7 +430,7 @@ $(function () {
             // subjectTitle; sind nun viele...
             $('.js-subjecttitle').remove(); // alle erstmal weg
             var $template = $('#js-subjecttitle-template');
-            $.each(job.subjectNames, function(i, name) {
+            $.each(job.subjectNames, function (i, name) {
                 var $newStar = $template.clone();
                 $newStar.removeAttr('id').addClass('js-subjecttitle').text(name).show().insertAfter($template);
             })
