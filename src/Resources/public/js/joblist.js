@@ -411,9 +411,9 @@ $(function () {
                     }
                 }
             }
-            $jobName.text(job.jobTitle + " - " + job.subjectTitle);
-            $jobTitle.text(job.jobTitle);
-            $city.text(job.city);
+            $jobName.text(decodeHtml(job.jobTitle + " - " + job.subjectTitle));
+            $jobTitle.text(decodeHtml(job.jobTitle));
+            $city.text(decodeHtml(job.city));
             $.each({
                 'typeFulltime': '#js-typefulltime',
                 'typeFullParttime': '#js-typefullparttime',
@@ -432,11 +432,11 @@ $(function () {
             var $template = $('#js-subjecttitle-template');
             $.each(job.subjectNames, function (i, name) {
                 var $newStar = $template.clone();
-                $newStar.removeAttr('id').addClass('js-subjecttitle').text(name).show().insertAfter($template);
+                $newStar.removeAttr('id').addClass('js-subjecttitle').text(decodeHtml(name)).show().insertAfter($template);
             })
 
             // $subjectTitle.text(job.subjectTitle);
-            $jobDescription.html(job.applicationNotes);
+            $jobDescription.html(decodeHtml(job.applicationNotes));
             if (job.clinicLogo != undefined) {
                 $logoWrapper.show();
                 $clinicLogo.attr('src', job.clinicLogo).attr('alt', 'clinicLogoAlt');
@@ -451,10 +451,10 @@ $(function () {
             //else {
             //    $clinicLogoWrapper.hide();
             // }
-            $youOffer.html(job.youOffer);
-            $weOffer.html(job.weOffer);
-            $aboutUs.html(job.aboutUs);
-            $jobId.text(job.jobId);
+            $youOffer.html(decodeHtml(job.youOffer));
+            $weOffer.html(decodeHtml(job.weOffer));
+            $aboutUs.html(decodeHtml(job.aboutUs));
+            $jobId.text(decodeHtml(job.jobId));
             if (job.jobId.match(/REHA/)) {
                 $rehaDetailHeadline.show();
                 $clinicDetailHeadline.hide();
@@ -462,7 +462,7 @@ $(function () {
                 $rehaDetailHeadline.hide();
                 $clinicDetailHeadline.show();
             }
-            $clinicName.text(job.clinicTitle);
+            $clinicName.text(decodeHtml(job.clinicTitle));
             // $clinicCity.text(job.city)
             $clinicAddress.text(job.zipCode + " " + job.city);
             $clinicStreet.text(job.street + " " + job.houseNumber)
@@ -493,12 +493,12 @@ $(function () {
             }
 
 
-            $clinicContactName.text(job.contactperson_title + " " + job.contactperson_firstname + " " + job.contactperson_lastname);
-            $clinicContactDepartment.text(job.department);
+            $clinicContactName.text(decodeHtml(job.contactperson_title + " " + job.contactperson_firstname + " " + job.contactperson_lastname));
+            $clinicContactDepartment.text(decodeHtml(job.department));
             $clinicContactPhone.text(job.contactperson_phone).attr('href', 'tel:' + job.contactperson_phone);
             $clinicContactMail.text(job.contactperson_email).attr('href', 'mailto:' + job.contactperson_email);
-            $jobMailto.attr('href', 'mailto:' + job.mailto);
-            $jobEquality.html(job.equality);
+            $jobMailto.attr('href', 'mailto:' + decodeHtml(job.mailto));
+            $jobEquality.html(decodeHtml(job.equality));
             // console.log($jobEquality.length)
 
             try {
@@ -506,6 +506,15 @@ $(function () {
                     $jobDetailsLink.css('display', 'inline-block').prop('href', detailUrl + job.jobAlias + '.html');
                 }
             } catch (e) { }
+        }
+
+        var _txtArea = undefined;
+        function decodeHtml(html) {
+            if (_txtArea == undefined) {
+                _txtArea = document.createElement("textarea");
+            }
+            _txtArea.innerHTML = html;
+            return _txtArea.value;
         }
     })());
 
