@@ -62,6 +62,7 @@ class JobdetailsModule extends \Module
             a.titleSelection as jobType,
             a.tstamp,
             a.subjectSelection as jobSubject,
+            a.has_contactperson,
             a.contactperson_salutation,
             a.contactperson_position,
             a.contactperson_title ,
@@ -216,7 +217,8 @@ class JobdetailsModule extends \Module
             'contactperson_phone',
             'contactperson_email',
         );
-        if (!strlen(trim($arrJob['contactperson_firstname']))) {
+        if ($arrJob['has_contactperson']!=1) {
+        // if (!strlen(trim($arrJob['contactperson_firstname']))) {
             foreach ($arrFieldKeys as $strKey) {
                 $arrJob[$strKey] = $arrJob['clinic_' . $strKey];
             }
