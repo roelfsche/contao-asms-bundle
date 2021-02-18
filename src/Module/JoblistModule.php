@@ -74,6 +74,7 @@ class JoblistModule extends \Module
             a.typeFulltime, a.typeParttime, a.typeLimited, a.weOffer, a.youOffer, a.applicationNotes, a.aboutUs,
             a.titleSelection as jobType,
             a.subjectSelection as jobSubject,
+            a.has_contactperson,
             a.contactperson_salutation,
             a.contactperson_position,
             a.contactperson_title ,
@@ -235,7 +236,7 @@ class JoblistModule extends \Module
         }
         $arrJobFields = $this->Database->prepare('select a.id, a.title from tl_subjects a WHERE a.id in (' . implode(', ', $arrSubjectIds) . ') ORDER BY a.title;')->execute()->fetchAllAssoc();
         $arrSubjectNames = array();
-        foreach($arrJobFields as $arrSubjectRow) {
+        foreach ($arrJobFields as $arrSubjectRow) {
             $arrSubjectNames[$arrSubjectRow['id']] = $arrSubjectRow['title'];
         }
 
@@ -260,7 +261,7 @@ class JoblistModule extends \Module
 
             // Subject (Fach) - Namen
             $arrJobSubjectNames = array();
-            foreach($arrJob['subjects'] as $intSubjectId) {
+            foreach ($arrJob['subjects'] as $intSubjectId) {
                 $arrJobSubjectNames[$intSubjectId] = $arrSubjectNames[$intSubjectId];
             }
             $arrJob['subjectNames'] = $arrJobSubjectNames;
@@ -342,7 +343,8 @@ class JoblistModule extends \Module
                 'contactperson_phone',
                 'contactperson_email',
             );
-            if (!strlen(trim($arrJob['contactperson_firstname']))) {
+            // if (!strlen(trim($arrJob['contactperson_firstname']))) {
+            if ($arrJob['has_contactperson'] != 1) {
                 foreach ($arrFieldKeys as $strKey) {
                     $arrJob[$strKey] = $arrJob['clinic_' . $strKey];
                 }
